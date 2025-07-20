@@ -1,0 +1,326 @@
+body {
+    margin: 0%;
+    padding: 0%;
+    background-color: black;
+}
+
+/* MAIN CONTAINER */
+.container {
+    width: 90%;
+    height: 90%;
+    background: linear-gradient(
+    to top right,
+    #629287,
+    #2d866e,
+    #14b8a6,
+    #2d866e,
+    #629287
+  );
+    margin: 5%;
+    border: 1px solid #97feed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+
+/* TOP HEADING SECTION */
+.heading {
+    height: auto;
+    width: 90%;
+    /* background-color: #2d866e; */
+    margin: 0 5% 0 5%;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 900;
+    font-family: 'Playfair Display', serif;
+    color: white;
+    text-shadow: 
+    0 0 10px cyan,
+    0 0 20px cyan,
+    0 0 40px cyan;
+    padding: 5px 0 5px 0;
+    cursor: crosshair;
+}
+
+/* FOR FLEXIBILETY */
+@media only screen and (min-width: 250px) and (max-width: 550px) {
+    .heading {
+        font-size: 30px;
+        font-weight: 800;
+    }
+}
+
+/* TEXTUAL DATA SECTION */
+.text-data {
+    height: auto;
+    width: 90%;
+    margin: 0 5% 0 5%;
+    text-align: justify;
+}
+
+.text-data p {
+    font-size: 18px;
+    font-weight: 540;
+    line-height: 1.3;
+    cursor: default;
+}
+
+/* FOR FLEXIBILETY */
+@media only screen and (min-width: 550px) {
+    .text-data p {
+        font-size: 18px;
+        line-height: 1.3;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 550px){
+    .text-data p {
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+    }
+}
+
+/* DATA ICON SECTION */
+.data-icon {
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.data-icon img {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0px 0px 1.1px rgb(0, 0, 0));
+}
+
+.data-box {
+    width: 20%;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.percentage {
+    width: 75%;
+    height: 15px;
+    margin-left: 2.2%;
+    background-color: white;
+    border: 1.2px solid black;
+}
+
+/* 1ST DATA PERCENTAGE SECTION */
+.data-icon .data-box .percentage .left1 {
+    width: 75%;
+    height: 100%;
+    background-color: rgb(13, 255, 0);
+    border-right: 0.01px solid #868686;
+}
+
+.data-icon .data-box .percentage .right1 {
+    width: auto;
+    height: auto;
+    font-weight: 700;
+}
+
+/* 2ND DATA PERCENTAGE SECTION */
+.data-icon .data-box .percentage .left2 {
+    width: 91%;
+    height: 100%;
+    background-color: rgb(13, 255, 0);
+    border-right: 0.01px solid #868686;
+}
+
+.data-icon .data-box .percentage .right2 {
+    width: auto;
+    height: auto;
+    font-weight: 700;
+}
+
+/* 3RD DATA PERCENTAGE SECTION */
+.data-icon .data-box .percentage .left3 {
+    width: 54%;
+    height: 100%;
+    background-color: rgb(13, 255, 0);
+    border-right: 0.01px solid #868686;
+}
+
+.data-icon .data-box .percentage .right3 {
+    width: auto;
+    height: auto;
+    font-weight: 700;
+}
+
+/* 4TH DATA PERCENTAGE SECTION */
+.data-icon .data-box .percentage .left4 {
+    width: 71%;
+    height: 100%;
+    background-color: rgb(13, 255, 0);
+    border-right: 0.01px solid #868686;
+}
+
+.data-icon .data-box .percentage .right4 {
+    width: auto;
+    height: auto;
+    font-weight: 700;
+}
+
+/* 5TH DATA PERCENTAGE SECTION */
+.data-icon .data-box .percentage .left5 {
+    width: 82%;
+    height: 100%;
+    background-color: rgb(13, 255, 0);
+    border-right: 0.01px solid #868686;
+}
+
+.data-icon .data-box .percentage .right5 {
+    width: auto;
+    height: auto;
+    font-weight: 700;
+}
+
+/* FOR FLEXIBILETY */
+@media only screen and (min-width: 550px) and (max-width: 1100px) {
+    .data-icon {
+        flex-direction: column;
+    }
+    .data-icon img {
+        width: 30px;
+        height: 30px;
+    }
+    .data-box {
+        width: 100%;
+    }
+    .percentage {
+        width: 90%;
+        height: 12px;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 550px) {
+    .data-icon {
+        flex-direction: column;
+    }
+    .data-icon img {
+        width: 25px;
+        height: 25px;
+    }
+    .data-box {
+        width: 100%;
+    }
+    .percentage {
+        width: 88%;
+        height: 10px;
+    }
+    .right1 {
+        font-size: 13px;
+        font-weight: 550;
+    }
+    .right2 {
+        font-size: 13px;
+        font-weight: 550;
+    }
+    .right3 {
+        font-size: 13px;
+        font-weight: 550;
+    }
+    .right4 {
+        font-size: 13px;
+        font-weight: 550;
+    }
+    .right5 {
+        font-size: 13px;
+        font-weight: 550;
+    }
+}
+
+/* BUTTOM ENDING SECTION */
+.ending {
+    height: auto;
+    width: 90%;
+    text-align: justify;
+    margin: 0 5% 0 5%;
+}
+
+.ending p {
+    font-size: 18px;
+    font-weight: 540;
+    line-height: 1.3;
+    cursor: default;
+}
+
+.ending p a {
+    text-decoration: none;
+    color: blue;
+}
+
+/* FOR FLEXIBILETY */
+@media only screen and (min-width: 550px) {
+    .ending p {
+        font-size: 18px;
+        line-height: 1.3;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 550px){
+    .ending p {
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+    }
+}
+
+/* FOR BOTTOM BUTTON SECTION */
+.custom-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+  width: 40%;
+  margin: 1.3% 4%;
+  background-color: #5eddbb;
+  border: 0.04px solid #000000;
+  box-shadow:
+    0 0.1rem 0.2rem #00000033,
+    0 0.1rem 0.5rem #0000004d,
+    0 0.2rem 1.5rem #0000004d;
+  transition: all 0.2s ease;
+  border-radius: 10px;
+}
+
+.custom-btn:hover {
+  transform: scale(1.2);
+  background-color: #3bb449;
+  border: 1px solid #000000;
+  color: white;
+  text-shadow:
+    0 0 10px cyan,
+    0 0 20px cyan,
+    0 0 40px cyan;
+  cursor: pointer;
+}
+
+/* FOR FLEXIBILETY */
+@media only screen and (min-width: 200px) and (max-width: 650px) {
+    .custom-btn{
+        display: grid;
+        width: 82%;
+        font-size: 18px;
+        margin-bottom: 15px;
+        margin-left: 6%;
+    }
+}
