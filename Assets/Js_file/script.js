@@ -1,3 +1,21 @@
+let modeBtn = document.querySelector(".mode");
+let currentMode = "light"; 
+
+modeBtn.addEventListener("click", () => {
+    if (currentMode === "light") {
+        document.body.style.background = "black";
+        document.body.style.color = "white";
+        modeBtn.textContent = "Change to Light Mode";
+        currentMode = "dark";
+    } else {
+        document.body.style.background = "Normal";
+        document.body.style.color = "black";
+        modeBtn.textContent = "Change to Dark Mode";
+        currentMode = "light";
+    }
+}); 
+
+
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Typing animation for <h1>
   const typedText = document.querySelector(".base h1 span");
