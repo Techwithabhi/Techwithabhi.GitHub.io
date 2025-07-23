@@ -864,24 +864,27 @@ button:hover {
 
 /* Starting Small Project Section */
 #small-project {
-  width: 90%;
-  padding: 0% 5% 0% 5%;
+  width: 70%;
+  padding: 0% 15% 0% 15%;
   padding-top: 40px;
   margin-top: -40px;
 }
 
 .project-2 {
   width: 90%;
+  border: 5px solid #000000;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
+  position: absolute;
+  top: 0%;
   margin: 20px auto 80px auto;
 }
 
 .img-box {
-  width: 24%;
-  height: 400px;
+  width: 19%;
+  height: 350px;
   /* margin: 2px 0px 2px 0px; */
   display: inline-block;
   position: relative;
@@ -905,6 +908,7 @@ button:hover {
 }
 
 .img-box:hover {
+  border: 2px solid #00fff7;
   box-shadow: 
   0 0.1rem 0.2rem #00000033, 
   0 0.1rem 0.5rem #0000004d,
@@ -921,9 +925,25 @@ button:hover {
   color: #ffffff;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
   text-shadow:
   0 0 10px cyan,
   0 0 20px cyan,
   0 0 40px cyan;
 }
 
+#number1 {
+  border-top-left-radius: 10px;
+}
+
+#number5 {
+  border-top-right-radius: 10px;
+}
+
+#number6 {
+  border-bottom-left-radius: 10px;
+}
+
+#number10 {
+  border-bottom-right-radius: 10px;
+}
