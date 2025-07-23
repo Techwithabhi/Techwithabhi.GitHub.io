@@ -863,3 +863,10 @@ button:hover {
 }
 
 /* Starting Small Project Section */
+#small-project {
+  width: 75%;
+  padding: 0% 12.5% 0% 12.5%;
+  padding-top: 40px;
+  margin-top: -40px;
+}
+
