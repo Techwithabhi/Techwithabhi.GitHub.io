@@ -863,7 +863,7 @@ button:hover {
 }
 
 /* Starting Small Project Section */
-#small-project {
+/* #small-project {
   width: 70%;
   padding: 0% 15% 0% 15%;
   padding-top: 40px;
@@ -885,11 +885,9 @@ button:hover {
 .img-box {
   width: 19%;
   height: 350px;
-  /* margin: 2px 0px 2px 0px; */
   display: inline-block;
   position: relative;
   overflow: hidden;
-  /* border-radius: 10px; */
   border: 2px solid #000000;
   box-shadow: 0 0.1rem 0.2rem #00000033, 0 0.1rem 0.5rem #0000004d,
     0 0.2rem 1.5rem #0000004d;
@@ -946,4 +944,4 @@ button:hover {
 
 #number10 {
   border-bottom-right-radius: 10px;
-}
+} */
