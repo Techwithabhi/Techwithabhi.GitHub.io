@@ -945,3 +945,84 @@ button:hover {
 #number10 {
   border-bottom-right-radius: 10px;
 } */
+/* ############################################################### */
+
+/* Starting Small Project Section */
+#small-project {
+  width: 80%;
+  padding: 0% 10% 0% 10%;
+  padding-top: 40px;
+  margin-top: -40px;
+}
+
+#project-2 {
+  width: 90%;
+  margin: 0% 5% 0% 5%;
+  height: auto;
+  background-color: #1e293b;
+  border-radius: 1.5rem;
+  border: 2px solid black;
+  box-shadow: 0 2px 6px #64696933, 0 4px 12px #0000004d;
+}
+
+#proect-2 .rows {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* gap: 20px; */
+  /* flex-wrap: wrap; */
+}
+
+.rows {
+  display: flex;
+  justify-content: center;
+}
+
+.main {
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* gap: 50px; */
+  flex-wrap: wrap;
+  overflow: hidden;
+  margin: 3px 0px 3px 0px;
+}
+
+.rows .main img{
+  width: 550px;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border: 2px solid #ff0000;
+}
+
+#first-line {
+  padding-top: 1.5px;
+}
+
+#fourth-line {
+  padding-bottom: 1.5px;
+}
+
+#first-box img {
+  border-top-left-radius: 10px;
+}
+
+#second-box img {
+  border-top-right-radius: 10px;
+}
+
+#seventh-box img {
+  border-bottom-left-radius: 10px;
+}
+
+#eighth-box img {
+  border-bottom-right-radius: 10px;
+}
+
