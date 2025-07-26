@@ -1019,9 +1019,9 @@ h2 {
   /* transform: translateY(-8px) scale(1.02); */
   border-color: #ffffff;
    box-shadow: 
+    0 0 5px cyan,
     0 0 10px cyan,
-    0 0 20px cyan,
-    0 0 40px cyan;
+    0 0 20px cyan;
 }
 
 #first-line .item img,
