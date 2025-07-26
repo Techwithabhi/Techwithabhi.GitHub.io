@@ -901,14 +901,6 @@ h2 {
  overflow: hidden;
  transition: all 0.3s ease;
 }
-/* 
-#project-2:hover {
- box-shadow:
- 0 0.1rem 0.2rem #00000033, 
- 0 0.1rem 0.5rem #0000004d,
- 0 0.2rem 1.5rem #0000004d, 
- 0 0.9rem 1.5rem #00fff7;
-} */
 
 /* Common styles for all gallery lines */
 .gallery-line {
