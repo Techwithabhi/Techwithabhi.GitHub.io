@@ -991,6 +991,7 @@ button:hover {
  transition: all 0.3s ease;
  cursor: pointer;
  overflow: hidden;
+ position: relative;
 }
 
 #first-line .item:hover {
@@ -1009,10 +1010,43 @@ button:hover {
  0 0 10px cyan,
   0 0 20px cyan,
   0 0 40px cyan;
- transition: transform 0.2s ease;
+ transition: all 0.3s ease;
 }
 
 #first-line .item:hover img {
  transform: scale(1.1);
 }
 
+/* Blur effect: when hovering over first-line, blur all images except the hovered one */
+#first-line:hover .item:not(:hover) img {
+ filter: blur(4px);
+ opacity: 0.6;
+}
+
+/* Click to View overlay */
+#first-line .item::before {
+ content: "Click to View";
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ color: #ffffff;
+ font-size: 1.2rem;
+ font-weight: bold;
+ text-shadow: 
+  0 0 5px #00fff7,
+  0 0 10px #00fff7,
+  0 0 15px #00fff7,
+  0 0 20px #00fff7;
+ opacity: 0;
+ visibility: hidden;
+ transition: all 0.3s ease;
+ z-index: 10;
+ pointer-events: none;
+ text-align: center;
+}
+
+#first-line .item:hover::before {
+ opacity: 1;
+ visibility: visible;
+}
