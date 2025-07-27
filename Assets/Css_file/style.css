@@ -889,9 +889,9 @@ h2 {
 #project-2 {
  width: 90%;
  height: auto;
- margin: 0% 8% 0% 2%;
+ margin: 0% 5% 0% 5%;
  background-color: #3f4744;
- /* padding: 0.8% 0.5% 0.8% 0.4%; */
+ padding: 0.8% 0.5% 0.8% 0.4%;
  border-radius: 1rem;
  border: 5px solid #ffffff;
  box-shadow: 
@@ -933,6 +933,7 @@ h2 {
     width: 95%;
     padding: 0%;
     border: 3px solid #ffffff;;
+    margin: 0% 8% 0% 2%;
   }
   #first-line,
   #second-line,
@@ -958,6 +959,9 @@ h2 {
     width: 98%;
     height: 150px;
     padding: 0%;
+  }
+  #last-item {
+    margin-bottom: 2%;
   }
 }
 
@@ -1016,7 +1020,7 @@ body:has(#third-line .item:hover) #second-line .item img {
 #third-line .item::before {
   content: "Click to View";
   position: absolute;
-  top: 50%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #ffffff;
