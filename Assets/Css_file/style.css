@@ -865,7 +865,7 @@ button:hover {
 /* Starting Small Project Section */
 #small-project {
  width: 90%;
- padding: 0% 5% 0% 5%;
+ padding: 0% 5%;
  padding-top: 40px;
  margin-top: -40px;
  margin-bottom: 50px;
@@ -889,9 +889,9 @@ h2 {
 #project-2 {
  width: 90%;
  height: auto;
- margin: 0% 5% 0% 5%;
+ margin: 0% 6% 0% 4%;
  background-color: #3f4744;
- padding: 0.8% 0.5% 0.8% 0.4%;
+ /* padding: 0.8% 0.5% 0.8% 0.4%; */
  border-radius: 1rem;
  border: 5px solid #ffffff;
  box-shadow: 
@@ -900,91 +900,6 @@ h2 {
   0 0 40px cyan;
  overflow: hidden;
  transition: all 0.3s ease;
-}
-
-/* Common styles for all gallery lines */
-.gallery-line {
-  display: flex;
-  justify-content: space-around;
-  padding-bottom: 1%;
-}
-
-/* Remove padding-bottom from the last line */
-.gallery-line:last-child {
-  padding-bottom: 0;
-}
-
-/* Common item styles */
-.gallery-line .item {
-  width: 32.5%;
-  box-sizing: border-box;
-  border-radius: 8px;
-  border: 3px solid #ffffff;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Hover effects for items */
-.gallery-line .item:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: #00fff7;
-  box-shadow: 0 10px 25px #00fff733;
-}
-
-/* Image styles */
-.gallery-line .item img {
-  width: 100%;
-  height: 12rem;
-  display: block;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 
-    0 0 10px cyan,
-    0 0 20px cyan,
-    0 0 40px cyan;
-  transition: all 0.3s ease;
-}
-
-/* Image hover effect */
-.gallery-line .item:hover img {
-  transform: scale(1.1);
-}
-
-/* Global blur effect: when any image is hovered, blur all other images across all lines */
-.gallery-container:hover .gallery-line .item:not(:hover) img {
-  filter: blur(4px);
-  opacity: 0.6;
-}
-
-/* Click to View overlay */
-.gallery-line .item::before {
-  content: "Click to View";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ffffff;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-shadow: 
-    0 0 5px #00fff7,
-    0 0 10px #00fff7,
-    0 0 15px #00fff7,
-    0 0 20px #00fff7;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 10;
-  pointer-events: none;
-  text-align: center;
-}
-
-/* Show overlay on hover */
-.gallery-line .item:hover::before {
-  opacity: 1;
-  visibility: visible;
 }
 
 /* Legacy support - if you still want to use the old IDs */
@@ -1013,12 +928,44 @@ h2 {
   position: relative;
 }
 
+@media screen and (min-width: 250px)and (max-width: 800px) {
+  #project-2 {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  #first-line,
+  #second-line,
+  #third-line {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 0% 1%;
+  }
+  #first-line .item,
+  #second-line .item,
+  #third-line .item{
+    width: 98%;
+    height: 150px;
+    margin-bottom: 0.5%;
+    margin-top: 0.5%;
+  }
+  #first-line .item img,
+  #second-line .item img,
+  #third-line .item img {
+    width: 98%;
+    height: 150px;
+    padding: 0%;
+  }
+}
+
 #first-line .item:hover,
 #second-line .item:hover,
 #third-line .item:hover {
   /* transform: translateY(-8px) scale(1.02); */
   border-color: #ffffff;
-   box-shadow: 
+  box-shadow: 
     0 0 5px cyan,
     0 0 10px cyan,
     0 0 20px cyan;
@@ -1093,3 +1040,4 @@ body:has(#third-line .item:hover) #second-line .item img {
   opacity: 1;
   visibility: visible;
 }
+
