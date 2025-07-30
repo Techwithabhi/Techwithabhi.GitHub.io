@@ -942,13 +942,13 @@ h2 {
     flex-direction: column;
     justify-content: center;
     width: 98%;
-    /* margin: 0% 1%; */
+    padding-bottom: 0%;
   }
   #first-line .item,
   #second-line .item,
   #third-line .item{
     width: 98%;
-    height: 9rem;
+    height: 10rem;
     margin-top: 2%;
     margin-left: 2%;
     border: 2px solid #ffffff;
@@ -957,7 +957,7 @@ h2 {
   #second-line .item img,
   #third-line .item img {
     width: 98%;
-    height: 9rem;
+    height: 10rem;
     padding: 0%;
   }
   #last-item {
@@ -980,7 +980,7 @@ h2 {
 #second-line .item img,
 #third-line .item img {
   width: 100%;
-  height: 9rem;
+  height: 10rem;
   display: block;
   object-fit: cover;
   border-radius: 8px;
