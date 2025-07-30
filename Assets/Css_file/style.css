@@ -948,7 +948,7 @@ h2 {
   #second-line .item,
   #third-line .item{
     width: 98%;
-    height: 150px;
+    height: 9rem;
     margin-top: 2%;
     margin-left: 2%;
     border: 2px solid #ffffff;
@@ -957,7 +957,7 @@ h2 {
   #second-line .item img,
   #third-line .item img {
     width: 98%;
-    height: 150px;
+    height: 9rem;
     padding: 0%;
   }
   #last-item {
