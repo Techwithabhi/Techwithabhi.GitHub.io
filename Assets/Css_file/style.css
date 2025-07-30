@@ -878,8 +878,8 @@ h2 {
 
 .head {
  width: auto;
- height: 50px;
- display: flex;
+ height: auto;
+ display: grid;
  justify-self: center;
  justify-content: center;
  align-items: center;
