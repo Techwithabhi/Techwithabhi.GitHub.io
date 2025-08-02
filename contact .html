@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Contact Portal</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-cyan: #00fff7;
+            --dark-cyan: #00b3ad;
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --text-light: #ffffff;
+            --text-cyan: #00fff7;
+            --glass-bg: rgba(0, 255, 247, 0.08);
+            --glass-border: rgba(0, 255, 247, 0.2);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            border: 2px solid var(--glass-border);
+            padding: 50px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(0, 255, 247, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(0);
+            transition: all 0.4s ease;
+            animation: slideIn 1.2s ease-out;
+            position: relative;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 25px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary-cyan), transparent, var(--dark-cyan));
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 
+                0 35px 70px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(0, 255, 247, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary-cyan), #ffffff, var(--dark-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            animation: glow 3s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(0, 255, 247, 0.5);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 20px var(--primary-cyan));
+            }
+            to {
+                filter: drop-shadow(0 0 35px var(--primary-cyan)) drop-shadow(0 0 45px var(--primary-cyan));
+            }
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-cyan);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 18px 20px;
+            border: 2px solid rgba(0, 255, 247, 0.3);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--text-light);
+            font-size: 16px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-cyan);
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 247, 0.4),
+                inset 0 0 20px rgba(0, 255, 247, 0.1);
+            transform: scale(1.02);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--dark-cyan));
+            color: #000;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 35px rgba(0, 255, 247, 0.4),
+                0 0 25px rgba(0, 255, 247, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .status-message {
+            padding: 18px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .status-message.success {
+            background: rgba(0, 255, 100, 0.2);
+            border: 2px solid #00ff64;
+            color: #00ff64;
+            box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
+        }
+
+        .status-message.error {
+            background: rgba(255, 50, 50, 0.2);
+            border: 2px solid #ff3232;
+            color: #ff6464;
+            box-shadow: 0 0 20px rgba(255, 50, 50, 0.3);
+        }
+
+        .status-message.info {
+            background: rgba(0, 255, 247, 0.2);
+            border: 2px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 247, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-cyan);
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 255, 247, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(0, 255, 247, 0.3);
+            backdrop-filter: blur(15px);
+        }
+
+        .user-info span {
+            color: var(--text-cyan);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 15px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .setup-info {
+            background: rgba(255, 165, 0, 0.1);
+            border: 2px solid #ffa500;
+            color: #ffb347;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .setup-info h3 {
+            color: #ffa500;
+            margin-bottom: 10px;
+        }
+
+        .setup-info code {
+            background: rgba(255, 165, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Enhanced 3D Effects */
+        .glass-card {
+            perspective: 1000px;
+        }
+
+        .form-group {
+            transform-style: preserve-3d;
+        }
+
+        .form-group:hover {
+            transform: rotateX(2deg) rotateY(1deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 35px 25px;
+                margin: 15px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 15px 18px;
+                font-size: 15px;
+            }
+
+            .btn {
+                padding: 15px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .glass-card {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 14px 16px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+
+        /* iPad specific */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .glass-card {
+                max-width: 650px;
+                padding: 60px;
+            }
+
+            .header h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Particle enhancement */
+        #canvas-container canvas {
+            filter: blur(0.5px);
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <div class="container">
+        <div class="glass-card">
+            <div class="header">
+                <h1>Contact Portal</h1>
+                <p>Connect with me through secure authentication</p>
+            </div>
+
+            <div id="status-message" class="status-message"></div>
+
+            <!-- Setup Instructions -->
+            <div class="setup-info">
+                <h3>⚠️ EmailJS Configuration Required</h3>
+                <p>To enable real email sending, you need to:</p>
+                <p>1. Create account at <strong>emailjs.com</strong></p>
+                <p>2. Replace <code>YOUR_EMAILJS_PUBLIC_KEY</code> with your actual public key</p>
+                <p>3. Replace <code>YOUR_SERVICE_ID</code> and <code>YOUR_TEMPLATE_ID</code> with your EmailJS service and template IDs</p>
+                <p>4. Create a template with variables: <code>{{from_name}}</code>, <code>{{from_email}}</code>, <code>{{subject}}</code>, <code>{{message}}</code></p>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form">
+                <div class="form-group">
+                    <label for="email">Gmail Address</label>
+                    <input type="email" id="email" placeholder="your.email@gmail.com" required>
+                </div>
+                <button class="btn" onclick="simulateLogin()">
+                    <span id="login-text">Verify & Login</span>
+                </button>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 15px; text-align: center;">
+                    * For demo purposes, any valid Gmail address will work
+                </p>
+            </div>
+
+            <!-- Contact Form -->
+            <div id="contact-form" class="hidden">
+                <div class="user-info">
+                    <span id="user-name"></span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+
+                <form id="message-form">
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" placeholder="What's this about?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">
+                        <span id="send-text">Send Message</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // EmailJS Configuration - REPLACE THESE WITH YOUR ACTUAL VALUES
+        const EMAILJS_CONFIG = {
+            publicKey: "YOUR_EMAILJS_PUBLIC_KEY", // Replace with your public key
+            serviceId: "YOUR_SERVICE_ID",         // Replace with your service ID
+            templateId: "YOUR_TEMPLATE_ID"        // Replace with your template ID
+        };
+
+        // Initialize EmailJS
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+
+        // 3D Scene Setup
+        let scene, camera, renderer, particles, particleSystem;
+
+        function init3D() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            createParticles();
+            createFloatingElements();
+            
+            camera.position.z = 5;
+            animate();
+        }
+
+        function createParticles() {
+            const geometry = new THREE.BufferGeometry();
+            const particleCount = 1500;
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            const sizes = new Float32Array(particleCount);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 30;
+                positions[i + 1] = (Math.random() - 0.5) * 30;
+                positions[i + 2] = (Math.random() - 0.5) * 30;
+
+                colors[i] = 0;
+                colors[i + 1] = 1;
+                colors[i + 2] = 0.97;
+                
+                sizes[i / 3] = Math.random() * 0.05 + 0.01;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.03,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.9,
+                blending: THREE.AdditiveBlending
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+        }
+
+        function createFloatingElements() {
+            // Add some floating geometric shapes
+            const shapes = [];
+            for (let i = 0; i < 5; i++) {
+                const geometry = new THREE.RingGeometry(0.5, 0.7, 8);
+                const material = new THREE.MeshBasicMaterial({
+                    color: 0x00fff7,
+                    transparent: true,
+                    opacity: 0.1,
+                    wireframe: true
+                });
+                const ring = new THREE.Mesh(geometry, material);
+                ring.position.set(
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 10
+                );
+                ring.rotation.set(
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI
+                );
+                shapes.push(ring);
+                scene.add(ring);
+            }
+            
+            // Store shapes for animation
+            window.floatingShapes = shapes;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (particles) {
+                particles.rotation.x += 0.0008;
+                particles.rotation.y += 0.0012;
+                
+                // Animate individual particles
+                const positions = particles.geometry.attributes.position.array;
+                for (let i = 0; i < positions.length; i += 3) {
+                    positions[i + 1] += Math.sin(Date.now() * 0.001 + positions[i]) * 0.001;
+                }
+                particles.geometry.attributes.position.needsUpdate = true;
+            }
+
+            // Animate floating shapes
+            if (window.floatingShapes) {
+                window.floatingShapes.forEach((shape, index) => {
+                    shape.rotation.x += 0.005 + index * 0.001;
+                    shape.rotation.y += 0.003 + index * 0.0005;
+                    shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.002;
+                });
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Status message functions
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status-message');
+            statusEl.textContent = message;
+            statusEl.className = `status-message ${type} show`;
+            
+            setTimeout(() => {
+                statusEl.classList.remove('show');
+            }, 5000);
+        }
+
+        // Check if EmailJS is properly configured
+        function isEmailJSConfigured() {
+            return EMAILJS_CONFIG.publicKey !== "YOUR_EMAILJS_PUBLIC_KEY" &&
+                   EMAILJS_CONFIG.serviceId !== "YOUR_SERVICE_ID" &&
+                   EMAILJS_CONFIG.templateId !== "YOUR_TEMPLATE_ID";
+        }
+
+        // Simplified login function for demo
+        function simulateLogin() {
+            const email = document.getElementById('email').value.trim();
+            const loginBtn = document.querySelector('#login-form .btn');
+            const loginText = document.getElementById('login-text');
+            
+            if (!email) {
+                showStatus('Please enter your Gmail address.', 'error');
+                return;
+            }
+
+            if (!email.includes('@gmail.com')) {
+                showStatus('Please enter a valid Gmail address.', 'error');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginText.innerHTML = '<span class="loading"></span>Verifying...';
+
+            // Simulate verification process
+            setTimeout(() => {
+                const user = {
+                    email: email,
+                    displayName: email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+                };
+                
+                // Use in-memory storage instead of sessionStorage
+                window.currentUser = user;
+                
+                showContactForm(user);
+                showStatus('Login successful! Welcome to the contact portal.', 'success');
+                
+                loginBtn.disabled = false;
+                loginText.textContent = 'Verify & Login';
+            }, 2000);
+        }
+
+        function showContactForm(user) {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('contact-form').classList.remove('hidden');
+            document.getElementById('user-name').textContent = `Welcome, ${user.displayName}`;
+        }
+
+        function logout() {
+            window.currentUser = null;
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('contact-form').classList.add('hidden');
+            document.getElementById('email').value = '';
+            showStatus('Logged out successfully.', 'info');
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            init3D();
+        });
+
+        // Handle form submission with real email sending
+        document.getElementById('message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!window.currentUser) {
+                showStatus('Please login first.', 'error');
+                return;
+            }
+
+            const user = window.currentUser;
+            const sendBtn = this.querySelector('.btn');
+            const sendText = document.getElementById('send-text');
+            
+            sendBtn.disabled = true;
+            sendText.innerHTML = '<span class="loading"></span>Sending...';
+
+            const templateParams = {
+                from_name: user.displayName,
+                from_email: user.email,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                to_email: 'abhisarkar6038@gmail.com'
+            };
+
+            // Check if EmailJS is configured
+            if (!isEmailJSConfigured()) {
+                showStatus('EmailJS not configured yet. Please configure EmailJS settings to send real emails.', 'error');
+                sendBtn.disabled = false;
+                sendText.textContent = 'Send Message';
+                return;
+            }
+
+            // Send actual email using EmailJS
+            emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, templateParams)
+                .then((response) => {
+                    console.log('Email sent successfully:', response);
+                    showStatus('Message sent successfully to abhisarkar6038@gmail.com! You will receive a reply soon.', 'success');
+                    document.getElementById('message-form').reset();
+                })
+                .catch((error) => {
+                    console.error('Email sending failed:', error);
+                    showStatus('Failed to send message. Please check EmailJS configuration or try again later.', 'error');
+                })
+                .finally(() => {
+                    sendBtn.disabled = false;
+                    sendText.textContent = 'Send Message';
+                });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (camera && renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        });
+
+        // Enhanced interactive particle effects
+        document.addEventListener('mousemove', (event) => {
+            if (particles) {
+                const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                
+                particles.rotation.x += mouseY * 0.0005;
+                particles.rotation.y += mouseX * 0.0005;
+            }
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                const loginForm = document.getElementById('login-form');
+                const contactForm = document.getElementById('contact-form');
+                
+                if (!contactForm.classList.contains('hidden')) {
+                    logout();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
