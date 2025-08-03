@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Contact Portal</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "m2wWvRNYYUV2tvLRe",
+      });
+   })();
+</script>
     <style>
         * {
             margin: 0;
@@ -326,29 +333,6 @@
             box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
         }
 
-        .setup-info {
-            background: rgba(255, 165, 0, 0.1);
-            border: 2px solid #ffa500;
-            color: #ffb347;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .setup-info h3 {
-            color: #ffa500;
-            margin-bottom: 10px;
-        }
-
-        .setup-info code {
-            background: rgba(255, 165, 0, 0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-        }
-
         /* Enhanced 3D Effects */
         .glass-card {
             perspective: 1000px;
@@ -441,16 +425,6 @@
 
             <div id="status-message" class="status-message"></div>
 
-            <!-- Setup Instructions -->
-            <div class="setup-info">
-                <h3>⚠️ EmailJS Configuration Required</h3>
-                <p>To enable real email sending, you need to:</p>
-                <p>1. Create account at <strong>emailjs.com</strong></p>
-                <p>2. Replace <code>YOUR_EMAILJS_PUBLIC_KEY</code> with your actual public key</p>
-                <p>3. Replace <code>YOUR_SERVICE_ID</code> and <code>YOUR_TEMPLATE_ID</code> with your EmailJS service and template IDs</p>
-                <p>4. Create a template with variables: <code>{{from_name}}</code>, <code>{{from_email}}</code>, <code>{{subject}}</code>, <code>{{message}}</code></p>
-            </div>
-
             <!-- Login Form -->
             <div id="login-form">
                 <div class="form-group">
@@ -490,14 +464,14 @@
     </div>
 
     <script>
-        // EmailJS Configuration - REPLACE THESE WITH YOUR ACTUAL VALUES
+        // EmailJS Configuration - Updated with your actual values
         const EMAILJS_CONFIG = {
-            publicKey: "YOUR_EMAILJS_PUBLIC_KEY", // Replace with your public key
-            serviceId: "YOUR_SERVICE_ID",         // Replace with your service ID
-            templateId: "YOUR_TEMPLATE_ID"        // Replace with your template ID
+            publicKey: "m2wWvRNYYUV2tvLRe",
+            serviceId: "Tech_with_abhi",
+            templateId: "template_b9wjd9c"
         };
 
-        // Initialize EmailJS
+        // Initialize EmailJS with your public key
         emailjs.init(EMAILJS_CONFIG.publicKey);
 
         // 3D Scene Setup
@@ -622,13 +596,6 @@
             }, 5000);
         }
 
-        // Check if EmailJS is properly configured
-        function isEmailJSConfigured() {
-            return EMAILJS_CONFIG.publicKey !== "YOUR_EMAILJS_PUBLIC_KEY" &&
-                   EMAILJS_CONFIG.serviceId !== "YOUR_SERVICE_ID" &&
-                   EMAILJS_CONFIG.templateId !== "YOUR_TEMPLATE_ID";
-        }
-
         // Simplified login function for demo
         function simulateLogin() {
             const email = document.getElementById('email').value.trim();
@@ -677,6 +644,8 @@
             document.getElementById('login-form').classList.remove('hidden');
             document.getElementById('contact-form').classList.add('hidden');
             document.getElementById('email').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('message').value = '';
             showStatus('Logged out successfully.', 'info');
         }
 
@@ -697,25 +666,24 @@
             const user = window.currentUser;
             const sendBtn = this.querySelector('.btn');
             const sendText = document.getElementById('send-text');
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
             
+            if (!subject || !message) {
+                showStatus('Please fill in all fields.', 'error');
+                return;
+            }
+
             sendBtn.disabled = true;
             sendText.innerHTML = '<span class="loading"></span>Sending...';
 
             const templateParams = {
                 from_name: user.displayName,
                 from_email: user.email,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value,
+                subject: subject,
+                message: message,
                 to_email: 'abhisarkar6038@gmail.com'
             };
-
-            // Check if EmailJS is configured
-            if (!isEmailJSConfigured()) {
-                showStatus('EmailJS not configured yet. Please configure EmailJS settings to send real emails.', 'error');
-                sendBtn.disabled = false;
-                sendText.textContent = 'Send Message';
-                return;
-            }
 
             // Send actual email using EmailJS
             emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, templateParams)
@@ -726,7 +694,7 @@
                 })
                 .catch((error) => {
                     console.error('Email sending failed:', error);
-                    showStatus('Failed to send message. Please check EmailJS configuration or try again later.', 'error');
+                    showStatus('Failed to send message. Please try again later.', 'error');
                 })
                 .finally(() => {
                     sendBtn.disabled = false;
