@@ -579,7 +579,7 @@ button:hover {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 9s ease;
+  transition: all 9s ease;
 }
 
 .img-wrapper:hover img {
@@ -988,13 +988,13 @@ h2 {
     0 0 10px cyan,
     0 0 20px cyan,
     0 0 40px cyan;
-  transition: all 0.3s ease;
+  transition: all 0.1s ease;
 }
 
 #first-line .item:hover img,
 #second-line .item:hover img,
 #third-line .item:hover img {
-  transform: scale(1.1);
+  transform: scale(1.06);
 }
 
 #first-line:hover .item:not(:hover) img,
