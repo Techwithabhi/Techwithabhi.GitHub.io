@@ -777,7 +777,7 @@ button:hover {
     max-width: 500px;
     height: auto;
     margin-bottom: 20px;
-    margin-right: 0.5%;
+    /* margin: 0px; */
   }
 
   .left-box img {
@@ -793,17 +793,12 @@ button:hover {
     max-width: 508px;
     height: auto;
     min-height: 350px;
-    margin-left: 0px;
-    margin-right: 0px;
-    /* margin-left: 0.9%; */
-    margin-top: 0;
+    margin: 0%;
     margin-bottom: 20px;
     position: relative;
     z-index: 1;
     border-radius: 15px;
     border: 3px solid black;
-    /* padding: 1.5rem; */
-    /* margin-right: 0.45%; */
   }
 
   .right-box .container {
@@ -864,12 +859,12 @@ button:hover {
   }
 }
 
-@media (max-width: 550px) {
+/* @media (max-width: 550px) {
   #project .project1 .right-box{
     width: 98.5%;
     margin-left: 0.6%;
   }
-}
+} */
 
 /* Starting Small Project Section */
 #small-project {
