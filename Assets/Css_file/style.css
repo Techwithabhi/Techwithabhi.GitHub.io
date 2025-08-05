@@ -773,8 +773,8 @@ button:hover {
   }
 
   .project1 .left-box {
-    width: 96%;
-    padding: 0% 2% 0% 2%;
+    width: 98%;
+    padding: 0% 1.2% 0% 0.8%;
     max-width: 500px;
     height: auto;
     margin-bottom: 20px;
@@ -846,10 +846,11 @@ button:hover {
   }
 
   .project1 .right-box .down .bottom-img button {
-    width: 100%;
+    width: 170%;
     height: 50px;
     font-size: 18px;
     position: static;
+    margin-left: -50px;
     /* margin-right: 1rem; */
   }
 
@@ -859,11 +860,13 @@ button:hover {
     margin-left: 0.5rem;
   }
 }
-
-/* @media (max-width: 550px) {
+/* 
+@media (max-width: 550px) {
   #project .project1 .right-box{
-    width: 98.5%;
-    margin-left: 0.6%;
+    padding: 0% 1.2% 0% 0.8%;
+    max-width: 500px;
+    height: auto;
+    margin-bottom: 20px;
   }
 } */
 
