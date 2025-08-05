@@ -773,11 +773,11 @@ button:hover {
   }
 
   .project1 .left-box {
-    width: 98%;
+    width: 97%;
     max-width: 500px;
     height: auto;
     margin-bottom: 20px;
-    margin-right: 1%;
+    margin-right: 0.5%;
   }
 
   .left-box img {
@@ -790,10 +790,12 @@ button:hover {
 
   #project .project1 .right-box {
     width: 100%;
-    max-width: 500px;
+    max-width: 508px;
     height: auto;
     min-height: 350px;
-    margin-left: 0.9%;
+    margin-left: 0px;
+    margin-right: 0px;
+    /* margin-left: 0.9%; */
     margin-top: 0;
     margin-bottom: 20px;
     position: relative;
@@ -801,7 +803,7 @@ button:hover {
     border-radius: 15px;
     border: 3px solid black;
     /* padding: 1.5rem; */
-    margin-right: 0.45%;
+    /* margin-right: 0.45%; */
   }
 
   .right-box .container {
