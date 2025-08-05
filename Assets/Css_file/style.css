@@ -863,7 +863,8 @@ button:hover {
 
 @media (max-width: 550px) {
   #project .project1 .left-box{
-    padding: 0% 1.5% 0% 0.5%;
+    width: 97%;
+    padding: 0% 2.1% 0% 0.9%;
   }
   .project1 .right-box .down .bottom-img button {
     width: auto;
