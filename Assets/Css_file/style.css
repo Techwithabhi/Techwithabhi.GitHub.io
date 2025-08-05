@@ -847,7 +847,7 @@ button:hover {
 
   .project1 .right-box .down .bottom-img button {
     width: 200%;
-    height: 50px;
+    height: auto;
     font-size: 18px;
     position: static;
     margin-left: -70px;
