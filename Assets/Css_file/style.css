@@ -864,6 +864,13 @@ button:hover {
   }
 }
 
+@media (max-width: 550px) {
+  #project .project1 .right-box{
+    width: 98.5%;
+    margin-left: 0.6%;
+  }
+}
+
 /* Starting Small Project Section */
 #small-project {
  width: 90%;
