@@ -32,6 +32,7 @@ function init3D() {
   animate();
 }
 
+
 function createParticles() {
   const geometry = new THREE.BufferGeometry();
   const particleCount = 1500;
@@ -67,6 +68,7 @@ function createParticles() {
   scene.add(particles);
 }
 
+
 function createFloatingElements() {
   // Add some floating geometric shapes
   const shapes = [];
@@ -97,6 +99,7 @@ function createFloatingElements() {
   window.floatingShapes = shapes;
 }
 
+
 function animate() {
   requestAnimationFrame(animate);
 
@@ -124,6 +127,7 @@ function animate() {
   renderer.render(scene, camera);
 }
 
+
 // Status message functions
 function showStatus(message, type = "info") {
   const statusEl = document.getElementById("status-message");
@@ -134,6 +138,7 @@ function showStatus(message, type = "info") {
     statusEl.classList.remove("show");
   }, 5000);
 }
+
 
 // Simplified login function for demo
 function simulateLogin() {
@@ -174,6 +179,7 @@ function simulateLogin() {
     loginText.textContent = "Verify & Login";
   }, 2000);
 }
+
 
 function showContactForm(user) {
   document.getElementById("login-form").classList.add("hidden");
