@@ -871,6 +871,11 @@ button:hover {
     /* margin-left: -50px; */
     margin-left: 0.5rem;
   }
+  #project .q1 p {
+  font-size: 18px;
+  font-weight: 500;
+  /* padding-bottom: 0%; */
+  }
 }
 
 /* Starting Small Project Section */
