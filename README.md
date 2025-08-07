@@ -18,7 +18,8 @@ SECONDARY_COLOR=FF6B6B
 <!-- Header Banner -->
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6&height=300&section=header&text=TECHWITHABHI&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Frontend%20Portfolio%20with%20HTML%20CSS%20JS&descAlignY=55&descSize=18"/>
 
-
+<!-- Typing Animation -->
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&duration=3000&pause=1000&color=00D4FF&center=true&vCenter=true&width=600&height=100&lines=Welcome+to+my+Web+Portfolio!+%F0%9F%8C%9F;Frontend+Developer+%F0%9F%92%BB;Creative+Coder+%F0%9F%8E%A8;Always+Learning+%F0%9F%9A%80" alt="Typing Animation" />
 
 <!-- Badges Row -->
 [![Portfolio](https://img.shields.io/badge/%F0%9F%8C%90_Live_Demo-00D4FF?style=for-the-badge&logoColor=white)](https://techwithabhi.github.io)
