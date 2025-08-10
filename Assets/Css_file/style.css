@@ -860,6 +860,135 @@ button:hover {
     margin-left: 0.5rem;
   }
 }
+/* ###################################################################################### */
+
+@media (max-width: 750px) {
+  #project {
+    width: 95%;
+    padding: 0% 2.5% 0% 2.5%;
+    padding-top: 30px;
+    margin-top: -30px;
+    /* padding-right: 10px; */
+  }
+
+  .head {
+    text-align: center;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .head p {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .head span {
+    padding-left: 0;
+  }
+
+  .head span strong {
+    font-size: 28px;
+  }
+
+  .project1 {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto 40px auto;
+  }
+
+  .project1 .left-box {
+    width: 98%;
+    padding: 0% 1.2% 0% 0.8%;
+    max-width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+    /* margin: 0px; */
+  }
+
+  .left-box img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 15px;
+    border: 2px solid #000000;
+  }
+
+  #project .project1 .right-box {
+    width: 100%;
+    max-width: 508px;
+    height: auto;
+    min-height: 350px;
+    margin: 0%;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    border-radius: 15px;
+    border: 3px solid black;
+  }
+
+  .right-box .container {
+    width: 100%;
+    padding-right: 0;
+    gap: 1.5rem;
+    padding-right: 0px;
+  }
+
+  #up {
+    /* padding: 1.2rem; */
+    text-align: center;
+    /* margin-right: 50px; */
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+
+  #up strong {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  #up p {
+    font-size: 16px;
+    text-align: justify;
+  }
+
+  .project1 .right-box .down .top {
+    /* padding: 1rem; */
+    padding-left: 0%;
+    /* padding-right: 19px; */
+    margin-right: 12px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .project1 .right-box .down .bottom-img {
+    width: 100%;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .project1 .right-box .down .bottom-img button {
+    width: 200%;
+    height: auto;
+    font-size: 18px;
+    position: static;
+    margin-left: -70px;
+    /* margin-right: 1rem; */
+  }
+
+  .project1 .right-box .down .bottom-img img {
+    height: 0;
+    position: static;
+    margin-left: 0.5rem;
+  }
+}
+
+/* ######################################################################################## */
 
 @media (max-width: 550px) {
   #project .project1 .left-box{
