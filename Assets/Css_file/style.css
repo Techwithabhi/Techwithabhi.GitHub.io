@@ -1192,10 +1192,11 @@ body:has(#third-line .item:hover) #second-line .item img {
 
 /* STARTING FOOTER SECTION */
 #social {
-  height: 500px;
-  width: 79%;
-  background: transparent;
-  margin: 0% 11% 0% 10%;
+  height: auto;
+  width: 87%;
+  background: blanchedalmond;
+  margin-left: 5%;
+  margin-right: 5%;
   padding: 20px;
   text-align: center;
   font-size: 14px;
@@ -1213,3 +1214,4 @@ body:has(#third-line .item:hover) #second-line .item img {
   font-weight: 500;
   margin-bottom: 20px;
 }
+
