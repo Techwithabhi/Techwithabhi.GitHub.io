@@ -1193,17 +1193,12 @@ body:has(#third-line .item:hover) #second-line .item img {
 /* STARTING FOOTER SECTION */
 #social {
   height: auto;
-  width: 87%;
-  background: blanchedalmond;
-  margin-left: 5%;
-  margin-right: 5%;
-  padding: 20px;
-  text-align: center;
-  font-size: 14px;
-  position: relative;
+  width: 90%;
+  margin: 0% 5% 5% 5%;
+  background-color: #2d866e;
 }
 
-#social h2 {
+/* #social h2 {
   font-size: 23px;
   font-weight: 640;
   margin-bottom: 20px;
@@ -1213,5 +1208,5 @@ body:has(#third-line .item:hover) #second-line .item img {
   font-size: 22px;
   font-weight: 500;
   margin-bottom: 20px;
-}
+} */
 
