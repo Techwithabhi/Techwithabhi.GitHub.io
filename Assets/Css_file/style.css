@@ -1198,15 +1198,8 @@ body:has(#third-line .item:hover) #second-line .item img {
   background-color: #2d866e;
 }
 
-/* #social h2 {
-  font-size: 23px;
-  font-weight: 640;
-  margin-bottom: 20px;
-}
-
 #social p {
-  font-size: 22px;
+  font-size: 23px;
   font-weight: 500;
-  margin-bottom: 20px;
-} */
-
+  padding-bottom: 20px;
+}
