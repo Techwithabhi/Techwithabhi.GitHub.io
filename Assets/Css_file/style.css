@@ -1195,7 +1195,7 @@ body:has(#third-line .item:hover) #second-line .item img {
   height: auto;
   width: 90%;
   margin: 0% 5% 5% 5%;
-  background-color: #2d866e;
+  /* background-color: #2d866e; */
 }
 
 #social p {
@@ -1219,6 +1219,12 @@ body:has(#third-line .item:hover) #second-line .item img {
   margin-bottom: 3rem;
   padding: 0% 2% 0% 2%;
   background-color: aqua;
+  border: 2px solid #000000;
+  box-shadow: 
+    0 0 1px #000000,
+    0 0 1.5px #000000,
+    0 0 1.5px #000000,
+    0 0 5px #000000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1235,4 +1241,17 @@ body:has(#third-line .item:hover) #second-line .item img {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+@media screen and (min-width: 250px)and (max-width: 630px){
+  #social .main-scl{
+    display: grid;
+  }
+  #social .main-scl .left-scl-box,
+  #social .main-scl .right-scl-box {
+    width: 96%;
+    height: auto;
+    margin-bottom: 1rem;
+    padding: 0% 2% 0% 2%;
+  }
 }
