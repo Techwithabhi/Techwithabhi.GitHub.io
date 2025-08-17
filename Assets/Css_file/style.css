@@ -1237,6 +1237,12 @@ body:has(#third-line .item:hover) #second-line .item img {
   margin-bottom: 3rem;
   padding: 0% 2% 0% 2%;
   background-color: aqua;
+  border: 2px solid #000000;
+  box-shadow: 
+    0 0 1px #000000,
+    0 0 1.5px #000000,
+    0 0 1.5px #000000,
+    0 0 5px #000000;
   display: flex;
   justify-content: center;
   align-items: center;
