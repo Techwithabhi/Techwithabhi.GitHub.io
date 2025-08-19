@@ -318,7 +318,7 @@ header {
 }
 
 .comu div:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
   background-color: #00fff7;
   color: #000000;
   cursor: default;
