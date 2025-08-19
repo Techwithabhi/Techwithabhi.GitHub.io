@@ -1032,7 +1032,7 @@ h2 {
 #project-2 {
  width: 90%;
  height: auto;
- margin: 0% 5% 0% 5%;
+ margin: 0% 6% 0% 4%;
  background-color: #3f4744;
  padding: 0.8% 0.5% 0.8% 0.4%;
  border-radius: 1rem;
@@ -1218,13 +1218,12 @@ body:has(#third-line .item:hover) #second-line .item img {
   height: auto;
   margin-bottom: 3rem;
   padding: 0% 2% 0% 2%;
-  background-color: aqua;
+  background-color: #a6dbda;
   border: 2px solid #000000;
   box-shadow: 
-    0 0 1px #000000,
-    0 0 1.5px #000000,
-    0 0 1.5px #000000,
-    0 0 5px #000000;
+    0 0.1rem 0.2rem #00000033, 
+    0 0.1rem 0.5rem #0000004d,
+    0 0.2rem 1.5rem #0000004d;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1236,13 +1235,12 @@ body:has(#third-line .item:hover) #second-line .item img {
   height: auto;
   margin-bottom: 3rem;
   padding: 0% 2% 0% 2%;
-  background-color: aqua;
+  background-color: #a6dbda;
   border: 2px solid #000000;
   box-shadow: 
-    0 0 1px #000000,
-    0 0 1.5px #000000,
-    0 0 1.5px #000000,
-    0 0 5px #000000;
+    0 0.1rem 0.2rem #00000033, 
+    0 0.1rem 0.5rem #0000004d,
+    0 0.2rem 1.5rem #0000004d;
   display: flex;
   justify-content: center;
   align-items: center;
