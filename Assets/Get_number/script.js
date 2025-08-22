@@ -1,168 +1,202 @@
-<script>
-    /**
-     * Quiz Unlock — Business rules:
-     * - 7 total questions, each can be attempted once; selection locks the card.
-     * - Each correct answer reveals 2 random, unrevealed digits of a hidden 10-digit number.
-     * - If user reaches 5 correct, reveal the remaining digits and surface the full number.
-     */
+/**
+ * Quiz Unlock — Business rules:
+ * - 7 total questions, each can be attempted once; selection locks the card.
+ * - Each correct answer reveals 2 random, unrevealed digits of a hidden 10-digit number.
+ * - If user reaches 5 correct, reveal the remaining digits and surface the full number.
+ */
 
-    // --- Utils
-    const $ = (sel, root = document) => root.querySelector(sel);
-    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+// --- Utils
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-    // Sample question set (general knowledge + logic). Feel free to customize.
-    const QUESTIONS = [
-      { q: "What does HTML stand for?", options: [
-          "HyperText Markup Language",
-          "HighText Markdown Language",
-          "Hyperlinking Text Management Layer",
-          "Home Tool Markup Language"
-        ], answer: 0
-      },
-      { q: "Which one is NOT a JavaScript data type?", options: [
-          "String", "Boolean", "Module", "Number"
-        ], answer: 2
-      },
-      { q: "2 + 2 × 3 = ?", options: ["12", "10", "8", "6"], answer: 1 },
-      { q: "Which tag makes the largest default heading in HTML?", options: ["<h6>", "<header>", "<h1>", "<title>"], answer: 2 },
-      { q: "Which CSS property controls text size?", options: ["font-weight", "font-size", "text-style", "size"], answer: 1 },
-      { q: "What is the output of Boolean(\"\") in JavaScript?", options: ["true", "false", "undefined", "0"], answer: 1 },
-      { q: "Which HTTP status indicates success?", options: ["200", "301", "404", "500"], answer: 0 }
-    ];
+// Sample question set (general knowledge + logic). Feel free to customize.
+const QUESTIONS = [
+  {
+    q: "What does HTML stand for?",
+    options: [
+      "HyperText Markup Language",
+      "HighText Markdown Language",
+      "Hyperlinking Text Management Layer",
+      "Home Tool Markup Language",
+    ],
+    answer: 0,
+  },
+  {
+    q: "Which one is NOT a JavaScript data type?",
+    options: ["String", "Boolean", "Module", "Number"],
+    answer: 2,
+  },
+  { q: "2 + 2 × 3 = ?", options: ["12", "10", "8", "6"], answer: 1 },
+  {
+    q: "Which tag makes the largest default heading in HTML?",
+    options: ["<h6>", "<header>", "<h1>", "<title>"],
+    answer: 2,
+  },
+  {
+    q: "Which CSS property controls text size?",
+    options: ["font-weight", "font-size", "text-style", "size"],
+    answer: 1,
+  },
+  {
+    q: 'What is the output of Boolean("") in JavaScript?',
+    options: ["true", "false", "undefined", "0"],
+    answer: 1,
+  },
+  {
+    q: "Which HTTP status indicates success?",
+    options: ["200", "301", "404", "500"],
+    answer: 0,
+  },
+];
 
-    // State
-    let hiddenNumber = [];
-    let revealed = new Set();
-    let correctCount = 0;
+// State
+let hiddenNumber = [];
+let revealed = new Set();
+let correctCount = 0;
 
-    function generatePhone() {
-      // Create a realistic 10-digit number not starting with 0
-      const first = Math.floor(Math.random() * 9) + 1; // 1..9
-      const rest = Array.from({ length: 9 }, () => Math.floor(Math.random() * 10));
-      hiddenNumber = [first, ...rest];
+function generatePhone() {
+  // Create a realistic 10-digit number not starting with 0
+  const first = Math.floor(Math.random() * 9) + 1; // 1..9
+  const rest = Array.from({ length: 9 }, () => Math.floor(Math.random() * 10));
+  hiddenNumber = [first, ...rest];
+}
+
+function renderDigits() {
+  const row = $("#digitRow");
+  row.innerHTML = "";
+  for (let i = 0; i < 10; i++) {
+    const div = document.createElement("div");
+    div.className = "digit masked";
+    div.dataset.index = String(i);
+    if (revealed.has(i)) {
+      div.textContent = hiddenNumber[i];
+      div.classList.remove("masked");
+      div.classList.add("revealed");
     }
+    row.appendChild(div);
+  }
+  updateMeta();
+}
 
-    function renderDigits() {
-      const row = $("#digitRow");
-      row.innerHTML = "";
-      for (let i = 0; i < 10; i++) {
-        const div = document.createElement("div");
-        div.className = "digit masked";
-        div.dataset.index = String(i);
-        if (revealed.has(i)) {
-          div.textContent = hiddenNumber[i];
-          div.classList.remove("masked");
-          div.classList.add("revealed");
-        }
-        row.appendChild(div);
-      }
-      updateMeta();
+function updateMeta() {
+  $("#score").textContent = String(correctCount);
+  $("#revealedCount").textContent = String(revealed.size);
+  $("#bar").style.width = `${(revealed.size / 10) * 100}%`;
+  if (correctCount >= 5) {
+    $("#status").textContent = `Success! Full number: ${hiddenNumber.join("")}`;
+  } else {
+    $("#status").textContent = `Get to 5 correct to unlock fully. (${
+      5 - correctCount
+    } more to go)`;
+  }
+}
+
+function revealDigits(count = 2) {
+  const maxTries = 50;
+  let tries = 0;
+  while (count > 0 && revealed.size < 10 && tries < maxTries) {
+    const idx = Math.floor(Math.random() * 10);
+    if (!revealed.has(idx)) {
+      revealed.add(idx);
+      count--;
     }
+    tries++;
+  }
+  renderDigits();
+}
 
-    function updateMeta() {
-      $("#score").textContent = String(correctCount);
-      $("#revealedCount").textContent = String(revealed.size);
-      $("#bar").style.width = `${(revealed.size / 10) * 100}%`;
-      if (correctCount >= 5) {
-        $("#status").textContent = `Success! Full number: ${hiddenNumber.join("")}`;
-      } else {
-        $("#status").textContent = `Get to 5 correct to unlock fully. (${5 - correctCount} more to go)`;
-      }
+function revealAll() {
+  for (let i = 0; i < 10; i++) revealed.add(i);
+  renderDigits();
+}
+
+function handleAnswer(card, optBtn, isCorrect) {
+  // Lock this card — one attempt only
+  $$("button.opt", card).forEach((b) => (b.disabled = true));
+  optBtn.classList.add(isCorrect ? "correct" : "wrong");
+
+  if (isCorrect) {
+    correctCount++;
+    revealDigits(2);
+    if (correctCount >= 5) {
+      // reveal remaining digits immediately
+      revealAll();
     }
+  }
 
-    function revealDigits(count = 2) {
-      const maxTries = 50;
-      let tries = 0;
-      while (count > 0 && revealed.size < 10 && tries < maxTries) {
-        const idx = Math.floor(Math.random() * 10);
-        if (!revealed.has(idx)) {
-          revealed.add(idx);
-          count--;
-        }
-        tries++;
-      }
-      renderDigits();
+  // When all 7 are attempted, show final status
+  const attempted = $$(".qcard").filter(
+    (c) => $$(".opt:disabled", c).length > 0
+  ).length;
+  if (attempted === QUESTIONS.length) {
+    if (correctCount < 5) {
+      $(
+        "#status"
+      ).textContent = `Finalized: ${correctCount}/7 correct. You needed ${
+        5 - correctCount
+      } more for full reveal.`;
+    } else {
+      $(
+        "#status"
+      ).textContent = `Finalized: ${correctCount}/7 correct. Full number: ${hiddenNumber.join(
+        ""
+      )}`;
     }
+  }
+}
 
-    function revealAll() {
-      for (let i = 0; i < 10; i++) revealed.add(i);
-      renderDigits();
-    }
+function renderQuiz() {
+  const wrap = $("#quiz");
+  wrap.innerHTML = "";
 
-    function handleAnswer(card, optBtn, isCorrect) {
-      // Lock this card — one attempt only
-      $$('button.opt', card).forEach(b => b.disabled = true);
-      optBtn.classList.add(isCorrect ? 'correct' : 'wrong');
+  QUESTIONS.forEach((item, idx) => {
+    const card = document.createElement("div");
+    card.className = "qcard";
 
-      if (isCorrect) {
-        correctCount++;
-        revealDigits(2);
-        if (correctCount >= 5) {
-          // reveal remaining digits immediately
-          revealAll();
-        }
-      }
+    const title = document.createElement("div");
+    title.className = "qtitle";
+    title.textContent = `${idx + 1}. ${item.q}`;
 
-      // When all 7 are attempted, show final status
-      const attempted = $$('.qcard').filter(c => $$('.opt:disabled', c).length > 0).length;
-      if (attempted === QUESTIONS.length) {
-        if (correctCount < 5) {
-          $("#status").textContent = `Finalized: ${correctCount}/7 correct. You needed ${5 - correctCount} more for full reveal.`;
-        } else {
-          $("#status").textContent = `Finalized: ${correctCount}/7 correct. Full number: ${hiddenNumber.join("")}`;
-        }
-      }
-    }
+    const optsWrap = document.createElement("div");
+    optsWrap.className = "opts";
 
-    function renderQuiz() {
-      const wrap = $("#quiz");
-      wrap.innerHTML = "";
+    item.options.forEach((optText, i) => {
+      const btn = document.createElement("button");
+      btn.className = "opt";
+      btn.type = "button";
+      btn.textContent = optText;
+      btn.addEventListener(
+        "click",
+        () => {
+          const isCorrect = i === item.answer;
+          handleAnswer(card, btn, isCorrect);
+        },
+        { once: true }
+      ); // ensure handler runs once per button
+      optsWrap.appendChild(btn);
+    });
 
-      QUESTIONS.forEach((item, idx) => {
-        const card = document.createElement('div');
-        card.className = 'qcard';
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.innerHTML = `<span class="pill">Attempt: one chance only</span>`;
 
-        const title = document.createElement('div');
-        title.className = 'qtitle';
-        title.textContent = `${idx + 1}. ${item.q}`;
+    card.appendChild(title);
+    card.appendChild(optsWrap);
+    card.appendChild(meta);
+    wrap.appendChild(card);
+  });
+}
 
-        const optsWrap = document.createElement('div');
-        optsWrap.className = 'opts';
+function newSession() {
+  correctCount = 0;
+  revealed = new Set();
+  generatePhone();
+  renderDigits();
+  renderQuiz();
+}
 
-        item.options.forEach((optText, i) => {
-          const btn = document.createElement('button');
-          btn.className = 'opt';
-          btn.type = 'button';
-          btn.textContent = optText;
-          btn.addEventListener('click', () => {
-            const isCorrect = i === item.answer;
-            handleAnswer(card, btn, isCorrect);
-          }, { once: true }); // ensure handler runs once per button
-          optsWrap.appendChild(btn);
-        });
+// Wire
+$("#restartBtn").addEventListener("click", newSession);
 
-        const meta = document.createElement('div');
-        meta.className = 'meta';
-        meta.innerHTML = `<span class="pill">Attempt: one chance only</span>`;
-
-        card.appendChild(title);
-        card.appendChild(optsWrap);
-        card.appendChild(meta);
-        wrap.appendChild(card);
-      });
-    }
-
-    function newSession() {
-      correctCount = 0;
-      revealed = new Set();
-      generatePhone();
-      renderDigits();
-      renderQuiz();
-    }
-
-    // Wire
-    $("#restartBtn").addEventListener('click', newSession);
-
-    // Init
-    newSession();
-  </script>
+// Init
+newSession();
