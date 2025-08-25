@@ -1211,6 +1211,11 @@ body:has(#third-line .item:hover) #second-line .item img {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  border: 2px solid #000000;
+  box-shadow: 
+    0 0.1rem 0.2rem #00000033, 
+    0 0.1rem 0.5rem #0000004d,
+    0 0.2rem 1.5rem #0000004d;
 }
 
 #social .main-scl .left-scl-box {
@@ -1221,14 +1226,15 @@ body:has(#third-line .item:hover) #second-line .item img {
     0 0 10px cyan,
     0 0 20px cyan,
     0 0 40px cyan;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
   padding: 0% 2% 0% 2%;
   background-color: transparent;
-  border: 2px solid #000000;
+  /* border: 2px solid #000000;
   box-shadow: 
     0 0.1rem 0.2rem #00000033, 
     0 0.1rem 0.5rem #0000004d,
-    0 0.2rem 1.5rem #0000004d;
+    0 0.2rem 1.5rem #0000004d; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1243,14 +1249,15 @@ body:has(#third-line .item:hover) #second-line .item img {
     0 0 10px cyan,
     0 0 20px cyan,
     0 0 40px cyan;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
   padding: 0% 2% 0% 2%;
   background-color: transparent;
-  border: 2px solid #000000;
+  /* border: 2px solid #000000;
   box-shadow: 
     0 0.1rem 0.2rem #00000033, 
     0 0.1rem 0.5rem #0000004d,
-    0 0.2rem 1.5rem #0000004d;
+    0 0.2rem 1.5rem #0000004d; */
   display: flex;
   justify-content: center;
   align-items: center;
