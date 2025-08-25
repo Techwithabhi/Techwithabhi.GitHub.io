@@ -1216,6 +1216,11 @@ body:has(#third-line .item:hover) #second-line .item img {
 #social .main-scl .left-scl-box {
   width: 45%;
   height: auto;
+  color: white;
+  text-shadow: 
+    0 0 10px cyan,
+    0 0 20px cyan,
+    0 0 40px cyan;
   margin-bottom: 3rem;
   padding: 0% 2% 0% 2%;
   background-color: transparent;
@@ -1237,7 +1242,7 @@ body:has(#third-line .item:hover) #second-line .item img {
   text-shadow: 
     0 0 10px cyan,
     0 0 20px cyan,
-    0 0 40px cyan;;
+    0 0 40px cyan;
   margin-bottom: 3rem;
   padding: 0% 2% 0% 2%;
   background-color: transparent;
