@@ -1218,7 +1218,7 @@ body:has(#third-line .item:hover) #second-line .item img {
   height: auto;
   margin-bottom: 3rem;
   padding: 0% 2% 0% 2%;
-  background-color: #a6dbda;
+  background-color: transparent;
   border: 2px solid #000000;
   box-shadow: 
     0 0.1rem 0.2rem #00000033, 
@@ -1233,9 +1233,14 @@ body:has(#third-line .item:hover) #second-line .item img {
 #social .main-scl .right-scl-box {
   width: 45%;
   height: auto;
+  color: white;
+  text-shadow: 
+    0 0 10px cyan,
+    0 0 20px cyan,
+    0 0 40px cyan;;
   margin-bottom: 3rem;
   padding: 0% 2% 0% 2%;
-  background-color: #a6dbda;
+  background-color: transparent;
   border: 2px solid #000000;
   box-shadow: 
     0 0.1rem 0.2rem #00000033, 
