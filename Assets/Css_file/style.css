@@ -1223,7 +1223,7 @@ body:has(#third-line .item:hover) #second-line .item img {
 }
 
 #social .main-scl .left-scl-box {
-  width: 45%;
+  width: 60%;
   height: auto;
   color: white;
   text-shadow: 
@@ -1246,7 +1246,7 @@ body:has(#third-line .item:hover) #second-line .item img {
 }
 
 #social .main-scl .right-scl-box {
-  width: 45%;
+  width: 30%;
   height: auto;
   color: white;
   text-shadow: 
