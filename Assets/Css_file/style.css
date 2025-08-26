@@ -1251,10 +1251,9 @@ body:has(#third-line .item:hover) #second-line .item img {
   font-weight: 600;
   font-family: "Times New Roman", Times, serif;
   padding: 7px 12px 7px 12px;
-  background-color: #5eddbb;
-  color: #000000;
+  background-color: transparent;
   font-weight: 700;
-  text-shadow: #1e293b;
+  /* text-shadow: #1e293b; */
   border: 0.04px solid #000000;
   border-radius: 12px;
   transition: all 0.2s ease;
@@ -1263,6 +1262,29 @@ body:has(#third-line .item:hover) #second-line .item img {
   0 0.1rem 0.5rem #0000004d,
   0 0.2rem 1.5rem #0000004d;
 }
+
+#social .main-scl .left-scl-box button:hover {
+  transform: scale(1.2);
+  color: #000000;
+  background-color: #00fff7;
+  text-shadow: #00203f;
+  border: 0.1px solid #000000;
+  cursor: pointer;
+}
+
+#social .main-scl .left-scl-box button a {
+  text-decoration: none;
+  color: white;
+  text-shadow:
+    0 0 10px cyan,
+    0 0 20px cyan,
+    0 0 40px cyan;
+}
+
+/* #social .main-scl .left-scl-box button a:hover {
+  color: #000000;
+  text-shadow: #00203f;
+} */
 
 #social .main-scl .right-scl-box {
   width: 30%;
