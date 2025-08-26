@@ -1245,6 +1245,25 @@ body:has(#third-line .item:hover) #second-line .item img {
   flex-direction: column;
 }
 
+#social .main-scl .left-scl-box button {
+  width: 75%;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Times New Roman", Times, serif;
+  padding: 7px 12px 7px 12px;
+  background-color: #5eddbb;
+  color: #000000;
+  font-weight: 700;
+  text-shadow: #1e293b;
+  border: 0.04px solid #000000;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 
+  0 0.1rem 0.2rem #00000033, 
+  0 0.1rem 0.5rem #0000004d,
+  0 0.2rem 1.5rem #0000004d;
+}
+
 #social .main-scl .right-scl-box {
   width: 30%;
   height: auto;
