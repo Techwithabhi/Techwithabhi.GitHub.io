@@ -1254,7 +1254,7 @@ body:has(#third-line .item:hover) #second-line .item img {
   background-color: transparent;
   font-weight: 700;
   /* text-shadow: #1e293b; */
-  border: 0.04px solid #000000;
+  border: 0.04px solid aqua;
   border-radius: 12px;
   transition: all 0.2s ease;
   box-shadow: 
