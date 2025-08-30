@@ -1248,43 +1248,48 @@ body:has(#third-line .item:hover) #second-line .item img {
 #social .main-scl .left-scl-box button {
   width: 75%;
   font-size: 20px;
-  font-weight: 600;
-  font-family: "Times New Roman", Times, serif;
-  padding: 7px 12px 7px 12px;
-  background-color: transparent;
   font-weight: 700;
-  /* text-shadow: #1e293b; */
-  border: 0.04px solid aqua;
+  font-family: "Times New Roman", Times, serif;
+  padding: 10px 16px;
+  background-color: transparent;
+  border: 1px solid aqua;
   border-radius: 12px;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   box-shadow: 
-  0 0.1rem 0.2rem #00000033, 
-  0 0.1rem 0.5rem #0000004d,
-  0 0.2rem 1.5rem #0000004d;
+    0 0.1rem 0.2rem #00000033, 
+    0 0.1rem 0.5rem #0000004d,
+    0 0.2rem 1.5rem #0000004d;
 }
 
 #social .main-scl .left-scl-box button:hover {
-  transform: scale(1.2);
-  color: #000000;
+  transform: scale(1.1);
   background-color: #00fff7;
-  text-shadow: #00203f;
-  border: 0.1px solid #000000;
+  border: 1px solid #000000;
   cursor: pointer;
 }
 
 #social .main-scl .left-scl-box button a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
   text-decoration: none;
   color: white;
+  font-weight: inherit;
+  font-size: inherit;
+  font-family: inherit;
   text-shadow:
     0 0 10px cyan,
     0 0 20px cyan,
     0 0 40px cyan;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
-/* #social .main-scl .left-scl-box button a:hover {
+#social .main-scl .left-scl-box button:hover a {
   color: #000000;
-  text-shadow: #00203f;
-} */
+  text-shadow: none;
+}
+
 
 #social .main-scl .right-scl-box {
   width: 30%;
