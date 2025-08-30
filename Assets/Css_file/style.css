@@ -1330,4 +1330,8 @@ body:has(#third-line .item:hover) #second-line .item img {
     font-size: 18px;
     text-align: center;
   }
+  #social .main-scl .left-scl-box button {
+    font-size: 16px;
+    font-weight: 600;
+  }
 }
