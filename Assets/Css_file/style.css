@@ -1341,14 +1341,14 @@ body:has(#third-line .item:hover) #second-line .item img {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 25px;
   flex-wrap: wrap;
   padding-bottom: 10px;
 }
 
 #social .main-scl .right-scl-box div img {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   transition: all 0.3s ease;
   filter: drop-shadow(0px 0px 1.1px rgb(0, 0, 0));
 }
