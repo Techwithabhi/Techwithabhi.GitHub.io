@@ -1223,7 +1223,7 @@ body:has(#third-line .item:hover) #second-line .item img {
 }
 
 #social .main-scl .left-scl-box {
-  width: 60%;
+  width: 75%;
   height: auto;
   color: white;
   text-shadow: 
@@ -1292,7 +1292,7 @@ body:has(#third-line .item:hover) #second-line .item img {
 
 
 #social .main-scl .right-scl-box {
-  width: 30%;
+  width: 15%;
   height: auto;
   color: white;
   text-shadow: 
@@ -1334,4 +1334,21 @@ body:has(#third-line .item:hover) #second-line .item img {
     font-size: 16px;
     font-weight: 600;
   }
+}
+
+
+#social .main-scl .right-scl-box div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+}
+
+#social .main-scl .right-scl-box div img {
+  width: 60px;
+  height: 60px;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0px 0px 1.1px rgb(0, 0, 0));
 }
