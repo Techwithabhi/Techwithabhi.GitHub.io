@@ -1336,6 +1336,10 @@ body:has(#third-line .item:hover) #second-line .item img {
   }
 }
 
+#social .main-scl .right-scl-box h1 {
+  margin-bottom: 0px;
+  padding-bottom: 15px;
+}
 
 #social .main-scl .right-scl-box div {
   display: flex;
@@ -1343,7 +1347,8 @@ body:has(#third-line .item:hover) #second-line .item img {
   align-items: center;
   gap: 25px;
   flex-wrap: wrap;
-  padding-bottom: 10px;
+  padding-bottom: 5%;
+  padding-top: 5%;
 }
 
 #social .main-scl .right-scl-box div img {
