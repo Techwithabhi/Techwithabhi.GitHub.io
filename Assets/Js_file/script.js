@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   // Select all icons in the tools, AI tools, and language sections
   const icons = document.querySelectorAll(
-    ".tools img, .ai img, .language img"
+    ".tools img, .ai img, .language img, .main-scl img"
   );
 
   icons.forEach((icon) => {
