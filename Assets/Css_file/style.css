@@ -1248,7 +1248,7 @@ body:has(#third-line .item:hover) #second-line .item img {
     0 0 20px cyan,
     0 0 40px cyan;
   margin-bottom: 2rem;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   padding: 0% 2% 0% 2%;
   background-color: transparent;
   /* border: 2px solid #000000;
@@ -1260,6 +1260,10 @@ body:has(#third-line .item:hover) #second-line .item img {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+#social .main-scl .left-scl-box h1 {
+  margin-top: 0px;
 }
 
 #social .main-scl .left-scl-box button {
