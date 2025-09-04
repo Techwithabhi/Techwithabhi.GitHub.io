@@ -1211,6 +1211,7 @@ body:has(#third-line .item:hover) #second-line .item img {
 }
 
 #social .main-scl p {
+  margin-top: 10px;
   font-size: 23px;
   font-weight: 500;
   padding: 0px 10px 10px 10px;
@@ -1239,7 +1240,7 @@ body:has(#third-line .item:hover) #second-line .item img {
 }
 
 #social .main-scl .left-scl-box {
-  width: 75%;
+  width: 85%;
   height: auto;
   color: white;
   text-shadow: 
@@ -1262,7 +1263,7 @@ body:has(#third-line .item:hover) #second-line .item img {
 }
 
 #social .main-scl .left-scl-box button {
-  width: 75%;
+  width: 85%;
   font-size: 20px;
   font-weight: 700;
   font-family: "Times New Roman", Times, serif;
@@ -1308,7 +1309,7 @@ body:has(#third-line .item:hover) #second-line .item img {
 
 
 #social .main-scl .right-scl-box {
-  width: 15%;
+  width: 65%;
   height: auto;
   color: white;
   text-shadow: 
