@@ -1231,7 +1231,7 @@ body:has(#third-line .item:hover) #second-line .item img {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  border-bottom: 2px solid aqua;
+  border-bottom: 4px solid aqua;
   /* border-top: 2px solid aqua; */
   box-shadow: 
     0 0.1rem 0.2rem #00000033, 
