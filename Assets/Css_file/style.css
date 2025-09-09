@@ -1011,7 +1011,7 @@ button:hover {
  padding: 0% 5%;
  padding-top: 40px;
  margin-top: -40px;
- margin-bottom: 50px;
+ margin-bottom: 150px;
 }
 
 h2 {
@@ -1194,8 +1194,9 @@ body:has(#third-line .item:hover) #second-line .item img {
 #social {
   height: auto;
   width: 100%;
-  padding-top: 40px;
-  margin-top: -40px;
+  /* padding-top: 40px; */
+  /* margin-top: -40px; */
+  /* padding-top: 50px; */
   /* margin-bottom: 50px; */
   /* margin-left: 5%;
   margin-right: 5%; */
@@ -1228,6 +1229,7 @@ body:has(#third-line .item:hover) #second-line .item img {
   /* margin: 0% 2.5% 0% 2.5%; */
   height: auto;
   display: flex;
+  padding-top: 50px;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
