@@ -161,3 +161,129 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+
+// Add required CSS animations dynamically
+function addDynamicStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to { transform: scale(4); opacity: 0; }
+        }
+        
+        @keyframes wave {
+            to { transform: scale(3); opacity: 0; }
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100px); opacity: 0; }
+        }
+        
+        .animate-in {
+            animation: slideUp 1s ease forwards !important;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: cyan;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: particle-float 4s linear infinite;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                opacity: 1;
+                transform: translateY(100px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.5);
+            }
+        }
+    `;
+    
+    document.head.appendChild(style);
+}
+
+// Initialize dynamic styles
+addDynamicStyles();
+
+// Performance optimization - throttle scroll events
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
+// Mouse trail effect
+document.addEventListener('mousemove', throttle(function(e) {
+    const socialSection = document.getElementById('social');
+    if (!socialSection) return;
+    
+    const rect = socialSection.getBoundingClientRect();
+    if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+        const trail = document.createElement('div');
+        trail.style.cssText = `
+            position: fixed;
+            left: ${e.clientX}px;
+            top: ${e.clientY}px;
+            width: 6px;
+            height: 6px;
+            background: rgba(0, 255, 247, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            animation: trailFade 1s ease-out forwards;
+        `;
+        
+        document.body.appendChild(trail);
+        
+        setTimeout(() => {
+            if (trail.parentNode) {
+                trail.parentNode.removeChild(trail);
+            }
+        }, 1000);
+    }
+}, 50));
+
+// Add trail animation
+const trailStyle = document.createElement('style');
+trailStyle.textContent = `
+    @keyframes trailFade {
+        0% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0.5); }
+    }
+`;
+document.head.appendChild(trailStyle);
