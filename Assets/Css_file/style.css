@@ -1260,6 +1260,14 @@ body:has(#third-line .item:hover) #second-line .item img {
   margin-top: 0px;
 }
 
+#social .main-scl .left-scl-box #feedback {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 550;
+  text-align: center;
+}
+
 #social .main-scl .left-scl-box button {
   width: 85%;
   font-size: 20px;
@@ -1379,17 +1387,25 @@ body:has(#third-line .item:hover) #second-line .item img {
     margin-bottom: 1rem;
     padding: 0% 5% 0% 5%;
   }
-  #spech {
-    font-size: 20px;
+  #social .main-scl #spech p {
+    font-size: 18px;
   }
   #social .main-scl .left-scl-box p,
   #social .main-scl .right-scl-box p {
     font-size: 18px;
     text-align: center;
   }
+  #social .main-scl .left-scl-box #feedback{
+    font-size: 18px;
+    margin-top: 3px;
+  }
   #social .main-scl .left-scl-box button {
     font-size: 16px;
     font-weight: 600;
+  }
+  #social .main-scl .right-scl-box div {
+    gap: 15px;
+    flex-wrap: wrap;
   }
   #social .main-scl .right-scl-box div img {
     width: 35px;
