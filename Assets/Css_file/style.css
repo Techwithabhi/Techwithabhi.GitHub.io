@@ -1387,4 +1387,14 @@ body:has(#third-line .item:hover) #second-line .item img {
     font-size: 16px;
     font-weight: 600;
   }
+  #social .main-scl .right-scl-box div img {
+    width: 35px;
+    height: 35px;
+  }
+  #trad {
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: -10px;
+    padding: 5px 0px 0px 0px;
+  }
 }
