@@ -1318,28 +1318,6 @@ body:has(#third-line .item:hover) #second-line .item img {
   flex-direction: column;
 }
 
-@media screen and (min-width: 250px)and (max-width: 630px){
-  #social .main-scl{
-    display: grid;
-  }
-  #social .main-scl .left-scl-box,
-  #social .main-scl .right-scl-box {
-    width: 96%;
-    height: auto;
-    margin-bottom: 1rem;
-    padding: 0% 2% 0% 2%;
-  }
-  #social .main-scl .left-scl-box p,
-  #social .main-scl .right-scl-box p {
-    font-size: 18px;
-    text-align: center;
-  }
-  #social .main-scl .left-scl-box button {
-    font-size: 16px;
-    font-weight: 600;
-  }
-}
-
 #social .main-scl .right-scl-box h1 {
   margin-bottom: 0px;
   padding-bottom: 15px;
@@ -1382,4 +1360,31 @@ body:has(#third-line .item:hover) #second-line .item img {
     0 0.1rem 0.2rem #00000033, 
     0 0.1rem 0.5rem #0000004d,
     0 0.2rem 1.5rem #0000004d;
+}
+
+@media screen and (min-width: 250px)and (max-width: 630px){
+  #social .main-scl{
+    display: grid;
+  }
+  #social .main-scl .left-scl-box,
+  #social .main-scl .right-scl-box {
+    width: 90%;
+    height: auto;
+    margin-bottom: 1rem;
+    padding: 0% 5% 0% 5%;
+  }
+  #social .main-scl .left-box h1 {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+  }
+  #social .main-scl .left-scl-box p,
+  #social .main-scl .right-scl-box p {
+    font-size: 18px;
+    text-align: center;
+  }
+  #social .main-scl .left-scl-box button {
+    font-size: 16px;
+    font-weight: 600;
+  }
 }
