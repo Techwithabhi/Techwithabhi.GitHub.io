@@ -224,6 +224,12 @@ header {
   text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
 }
 
+@media only screen and (max-width: 500px) {
+  .base h1 {
+    font-size: 25px;
+  }
+}
+
 /* call the action button */
 .work-btn {
   display: inline-block;
