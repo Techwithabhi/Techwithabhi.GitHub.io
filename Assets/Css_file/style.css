@@ -1373,11 +1373,11 @@ body:has(#third-line .item:hover) #second-line .item img {
     margin-bottom: 1rem;
     padding: 0% 5% 0% 5%;
   }
-  #social .main-scl .left-box h1 {
+  /* #social .main-scl .left-box h1 {
     font-size: 16px;
     text-align: center;
     font-weight: 500;
-  }
+  } */
   #social .main-scl .left-scl-box p,
   #social .main-scl .right-scl-box p {
     font-size: 18px;
