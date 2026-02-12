@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhi Sarkar | Portfolio</title>
+    <meta name="description" content="Portfolio of Abhi Sarkar - Data Analyst & Web Developer">
+
+    <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/assets/css_file/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepEmerald: '#05614B',
+                        abyss: '#020E0E',
+                        neoGreen: '#01DE82',
+                        pitchBlack: '#000000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="antialiased loading bg-black text-white">
+
+    <!-- LOADER -->
+    <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+        <div class="relative">
+            <h1 id="loader-text" class="text-6xl md:text-8xl font-black italic tracking-tighter opacity-0">
+                ABHI<span class="text-neoGreen">.</span>
+            </h1>
+            <div id="loader-bar" class="absolute -bottom-4 left-0 h-[2px] bg-neoGreen w-0"></div>
+        </div>
+    </div>
+
+    <div id="interactive-glow"></div>
+
+    <nav id="main-nav" class="fixed w-full z-50 px-6 py-4 bg-black/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-black tracking-tighter italic">
+                ABHI<span class="text-neoGreen">.</span>
+            </a>
+            <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest uppercase">
+                <a href="#about" class="hover:text-neoGreen transition">ABOUT</a>
+                <a href="#skills" class="hover:text-neoGreen transition">SKILLS</a>
+                <a href="#projects" class="hover:text-neoGreen transition">PROJECTS</a>
+                <a href="#contact" class="hover:text-neoGreen transition">CONTACTS</a>
+            </div>
+            <a href="https://drive.google.com/file/d/120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing" target="_blank"
+               class="px-4 py-2 border border-neoGreen text-neoGreen text-xs rounded-full hover:bg-neoGreen hover:text-black transition">
+                RESUME
+            </a>
+        </div>
+    </nav>
+
+        <section class="min-h-screen flex items-center justify-center px-6 relative z-10 pt-20">
+            <div class="max-w-7xl w-full grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-deepEmerald/20 border border-deepEmerald/30 text-neoGreen mb-6 hero-anim">
+                        <span class="w-2 h-2 bg-neoGreen rounded-full animate-ping"></span>
+                        <span class="text-xs font-mono uppercase tracking-tighter">Ready for Data Challenges</span>
+                    </div>
+                    <h1 class="text-6xl md:text-9xl font-black leading-none mb-6 hero-anim">
+                        ABHI <br> <span class="text-neoGreen">SARKAR</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg md:text-xl max-w-lg mb-8 hero-anim leading-relaxed">
+                        A <span class="text-white underline decoration-neoGreen decoration-2">Results-Driven</span> Graduate specializing in Data Analysis, Visualization, and Modern Web Architectures.
+                    </p>
+                    <div class="flex gap-4 hero-anim">
+                        <a href="#projects" class="btn-neo px-8 py-4 rounded">PROJECTS</a>
+                        <a href="#contact" class="px-8 py-4 border border-white/10 rounded hover:border-neoGreen transition">HIRE ME</a>
+                    </div>
+                </div>
+                
+                <div class="relative flex justify-center hero-anim">
+                    <div class="w-72 h-72 md:w-[450px] md:h-[450px] bg-abyss rounded-3xl neo-border relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none"></div>
+                        <img src="/assets/icon/dpicon.png" alt="Profile Image" 
+                             class="glow-image hero-glow-pulse w-full h-full object-cover relative z-0">
+                    </div>
+
+                    <div class="absolute -bottom-6 -right-6 md:right-10 bg-abyss p-6 rounded-xl neo-border z-20 hidden sm:block">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded bg-neoGreen/20 flex items-center justify-center">
+                                <i class="fa-solid fa-chart-line text-neoGreen"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase">Efficiency Boost</p>
+                                <p class="font-bold text-white">+45% Optimization</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-32 px-6 bg-abyss-gradient">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-20 items-center">
+                    <div class="reveal">
+                        <h2 class="text-4xl font-black mb-8">PROFESSIONAL <br><span class="text-neoGreen">BACKGROUND</span></h2>
+                        <p class="text-gray-400 leading-relaxed mb-6">
+                            Specializing in <strong class="text-white">Data Analysis, Data Visualization, and Data Mining</strong>, I have a keen ability to apply Forecasting and performance metrics for data-driven decision-making.
+                        </p>
+                        <p class="text-gray-400 leading-relaxed mb-10">
+                            I am committed to driving organizational success by implementing effective solutions in fast-paced environments, optimizing processes, and translating financial insights to enhance business efficiency.
+                        </p>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-4xl font-black text-white">Advanced</p>
+                                <p class="text-neoGreen text-sm font-mono uppercase">Excel Proficiency</p>
+                            </div>
+                            <div>
+                                <p class="text-4xl font-black text-white">Full-Stack</p>
+                                <p class="text-neoGreen text-sm font-mono uppercase">AI Integrated</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 reveal">
+                        <div class="p-8 bg-black neo-border rounded-2xl text-center">
+                            <i class="fa-solid fa-microchip text-3xl text-neoGreen mb-4 glow-image"></i>
+                            <h4 class="font-bold">AI Native</h4>
+                        </div>
+                        <div class="p-8 bg-black neo-border rounded-2xl text-center mt-8">
+                            <i class="fa-solid fa-database text-3xl text-neoGreen mb-4 glow-image"></i>
+                            <h4 class="font-bold">SQL Proficient</h4>
+                        </div>
+                        <div class="p-8 bg-black neo-border rounded-2xl text-center">
+                            <i class="fa-solid fa-code text-3xl text-neoGreen mb-4 glow-image"></i>
+                            <h4 class="font-bold">Python/JS</h4>
+                        </div>
+                        <div class="p-8 bg-black neo-border rounded-2xl text-center mt-8">
+                            <i class="fa-solid fa-shield-halved text-3xl text-neoGreen mb-4 glow-image"></i>
+                            <h4 class="font-bold">Teamwork</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl font-black mb-4">CORE <span class="text-neoGreen">CAPABILITIES</span></h2>
+                    <div class="w-20 h-1 bg-neoGreen mx-auto"></div>
+                </div>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="p-6 bg-abyss neo-border rounded-xl">
+                        <p class="text-neoGreen font-mono text-xs mb-4">01 // TOOLS</p>
+                        <h3 class="font-bold text-xl mb-6">Data Analysis</h3>
+                        <ul class="space-y-3 text-sm text-gray-500">
+                            <li>Advanced Excel</li>
+                            <li>Power BI</li>
+                            <li>Tableau</li>
+                            <li>SQL Mining</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-abyss neo-border rounded-xl">
+                        <p class="text-neoGreen font-mono text-xs mb-4">02 // DEV</p>
+                        <h3 class="font-bold text-xl mb-6">Programming</h3>
+                        <ul class="space-y-3 text-sm text-gray-500">
+                            <li>Python (Automation)</li>
+                            <li>JavaScript (ES6+)</li>
+                            <li>HTML5 / CSS3</li>
+                            <li>React Framework</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-abyss neo-border rounded-xl">
+                        <p class="text-neoGreen font-mono text-xs mb-4">03 // INTELLIGENCE</p>
+                        <h3 class="font-bold text-xl mb-6">AI Knowledge</h3>
+                        <ul class="space-y-3 text-sm text-gray-500">
+                            <li>ChatGPT / Claude</li>
+                            <li>Prompt Engineering</li>
+                            <li>DeepSeek / Gemini</li>
+                            <li>AI Automation</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-abyss neo-border rounded-xl">
+                        <p class="text-neoGreen font-mono text-xs mb-4">04 // SOFT</p>
+                        <h3 class="font-bold text-xl mb-6">Professionalism</h3>
+                        <ul class="space-y-3 text-sm text-gray-500">
+                            <li>Critical Thinking</li>
+                            <li>Strategic Planning</li>
+                            <li>Team Collaboration</li>
+                            <li>Adaptability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-32 px-6 bg-abyss-gradient">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <h2 class="text-5xl font-black italic">FEATURED <br><span class="text-neoGreen">EXPERIMENTS</span></h2>
+                    <p class="text-gray-500 max-w-sm text-sm">"Data is not just numbers; it's a story waiting to be told. In every dataset lies the blueprint for smarter decisions."</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <a href="/assets/projects_data/1st_pj_data/data.html" class="block">
+                        <div class="group relative bg-black p-4 rounded-3xl neo-border overflow-hidden">
+                            <div class="h-64 bg-abyss rounded-2xl mb-6 overflow-hidden relative">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-pie text-6xl text-deepEmerald group-hover:text-neoGreen transition duration-500 glow-image"></i>
+                                </div>
+                            </div>
+                            <div class="px-2">
+                                <h4 class="text-xl font-bold mb-2">Sales Performance Analysis</h4>
+                                <p class="text-gray-500 text-sm mb-6">In-depth market trend analysis using SQL and Power BI to identify high-growth revenue streams.</p>
+                                <div class="flex gap-2">
+                                    <span class="text-[10px] font-mono border border-white/10 px-2 py-1 rounded">POWER BI</span>
+                                    <span class="text-[10px] font-mono border border-white/10 px-2 py-1 rounded">SQL</span>
+                                    <span class="text-[10px] font-mono border border-white/10 px-2 py-1 rounded">PYTHON</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/assets/projects_data/2nd_pj_data/data.html" class="block">
+                        <div class="group relative bg-black p-4 rounded-3xl neo-border overflow-hidden">
+                            <div class="h-64 bg-abyss rounded-2xl mb-6 overflow-hidden relative">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <i class="fa-solid fa-magnifying-glass-chart text-6xl text-deepEmerald group-hover:text-neoGreen transition duration-500 glow-image"></i>
+                                </div>
+                            </div>
+                            <div class="px-2">
+                                <h4 class="text-xl font-bold mb-2">Financial Forecasting</h4>
+                                <p class="text-gray-500 text-sm mb-6">Applying Python-based predictive modeling to forecast quarterly budget allocations with high accuracy.</p>
+                                <div class="flex gap-2">
+                                    <span class="text-[10px] font-mono border border-white/10 px-2 py-1 rounded">PYTHON</span>
+                                    <span class="text-[10px] font-mono border border-white/10 px-2 py-1 rounded">PANDAS</span>
+                                    <span class="text-[10px] font-mono border border-white/10 px-2 py-1 rounded">NUMPY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/assets/projects_data/3rd_pj_data/data.html" class="block">
+                        <div class="group relative bg-black p-4 rounded-3xl neo-border overflow-hidden">
+                            <div class="h-64 bg-abyss rounded-2xl mb-6 overflow-hidden relative">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <i class="fa-solid fa-layer-group text-6xl text-deepEmerald group-hover:text-neoGreen transition duration-500 glow-image"></i>
+                                </div>
+                            </div>
+                            <div class="px-2">
+                                <h4 class="text-xl font-bold mb-2">Advanced Excel Dashboard</h4>
+                                <p class="text-gray-500 text-sm mb-6">Automated operational reporting system using Pivot Tables, Power Query, and VBA for efficiency.</p>
+                                <div class="flex gap-2">
+                                    <span class="text-[10px] font-mono border border-white/10 px-2 py-1 rounded">EXCEL</span>
+                                    <span class="text-[10px] font-mono border border-white/10 px-2 py-1 rounded">VBA</span>
+                                    <span class="text-[10px] font-mono border border-white/10 px-2 py-1 rounded">POWER QUERY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="bg-abyss neo-border rounded-[40px] p-8 md:p-20 relative overflow-hidden">
+                    <div class="grid md:grid-cols-2 gap-12 relative z-10">
+                        <div>
+                            <h2 class="text-5xl font-black mb-8 leading-tight italic">LET'S BUILD <br>THE <span class="text-neoGreen">FUTURE</span>.</h2>
+                            <p class="text-gray-400 mb-12">Whether launching a new project or exploring fresh ideas, I’m here to turn your vision into reality efficiently.</p>
+                            
+                            <div class="space-y-6">
+                                <p class="text-sm font-bold text-white uppercase tracking-widest mb-4">Connect with me:</p>
+                                <div class="flex flex-wrap items-center gap-4">
+                                    <a href="https://www.linkedin.com/in/techwithabhi/" target="_blank" class="group relative w-12 h-12 bg-neoGreen/10 rounded-full flex items-center justify-center border border-white/5 hover:bg-neoGreen hover:text-black transition-all duration-300 transform hover:-translate-y-1">
+                                        <i class="fa-brands fa-linkedin-in text-xl"></i>
+                                    </a>
+                                    <a href="https://github.com/Techwithabhi" target="_blank" class="group relative w-12 h-12 bg-neoGreen/10 rounded-full flex items-center justify-center border border-white/5 hover:bg-neoGreen hover:text-black transition-all duration-300 transform hover:-translate-y-1">
+                                        <i class="fa-brands fa-github text-xl"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/i_am_abhi_sarkar/" target="_blank" class="group relative w-12 h-12 bg-neoGreen/10 rounded-full flex items-center justify-center border border-white/5 hover:bg-neoGreen hover:text-black transition-all duration-300 transform hover:-translate-y-1">
+                                        <i class="fa-brands fa-instagram text-xl"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/abhi.sarkar.50364592/" target="_blank" class="group relative w-12 h-12 bg-neoGreen/10 rounded-full flex items-center justify-center border border-white/5 hover:bg-neoGreen hover:text-black transition-all duration-300 transform hover:-translate-y-1">
+                                        <i class="fa-brands fa-facebook-f text-xl"></i>
+                                    </a>
+                                    <a href="https://www.youtube.com/@techwithabhi-d8y" target="_blank" class="group relative w-12 h-12 bg-neoGreen/10 rounded-full flex items-center justify-center border border-white/5 hover:bg-neoGreen hover:text-black transition-all duration-300 transform hover:-translate-y-1">
+                                        <i class="fa-brands fa-youtube text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="contact-form" class="space-y-4">
+                            <input type="text" name="user_name" placeholder="Full Name" required
+                                class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl focus:border-neoGreen outline-none transition text-white">
+
+                            <input type="email" name="user_email" placeholder="Email Address" required
+                                class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl focus:border-neoGreen outline-none transition text-white">
+
+                            <textarea rows="3" name="message" placeholder="Your Message" required
+                                class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl focus:border-neoGreen outline-none transition text-white"></textarea>
+
+                            <button type="submit" class="btn-neo w-full py-5 rounded-2xl">
+                                SEND TRANSMISSION
+                            </button>
+                        </form>
+                    </div>
+                    <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-neoGreen/5 blur-[120px] rounded-full"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-10 text-center border-t border-white/5">
+            <p class="text-gray-600 text-xs font-mono uppercase tracking-[0.3em]">
+                &copy; 2026 Abhi Sarkar // Optimized for Impact
+            </p>
+        </footer>
+    </div>
+
+    <script src="/assets/js_file/script.js"></script>
+    <!-- EmailJS library -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <!-- Your mail logic -->
+    <script src="/assets/js_file/mail.js"></script>
+</body>
+</html>
