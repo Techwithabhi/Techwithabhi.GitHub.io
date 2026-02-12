@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* --- Core Layout & Global --- */
+body {
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+body.loading {
+    overflow: hidden;
+}
+
+/* --- Navigation Fix --- */
+#main-nav {
+    transition: opacity 1s ease-in-out;
+}
+
+/* Add this to style.css */
+#main-nav {
+    opacity: 0;
+    visibility: hidden; /* This prevents any clicking or flickering before reveal */
+    transition: none !important; /* Prevent CSS transitions from fighting GSAP */
+}
+
+/* --- Main Content Wrapper --- */
+#main-content {
+    position: relative;
+    z-index: 1;
+    transition: filter 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-content.blur-clear {
+    filter: blur(0px) !important;
+}
+
+/* --- Preloader --- */
+#loader {
+    transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+#loader.hide {
+    clip-path: inset(0 0 100% 0);
+    pointer-events: none;
+}
+
+/* --- Visual Effects --- */
+#interactive-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2; 
+    background: radial-gradient(
+        450px circle at var(--x, 50%) var(--y, 50%), 
+        rgba(1, 222, 130, 0.12), 
+        transparent 80%
+    );
+}
+
+.neo-border {
+    border: 1px solid rgba(1, 222, 130, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.neo-border:hover {
+    border-color: #01DE82;
+    box-shadow: 0 0 25px rgba(1, 222, 130, 0.2);
+    transform: translateY(-5px);
+    background: #020E0E;
+}
+
+.text-neoGreen {
+    color: #01DE82;
+    text-shadow: 0 0 10px rgba(1, 222, 130, 0.3);
+}
+
+.bg-abyss-gradient {
+    background: linear-gradient(180deg, #000000 0%, #020E0E 100%);
+}
+
+.btn-neo {
+    background: #01DE82;
+    color: #000000;
+    font-weight: 700;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-neo:hover {
+    box-shadow: 0 0 20px rgba(1, 222, 130, 0.6);
+    transform: scale(1.05);
+}
+
+/* --- Profile & Hero Animations --- */
+.glow-image {
+    transition: all 0.5s ease;
+}
+
+.group:hover .glow-image, 
+.glow-image:hover {
+    filter: drop-shadow(0 0 15px rgba(1, 222, 130, 0.8));
+    transform: scale(1.05);
+}
+
+.hero-glow-pulse {
+    animation: imagePulse 3s infinite ease-in-out;
+}
+
+@keyframes imagePulse {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(1, 222, 130, 0.3)); }
+    50% { filter: drop-shadow(0 0 25px rgba(1, 222, 130, 0.6)); }
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #000000; }
+::-webkit-scrollbar-thumb { background: #05614B; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #01DE82; }
