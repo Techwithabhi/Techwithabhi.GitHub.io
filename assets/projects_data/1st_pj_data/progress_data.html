@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Update | Abhi Sarkar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="data.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepEmerald: '#05614B',
+                        abyss: '#020E0E',
+                        neoGreen: '#01DE82',
+                        pitchBlack: '#000000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Prevents flicker and sets up GSAP entrance */
+        .reveal { opacity: 0; transform: translateY(30px); }
+        body.loading { overflow: hidden; }
+        
+        #loader {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Improved typography stroke for large text to prevent overcrowding */
+        .outline-text {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+            color: transparent;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-black text-white flex flex-col min-h-screen loading">
+
+    <div id="loader">
+        <div class="relative px-6 text-center">
+            <h1 id="loader-text" class="text-5xl md:text-7xl font-black italic tracking-tighter opacity-0">
+                ABHI<span class="text-neoGreen">.</span>
+            </h1>
+            <div id="loader-bar" class="absolute -bottom-4 left-0 h-[2px] bg-neoGreen w-0"></div>
+        </div>
+    </div>
+
+    <div class="fixed inset-0 z-0 opacity-20 pointer-events-none">
+        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_#05614B33_0%,_transparent_50%)]"></div>
+    </div>
+
+    <nav class="fixed w-full z-50 px-8 py-6 bg-black/50 backdrop-blur-lg border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="data.html" class="text-xl font-black tracking-tighter italic hover:text-neoGreen transition-all group flex items-center">
+                <i class="fa-solid fa-arrow-left text-[10px] mr-3 text-neoGreen group-hover:-translate-x-1 transition"></i>BACK
+            </a>
+            <div class="text-[10px] font-mono text-neoGreen/60 tracking-[0.4em] uppercase">
+                System Status: In Development
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 flex-grow flex items-center justify-center px-10 py-20">
+        <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="reveal lg:col-span-7">
+                <div class="inline-block px-3 py-1 rounded-full bg-deepEmerald/20 border border-deepEmerald/30 text-neoGreen mb-6 text-[10px] font-mono uppercase tracking-widest">
+                    Project Pipeline // 2026
+                </div>
+                <h1 class="text-6xl md:text-8xl xl:text-9xl font-black italic leading-[0.9] tracking-tighter mb-4">
+                    WORKS IN <br> 
+                    <span class="text-neoGreen drop-shadow-[0_0_30px_rgba(1,222,130,0.3)]">PROGRESS</span>
+                </h1>
+                <div class="h-1 w-20 bg-neoGreen/50 rounded-full"></div>
+            </div>
+
+            <div class="reveal lg:col-span-5 space-y-8 lg:border-l lg:border-white/10 lg:pl-16">
+                <div class="space-y-4">
+                    <h2 class="text-xl font-bold text-white uppercase tracking-widest flex items-center gap-3">
+                        <span class="w-8 h-[1px] bg-neoGreen"></span>
+                        Grateful for your visit
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed font-light">
+                        I am currently refining a new series of data analytics projects. I sincerely apologize that this section isn't live yet, but I want to ensure that what I share with you is of the highest quality.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-abyss/50 border border-white/10 rounded-3xl neo-border relative overflow-hidden backdrop-blur-sm">
+                    <i class="fa-solid fa-quote-left absolute -top-2 -left-2 text-4xl text-white/5"></i>
+                    <p class="italic text-gray-300 leading-relaxed relative z-10">
+                        "Thank you for your patience and for taking the time to explore my portfolio. It means a lot to have you follow my journey."
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-8">
+                    <a href="data.html" class="bg-white text-black font-black px-10 py-4 rounded-2xl hover:bg-neoGreen transition-all duration-500 flex items-center gap-3 group shadow-xl">
+                        <i class="fa-solid fa-arrow-left group-hover:translate-x-1 transition"></i>
+                        BACK TO PREVIOUS  
+                    </a>
+                    <div class="flex items-center gap-3 text-neoGreen font-mono text-[10px] uppercase tracking-widest">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neoGreen opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-neoGreen"></span>
+                        </span>
+                        Live Update Soon
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="relative z-10 px-10 py-8 flex flex-col md:flex-row justify-between items-center border-t border-white/5 gap-4">
+        <p class="text-gray-600 font-mono text-[9px] uppercase tracking-[0.3em]">
+            &copy; Abhi Sarkar &bull; Personal Portfolio 2026
+        </p>
+        <div class="flex gap-8 text-gray-400">
+            <a href="https://github.com/Techwithabhi" class="hover:text-neoGreen transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+            <a href="https://www.linkedin.com/in/techwithabhi/" class="hover:text-neoGreen transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.getElementById('loader');
+            const tl = gsap.timeline();
+
+            // 1. Initial Load Sequence
+            tl.to("#loader-text", {
+                opacity: 1,
+                y: -10,
+                duration: 0.6,
+                ease: "power2.out"
+            })
+            .to("#loader-bar", {
+                width: "100%",
+                duration: 0.8,
+                ease: "expo.inOut"
+            }, "-=0.2")
+            .to("#loader-text", {
+                opacity: 0,
+                y: -20,
+                duration: 0.4,
+                ease: "power2.in"
+            })
+            // 2. Dismiss Loader
+            .to(loader, {
+                opacity: 0,
+                display: "none",
+                duration: 0.5,
+                onComplete: () => {
+                    document.body.classList.remove('loading');
+                }
+            })
+            // 3. Reveal Content with better stagger
+            .to(".reveal", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.25,
+                ease: "expo.out"
+            }, "-=0.2");
+        });
+    </script>
+</body>
+</html>
