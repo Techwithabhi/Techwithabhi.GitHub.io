@@ -61,28 +61,28 @@ window.addEventListener('load', () => {
     tl.to("#loader-text", {
         opacity: 1,
         y: -10,
-        duration: 0.7,
+        duration: 1,
         ease: "power4.out"
     })
     .to("#loader-bar", {
         width: "100%",
-        duration: 1.2,
+        duration: 0.6,
         ease: "expo.inOut"
-    }, "-=0.4")
+    }, "-=0.3")
     .to("#loader-text", {
         opacity: 0,
         y: -20,
-        duration: 0.4,
+        duration: 0.2,
         ease: "power2.in"
     })
     .to(mainNav, {
         autoAlpha: 1, 
-        duration: 1.2,
+        duration: 0.5,
         ease: "power2.out"
     }, "-=0.2") 
     .to(mainContent, {
         filter: "blur(0px)",
-        duration: 1.5,
+        duration: 0.5,
         ease: "power2.out",
         onComplete: () => {
             mainContent.classList.add('blur-clear');
@@ -91,8 +91,8 @@ window.addEventListener('load', () => {
     .from(".hero-anim", {
         y: 30,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
+        duration: 0.5,
+        stagger: 0.2,
         ease: "power3.out"
     }, "-=0.8");
 });

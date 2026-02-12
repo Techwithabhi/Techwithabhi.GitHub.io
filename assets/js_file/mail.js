@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
             this
         ).then(
             function () {
-                alert("Message sent successfully 🚀");
+                alert("Message sent successfully📲📧✅");
                 form.reset();
             },
             function (error) {
