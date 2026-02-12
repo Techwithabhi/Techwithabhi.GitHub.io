@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Dashboard | Abhi Sarkar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="data.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepEmerald: '#05614B',
+                        abyss: '#020E0E',
+                        neoGreen: '#01DE82',
+                        pitchBlack: '#000000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="antialiased bg-black text-white">
+
+    <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+        <div class="relative px-6 text-center">
+            <h1 id="loader-text" class="text-5xl sm:text-6xl md:text-8xl font-black italic tracking-tighter opacity-0">
+                ABHI<span class="text-neoGreen">.</span>
+            </h1>
+            <div id="loader-bar" class="absolute -bottom-4 left-0 h-[2px] bg-neoGreen w-0"></div>
+        </div>
+    </div>
+
+    <nav class="fixed w-full z-50 px-4 md:px-6 py-4 bg-black/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/index.html" class="text-xl md:text-2xl font-black tracking-tighter italic">
+                <i class="fa-solid fa-arrow-left text-xs mr-2 text-neoGreen"></i>BACK
+            </a>
+            <div class="flex gap-4">
+                <a href="#" class="px-3 py-1.5 md:px-4 md:py-2 border border-neoGreen text-neoGreen text-[10px] md:text-xs rounded-full hover:bg-neoGreen hover:text-black transition uppercase font-bold">DOWNLOAD DATA</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-24 md:pt-32 pb-12 md:pb-20 px-4 md:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                
+                <div class="reveal">
+                    <div class="inline-block px-3 py-1 rounded-full bg-deepEmerald/20 border border-deepEmerald/30 text-neoGreen mb-4 md:mb-6 text-[10px] md:text-xs font-mono uppercase">
+                        Case Study // 03
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-black mb-6 md:mb-8 italic leading-tight">
+                        EXCEL <br><span class="text-neoGreen">AUTOMATION</span>
+                    </h1>
+                    
+                    <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-xl">
+                        Developed an automated operational reporting system using <strong class="text-white">Power Query</strong> and <strong class="text-white">VBA</strong>. This dashboard consolidates data from multiple sources into a single source of truth, saving the team over 10 hours of manual work weekly.
+                    </p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-6 mb-10">
+                        <div class="p-4 bg-abyss border border-white/10 rounded-xl text-center neo-border">
+                            <i class="fa-solid fa-file-excel text-xl md:text-2xl text-neoGreen mb-2"></i>
+                            <p class="text-[10px] font-mono block text-gray-400">Advanced Excel</p>
+                            <p class="text-lg md:text-xl font-black mt-1">100%</p>
+                        </div>
+                        <div class="p-4 bg-abyss border border-white/10 rounded-xl text-center neo-border">
+                            <i class="fa-solid fa-gears text-xl md:text-2xl text-neoGreen mb-2"></i>
+                            <p class="text-[10px] font-mono block text-gray-400">VBA Macros</p>
+                            <p class="text-lg md:text-xl font-black mt-1">90%</p>
+                        </div>
+                        <div class="p-4 bg-abyss border border-white/10 rounded-xl text-center neo-border col-span-2 sm:col-span-1">
+                            <i class="fa-solid fa-filter text-xl md:text-2xl text-neoGreen mb-2"></i>
+                            <p class="text-[10px] font-mono block text-gray-400">Power Query</p>
+                            <p class="text-lg md:text-xl font-black mt-1">95%</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#" class="bg-neoGreen text-black font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-white transition duration-300">
+                            <i class="fa-solid fa-download"></i> GET SPREADSHEET
+                        </a>
+                        <a href="#" class="px-8 py-4 border border-white/20 rounded-xl hover:border-neoGreen hover:text-neoGreen transition flex items-center justify-center gap-3 group">
+                            <i class="fa-solid fa-book-open group-hover:scale-125 transition"></i> READ DOCS
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative reveal mt-8 lg:mt-0">
+                    <div class="aspect-video bg-abyss rounded-[20px] md:rounded-[30px] border border-white/10 neo-border flex items-center justify-center overflow-hidden group">
+                        <i class="fa-solid fa-table-cells text-7xl md:text-9xl text-deepEmerald/30 group-hover:text-neoGreen/40 transition duration-700"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 md:bottom-8 md:left-8">
+                            <p class="text-neoGreen font-mono text-xs md:text-sm">Master_Dashboard.xlsx</p>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -top-4 -right-2 md:-top-6 md:-right-6 bg-black p-4 md:p-6 rounded-2xl border border-neoGreen/50 hidden sm:block">
+                        <p class="text-neoGreen text-2xl md:text-3xl font-black italic">10h+</p>
+                        <p class="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-tighter">Time Saved / Week</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="data.js"></script>
+</body>
+</html>
