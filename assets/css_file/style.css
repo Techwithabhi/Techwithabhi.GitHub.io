@@ -17,11 +17,10 @@ body.loading {
     transition: opacity 1s ease-in-out;
 }
 
-/* Add this to style.css */
 #main-nav {
     opacity: 0;
-    visibility: hidden; /* This prevents any clicking or flickering before reveal */
-    transition: none !important; /* Prevent CSS transitions from fighting GSAP */
+    visibility: hidden;
+    transition: none !important;
 }
 
 /* --- Main Content Wrapper --- */
@@ -61,6 +60,17 @@ body.loading {
     );
 }
 
+/* Mobile glow optimization */
+@media (max-width: 768px) {
+    #interactive-glow {
+        background: radial-gradient(
+            250px circle at var(--x, 50%) var(--y, 50%), 
+            rgba(1, 222, 130, 0.08), 
+            transparent 80%
+        );
+    }
+}
+
 .neo-border {
     border: 1px solid rgba(1, 222, 130, 0.1);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -71,6 +81,13 @@ body.loading {
     box-shadow: 0 0 25px rgba(1, 222, 130, 0.2);
     transform: translateY(-5px);
     background: #020E0E;
+}
+
+/* Touch device optimization */
+@media (hover: none) and (pointer: coarse) {
+    .neo-border:active {
+        transform: translateY(-2px);
+    }
 }
 
 .text-neoGreen {
@@ -95,6 +112,13 @@ body.loading {
     transform: scale(1.05);
 }
 
+/* Mobile button optimization */
+@media (max-width: 768px) {
+    .btn-neo:active {
+        transform: scale(0.98);
+    }
+}
+
 /* --- Profile & Hero Animations --- */
 .glow-image {
     transition: all 0.5s ease;
@@ -106,6 +130,15 @@ body.loading {
     transform: scale(1.05);
 }
 
+/* Mobile glow reduction */
+@media (max-width: 768px) {
+    .group:hover .glow-image, 
+    .glow-image:hover {
+        filter: drop-shadow(0 0 10px rgba(1, 222, 130, 0.6));
+        transform: scale(1.02);
+    }
+}
+
 .hero-glow-pulse {
     animation: imagePulse 3s infinite ease-in-out;
 }
@@ -115,8 +148,143 @@ body.loading {
     50% { filter: drop-shadow(0 0 25px rgba(1, 222, 130, 0.6)); }
 }
 
+/* Mobile pulse reduction */
+@media (max-width: 768px) {
+    @keyframes imagePulse {
+        0%, 100% { filter: drop-shadow(0 0 5px rgba(1, 222, 130, 0.2)); }
+        50% { filter: drop-shadow(0 0 15px rgba(1, 222, 130, 0.4)); }
+    }
+}
+
 /* --- Custom Scrollbar --- */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #000000; }
 ::-webkit-scrollbar-thumb { background: #05614B; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #01DE82; }
+
+/* Mobile scrollbar */
+@media (max-width: 768px) {
+    ::-webkit-scrollbar { width: 3px; }
+}
+
+/* --- RESPONSIVE ADDITIONS --- */
+
+/* Prevent horizontal scroll */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Mobile menu toggle */
+#mobile-menu {
+    z-index: 60;
+}
+
+/* Touch-friendly sizing */
+@media (max-width: 768px) {
+    button, a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Performance optimizations */
+.glow-image,
+.neo-border,
+.btn-neo {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* iOS Safari fix */
+@supports (-webkit-touch-callout: none) {
+    .min-h-screen {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Focus states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #01DE82;
+    outline-offset: 2px;
+}
+
+/* Prevent zoom on iOS */
+input, textarea {
+    font-size: 16px !important;
+}
+
+/* Image optimization */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Safe area for notched devices */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+}
+
+/* Landscape mobile adjustments */
+@media (max-width: 896px) and (orientation: landscape) {
+    .min-h-screen {
+        min-height: 100vh;
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+    h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+    }
+    
+    h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .glow-image {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* Hover states only for devices that support it */
+@media (hover: hover) and (pointer: fine) {
+    .neo-border:hover,
+    .btn-neo:hover,
+    .glow-image:hover {
+        transition: all 0.3s ease;
+    }
+}
+
+/* Touch device feedback */
+@media (hover: none) and (pointer: coarse) {
+    a:active,
+    button:active {
+        opacity: 0.7;
+    }
+}
