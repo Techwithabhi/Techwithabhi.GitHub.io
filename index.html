@@ -90,16 +90,22 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-theme-main/95 backdrop-blur-md border-b border-theme-border transition-colors duration-300">
-            <div class="flex flex-col space-y-4 p-6 text-xs font-bold tracking-widest uppercase">
-                <a href="#about" class="nav-link mobile-link">ABOUT</a>
-                <a href="#skills" class="nav-link mobile-link">SKILLS</a>
-                <a href="#projects" class="nav-link mobile-link">PROJECTS</a>
-                <a href="#contact" class="nav-link mobile-link">CONTACT</a>
-
-                <a href="https://drive.google.com/file/d/120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing"
-                target="_blank"
-                class="px-4 py-2 border border-theme-accent text-theme-accent text-xs rounded-full hover:bg-theme-accent hover:text-white transition text-center">
+        <div id="mobile-menu" 
+            class="hidden md:hidden absolute top-full left-0 w-full z-50 px-4 sm:px-6
+                    bg-theme-main/90 backdrop-blur-md border-b border-theme-border 
+                    transition-colors duration-300">
+            
+            <div class="flex flex-col p-8 space-y-6">
+                <div class="flex flex-col space-y-5 text-xs font-bold tracking-[0.2em] uppercase">
+                    <a href="#about" class="nav-link mobile-link">ABOUT</a>
+                    <a href="#skills" class="nav-link mobile-link">SKILLS</a>
+                    <a href="#projects" class="nav-link mobile-link">PROJECTS</a>
+                    <a href="#contact" class="nav-link mobile-link">CONTACT</a>
+                </div>
+                
+                <div class="h-[1px] w-full bg-theme-border opacity-50 "></div>
+                
+                <a href="https://drive.google.com/file/d/120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing" target="_blank" class="btn-neo py-4 rounded-x1 text-center text-black">
                     RESUME
                 </a>
             </div>
@@ -168,7 +174,7 @@
 
                         <img src="/assets/icon/dp2icon.png"
                             alt="Profile Image"
-                            class="glow-image hero-glow-pulse w-full h-full object-cover relative z-0">
+                            class="glow-image hero-glow-pulse w-full h-full object-cover relative z-0n">
                     </div>
 
                     <!-- FLOATING CARD -->
@@ -403,7 +409,7 @@
                             <textarea rows="3" name="message" placeholder="Your Message" required
                                 class="w-full bg-theme-main/30 border border-theme-border p-4 sm:p-5 rounded-xl sm:rounded-2xl focus:border-theme-accent outline-black transition text-theme-main text-sm sm:text-base"></textarea>
 
-                            <button type="submit" class="btn-neo w-full py-4 sm:py-5 rounded-xl sm:rounded-2xl text-sm sm:text-base font-bold text-center">
+                            <button type="submit" class="btn-neo w-full py-4 sm:py-5 rounded-xl sm:rounded-2xl text-sm sm:text-base font-bold text-black">
                                 SEND TRANSMISSION
                             </button>
                         </form>

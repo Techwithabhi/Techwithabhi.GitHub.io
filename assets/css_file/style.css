@@ -22,7 +22,7 @@
 /* LIGHT MODE (Clean Professional Theme) */
 /* Requested Palette: 000000 (Text), FFFFFF (BG), 2872A1 (Accent), CBDDE9 (Card/Decor) */
 [data-theme="light"] {
-    --bg-main: #c3c3fd;         /* Pure White Background */
+    --bg-main: #dfdffe;         /* Pure White Background */
     --bg-card: #a3edff;         /* Light Blue/Grey Card Background */
     --bg-card-dark: #d7d7fe;    /* Lighter/White-ish blue for "darker" areas to contrast with card */
     --text-main: #000000;       /* Pitch Black Text */
@@ -120,8 +120,23 @@ body.loading {
 }
 
 /* Mobile menu spacing adjustment */
-#mobile-menu .nav-link::after {
-    bottom: -6px;
+/* Syncing Mobile Menu with Nav transparency and blur */
+#mobile-menu {
+    /* Uses the theme variable at 90% opacity to match the nav */
+    background: color-mix(in srgb, var(--bg-main), transparent 10%);
+    
+    /* Standardizes the blur to match Tailwind's 'backdrop-blur-md' */
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    /* Matching nav border */
+    border-bottom: 1px solid var(--border-color);
+    
+    /* Optional: Remove these if you want it flush with the screen edges */
+    /* border-radius: 0; */ 
+    
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .nav-link:hover {
