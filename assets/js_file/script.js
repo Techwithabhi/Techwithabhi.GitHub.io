@@ -1,7 +1,38 @@
 // Register GSAP Plugins
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Mobile Menu Toggle (NEW) ---
+// --- 0. Theme Toggle Logic (Immediate Execution) ---
+const toggleBtn = document.getElementById('theme-toggle');
+
+// Helper to set theme
+function setTheme(themeName) {
+    document.documentElement.setAttribute('data-theme', themeName);
+    localStorage.setItem('theme', themeName);
+}
+
+// Check Local Storage or System Preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    setTheme(savedTheme);
+} else {
+    // Optional: Auto-detect system preference
+    // if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    //     setTheme('light');
+    // }
+}
+
+if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'light') {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+    });
+}
+
+// --- Mobile Menu Toggle ---
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -19,7 +50,6 @@ if (mobileMenuBtn && mobileMenu) {
         }
     });
 
-    // Close menu when clicking on links
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.add('hidden');
@@ -30,20 +60,15 @@ if (mobileMenuBtn && mobileMenu) {
     });
 }
 
-// --- 1. Interactive Glow Follower (Mouse Trail) ---
+// --- 1. Interactive Glow Follower ---
 const glow = document.getElementById('interactive-glow');
-
-// Only enable on non-touch devices for performance
 if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     window.addEventListener('mousemove', (e) => {
         glow.style.setProperty('--x', e.clientX + 'px');
         glow.style.setProperty('--y', e.clientY + 'px');
     });
 } else {
-    // Disable glow on touch devices
-    if (glow) {
-        glow.style.display = 'none';
-    }
+    if (glow) glow.style.display = 'none';
 }
 
 // --- 2. Loader and Hero Entry Sequence ---
@@ -117,20 +142,18 @@ const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)").matches
 
 cards.forEach(card => {
     if (isTouch) {
-        // Touch-optimized interactions
         card.addEventListener('touchstart', () => {
-            gsap.to(card, { borderColor: "#01DE82", duration: 0.2 });
+            gsap.to(card, { borderColor: getComputedStyle(document.documentElement).getPropertyValue('--accent'), duration: 0.2 });
         });
         card.addEventListener('touchend', () => {
-            gsap.to(card, { borderColor: "rgba(1, 222, 130, 0.1)", duration: 0.3 });
+            gsap.to(card, { borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border-color'), duration: 0.3 });
         });
     } else {
-        // Desktop hover
         card.addEventListener('mouseenter', () => {
-            gsap.to(card, { borderColor: "#01DE82", duration: 0.3 });
+            gsap.to(card, { borderColor: getComputedStyle(document.documentElement).getPropertyValue('--accent'), duration: 0.3 });
         });
         card.addEventListener('mouseleave', () => {
-            gsap.to(card, { borderColor: "rgba(1, 222, 130, 0.1)", duration: 0.3 });
+            gsap.to(card, { borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border-color'), duration: 0.3 });
         });
     }
 });
@@ -140,33 +163,31 @@ const glowImages = document.querySelectorAll('.glow-image');
 
 glowImages.forEach(img => {
     if (isTouch) {
-        // Reduced glow for mobile
         img.addEventListener('touchstart', () => {
             gsap.to(img, {
-                filter: "drop-shadow(0 0 20px rgba(1, 222, 130, 0.6))",
+                filter: "drop-shadow(0 0 20px " + getComputedStyle(document.documentElement).getPropertyValue('--accent') + ")",
                 duration: 0.3
             });
         });
         img.addEventListener('touchend', () => {
             const isHero = img.classList.contains('hero-glow-pulse');
             gsap.to(img, {
-                filter: isHero ? "" : "drop-shadow(0 0 0px rgba(1, 222, 130, 0))",
+                filter: isHero ? "" : "drop-shadow(0 0 0px rgba(0,0,0,0))",
                 duration: 0.3,
                 clearProps: isHero ? "filter" : "" 
             });
         });
     } else {
-        // Full glow for desktop
         img.addEventListener('mouseenter', () => {
             gsap.to(img, {
-                filter: "drop-shadow(0 0 30px rgba(1, 222, 130, 0.9))",
+                filter: "drop-shadow(0 0 30px " + getComputedStyle(document.documentElement).getPropertyValue('--accent') + ")",
                 duration: 0.4
             });
         });
         img.addEventListener('mouseleave', () => {
             const isHero = img.classList.contains('hero-glow-pulse');
             gsap.to(img, {
-                filter: isHero ? "" : "drop-shadow(0 0 0px rgba(1, 222, 130, 0))",
+                filter: isHero ? "" : "drop-shadow(0 0 0px rgba(0,0,0,0))",
                 duration: 0.4,
                 clearProps: isHero ? "filter" : "" 
             });
@@ -174,7 +195,7 @@ glowImages.forEach(img => {
     }
 });
 
-// --- 6. Smooth Scroll for Anchor Links (NEW) ---
+// --- 6. Smooth Scroll ---
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
@@ -192,17 +213,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// --- 7. Viewport Height Fix for Mobile (NEW) ---
+// --- 7. Viewport & Resize ---
 const setVH = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 };
-
 setVH();
 window.addEventListener('resize', setVH);
-window.addEventListener('orientationchange', setVH);
 
-// --- 8. Resize Handler with ScrollTrigger Refresh (NEW) ---
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
@@ -210,10 +228,3 @@ window.addEventListener('resize', () => {
         ScrollTrigger.refresh();
     }, 250);
 }, { passive: true });
-
-// --- 9. Orientation Change Handler (NEW) ---
-window.addEventListener('orientationchange', () => {
-    setTimeout(() => {
-        ScrollTrigger.refresh();
-    }, 300);
-});
