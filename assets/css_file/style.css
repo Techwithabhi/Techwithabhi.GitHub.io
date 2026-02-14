@@ -22,12 +22,12 @@
 /* LIGHT MODE (Clean Professional Theme) */
 /* Requested Palette: 000000 (Text), FFFFFF (BG), 2872A1 (Accent), CBDDE9 (Card/Decor) */
 [data-theme="light"] {
-    --bg-main: #dfdffe;         /* Pure White Background */
-    --bg-card: #a3edff;         /* Light Blue/Grey Card Background */
-    --bg-card-dark: #d7d7fe;    /* Lighter/White-ish blue for "darker" areas to contrast with card */
+    --bg-main: #c3f8eb;         /* Pure White Background */
+    --bg-card: #8fead6;         /* Light Blue/Grey Card Background */
+    --bg-card-dark: #b8f5e6;    /* Lighter/White-ish blue for "darker" areas to contrast with card */
     --text-main: #000000;       /* Pitch Black Text */
     --text-muted: #434d5e;      /* Dark Slate Grey for muted text (readable on white) */
-    --accent: #098489;          /* Strong Blue Accent */
+    --accent: #1d9478;          /* Strong Blue Accent */
     --accent-glow: rgba(40, 114, 161, 0.15); /* Blue Glow */
     --border-color: rgba(40, 114, 161, 0.2); /* Subtle Blue Border */
     
