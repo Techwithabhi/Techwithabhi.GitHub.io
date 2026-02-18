@@ -4,6 +4,31 @@ gsap.registerPlugin(ScrollTrigger);
 // --- 0. Theme Toggle Logic (Immediate Execution) ---
 const toggleBtn = document.getElementById('theme-toggle');
 
+document.addEventListener("click", (e) => {
+  const sparkCount = 12;
+
+  for (let i = 0; i < sparkCount; i++) {
+    const spark = document.createElement("div");
+    spark.className = "click-spark";
+
+    const angle = Math.random() * Math.PI * 2;
+    const distance = Math.random() * 20 + 10;
+
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance;
+
+    spark.style.left = e.pageX + "px";
+    spark.style.top = e.pageY + "px";
+    spark.style.setProperty("--dx", `${dx}px`);
+    spark.style.setProperty("--dy", `${dy}px`);
+    spark.style.transform = `rotate(${angle}rad)`;
+
+    document.body.appendChild(spark);
+
+    setTimeout(() => spark.remove(), 600);
+  }
+});
+
 // Helper to set theme
 function setTheme(themeName) {
     document.documentElement.setAttribute('data-theme', themeName);
