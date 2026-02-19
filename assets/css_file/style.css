@@ -69,13 +69,13 @@ body.loading {
 
 .click-spark {
   position: absolute;
-  width: 2px;
-  height: 10px;
-  background: linear-gradient(to top, #01de82, #ffffff);
+  width: 3px;
+  height: 3px;
+  background: linear-gradient(to top, #00ff95, #918f8f);
   pointer-events: none;
   transform-origin: center bottom;
-  animation: spark-move 950ms ease forwards;
-  filter: drop-shadow(0 0 4px #01de82);
+  animation: spark-move 1000ms ease forwards;
+  filter: drop-shadow(0 0 6px #01de82);
 }
 
 @keyframes spark-move {
@@ -85,7 +85,7 @@ body.loading {
   }
   100% {
     opacity: 0;
-    transform: translate(var(--dx), var(--dy)) scale(0.6);
+    transform: translate(var(--dx), var(--dy)) scale(0.3);
   }
 }
 
