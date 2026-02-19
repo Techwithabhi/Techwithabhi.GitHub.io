@@ -5,14 +5,14 @@ gsap.registerPlugin(ScrollTrigger);
 const toggleBtn = document.getElementById('theme-toggle');
 
 document.addEventListener("click", (e) => {
-  const sparkCount = 12;
+  const sparkCount = 25;
 
   for (let i = 0; i < sparkCount; i++) {
     const spark = document.createElement("div");
     spark.className = "click-spark";
 
-    const angle = Math.random() * Math.PI * 2;
-    const distance = Math.random() * 20 + 10;
+    const angle = Math.random() * Math.PI * 5;
+    const distance = Math.random() * 20 + 15;
 
     const dx = Math.cos(angle) * distance;
     const dy = Math.sin(angle) * distance;
