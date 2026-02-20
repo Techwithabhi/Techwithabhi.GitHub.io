@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=300&section=header&text=Abhi%20Sarkar&fontSize=90&animation=fadeIn&fontAlignY=38&desc=Data%20Analysis%20|%20Visualization%20|%20Modern%20Web%20Architecture&descAlignY=55&descAlign=62" alt="Abhi Sarkar Banner" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=300&section=header&text=Abhi%20Sarkar&fontSize=90&animation=fadeIn&fontAlignY=38&desc=Data%20Analysis%20|%20Visualization%20|%20Modern%20Web%20Architecture&descAlignY=55&descAlign=50" alt="Abhi Sarkar Banner" />
 </div>
 
 <div align="center">
@@ -104,9 +104,9 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 <div align="center">
 <table style="border-collapse: collapse; border: 2px solid #58A6FF;">
 <tr>
-<td align="center" width="300" bgcolor="#0D1117">
+<td align="center" width="500" bgcolor="#0D1117">
 <br>
-<img src="assets/icon/animation.gif" width="180" style="border: 2px solid #58A6FF; border-radius: 10px; box-shadow: 0 0 15px #58A6FF;" alt="Player Avatar" />
+<img src="assets/icon/animation.gif" width="380" style="border: 2px solid #58A6FF; border-radius: 10px; box-shadow: 0 0 15px #58A6FF;" alt="Player Avatar" />
 <br><br>
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&pause=1000&color=58A6FF&center=true&width=300&lines=ABHI+SARKAR;DATA+ALCHEMIST;UI%2FUX+SORCERER;READY+FOR+ACTION..." alt="Typing Animation" />
 </td>
