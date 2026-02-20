@@ -74,6 +74,29 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 
 ---
 
+## 📂 Project File Structure
+
+```text
+📦 techwithabhi.github.io
+ ┣ 📂 assets
+ ┃ ┣ 📂 icon
+ ┃ ┃ ┗ 🖼️ dp2icon.png             # Profile imagery and favicons
+ ┃ ┗ 📂 projects_data             # Detailed pages for case studies
+ ┃   ┣ 📂 1st_pj_data
+ ┃   ┃ ┣ 📄 1st_project.html
+ ┃   ┃ ┗ 📂 images
+ ┃   ┣ 📂 2nd_pj_data
+ ┃   ┃ ┣ 📄 2nd_project.html
+ ┃   ┃ ┗ 📂 images
+ ┃   ┗ 📂 3rd_pj_data
+ ┃     ┣ 📄 3rd_project.html
+ ┃     ┗ 📂 images
+ ┣ 📄 index.html                  # Main portfolio entry point
+ ┣ 🎨 styles.css                  # Global stylesheet & responsive rules
+ ┣ ⚡ script.js                   # DOM manipulation & animations
+ ┗ 📝 README.md                   # Project documentation
+```
+
 ## 🕹️ `PLAYER 1 : INITIALIZED`
 
 > *"Code is my canvas. Data is my paint."*
@@ -103,29 +126,6 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 </div>
 </div>
 
-## 📂 Project File Structure
-
-```text
-📦 techwithabhi.github.io
- ┣ 📂 assets
- ┃ ┣ 📂 icon
- ┃ ┃ ┗ 🖼️ dp2icon.png             # Profile imagery and favicons
- ┃ ┗ 📂 projects_data             # Detailed pages for case studies
- ┃   ┣ 📂 1st_pj_data
- ┃   ┃ ┣ 📄 1st_project.html
- ┃   ┃ ┗ 📂 images
- ┃   ┣ 📂 2nd_pj_data
- ┃   ┃ ┣ 📄 2nd_project.html
- ┃   ┃ ┗ 📂 images
- ┃   ┗ 📂 3rd_pj_data
- ┃     ┣ 📄 3rd_project.html
- ┃     ┗ 📂 images
- ┣ 📄 index.html                  # Main portfolio entry point
- ┣ 🎨 styles.css                  # Global stylesheet & responsive rules
- ┣ ⚡ script.js                   # DOM manipulation & animations
- ┗ 📝 README.md                   # Project documentation
-```
-
 ## 🤝 Let's Connect
 
 Whether launching a new project or exploring fresh ideas, I'm here to turn your vision into reality.
@@ -134,13 +134,13 @@ Whether launching a new project or exploring fresh ideas, I'm here to turn your 
   <a href="https://github.com/techwithabhi">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
   </a>
-  <a href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME">
+  <a href="https://www.linkedin.com/in/techwithabhi/">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
   </a>
-  <a href="mailto:YOUR_EMAIL@gmail.com">
+  <a href="mailto:abhisarkar6038@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
   </a>
-  <a href="https://twitter.com/YOUR_TWITTER_HANDLE">
+  <a href="https://x.com/AbhiSarkar2025">
     <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
   </a>
 </div>
