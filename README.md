@@ -10,8 +10,8 @@
     <a href="https://techwithabhi.github.io/">
       <img src="https://img.shields.io/badge/View_Portfolio-000000?style=for-the-badge&logo=Google-Chrome&logoColor=white" alt="Website" />
     </a>
-    <a href="https://drive.google.com/file/d/120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing">
-      <img src="https://img.shields.io/badge/Download_Resume-FF5722?style=for-the-badge&logo=adobe-acrobat-reader&logoColor=white" alt="Resume" />
+    <a href="https://drive.google.com/file/d/ 120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing">
+     <img src="https://img.shields.io/badge/Download_Resume-FF5722?style=for-the-badge&logo=adobeacrobat&logoColor=white" alt="Resume" />
     </a>
   </p>
 
