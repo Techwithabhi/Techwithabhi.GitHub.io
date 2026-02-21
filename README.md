@@ -106,7 +106,7 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 <tr>
 <td align="center" width="500" bgcolor="#0D1117">
 <br>
-<img src="assets/icon/animation2.gif" width="380" style="border: 2px solid #58A6FF; border-radius: 10px; box-shadow: 0 0 15px #58A6FF;" alt="Player Avatar" />
+<img src="assets/icon/animation2.gif" width="430" style="border: 2px solid #58A6FF; border-radius: 10px; box-shadow: 0 0 15px #58A6FF;" alt="Player Avatar" />
 <br><br>
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&pause=1000&color=58A6FF&center=true&width=300&lines=ABHI+SARKAR;DATA+ALCHEMIST;UI%2FUX+SORCERER;READY+FOR+ACTION..." alt="Typing Animation" />
 </td>
