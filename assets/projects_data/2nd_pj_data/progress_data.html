@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Progress Update | Abhi Sarkar</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="P2_data.css">
+    
+    <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
+    <link rel="stylesheet" href="/assets/css_file/style.css"> <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    </script>
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        deepEmerald: '#05614B',
-                        abyss: '#020E0E',
-                        neoGreen: '#01DE82',
-                        pitchBlack: '#000000',
-                    },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
@@ -27,6 +31,7 @@
             }
         }
     </script>
+
     <style>
         /* Prevents flicker and sets up GSAP entrance */
         .reveal { opacity: 0; transform: translateY(30px); }
@@ -36,96 +41,112 @@
             position: fixed;
             inset: 0;
             z-index: 100;
-            background-color: black;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Improved typography stroke for large text to prevent overcrowding */
-        .outline-text {
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-            color: transparent;
+        /* Thematic glowing text shadow for the progress text */
+        .glow-text {
+            text-shadow: 0 0 30px var(--accent-glow);
         }
     </style>
 </head>
 
-<body class="antialiased bg-black text-white flex flex-col min-h-screen loading">
+<body class="antialiased bg-theme-main text-theme-main flex flex-col min-h-screen loading transition-colors duration-300">
 
-    <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+    <div id="loader" class="fixed inset-0 z- bg-black flex items-center justify-center">
         <div class="relative px-6 text-center">
-            <h1 id="loader-text" class="text-5xl sm:text-6xl md:text-8xl font-black italic tracking-tighter opacity-0">
-                ABHI<span class="text-neoGreen">.</span>
+            <h1 id="loader-text" class="text-5xl sm:text-6xl md:text-6xl font-black italic tracking-tighter opacity-0 text-white">
+                PROGRESS<span class="text-neoGreen">.P2</span>
             </h1>
             <div id="loader-bar" class="absolute -bottom-4 left-0 h-[2px] bg-neoGreen w-0"></div>
         </div>
     </div>
 
-    <div class="fixed inset-0 z-0 opacity-20 pointer-events-none">
-        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_#05614B33_0%,_transparent_50%)]"></div>
+    <div class="fixed inset-0 z-0 opacity-20 pointer-events-none transition-colors duration-300">
+        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_var(--accent-glow)_0%,_transparent_50%)]"></div>
     </div>
 
-    <nav class="fixed w-full z-50 px-8 py-6 bg-black/50 backdrop-blur-lg border-b border-white/5">
+    <nav class="fixed w-full z-50 px-8 py-6 bg-theme-main/80 backdrop-blur-lg border-b border-theme-border transition-colors duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="P2_data.html" class="text-xl font-black tracking-tighter italic hover:text-neoGreen transition-all group flex items-center">
-                <i class="fa-solid fa-arrow-left text-[10px] mr-3 text-neoGreen group-hover:-translate-x-1 transition"></i>BACK
+            
+            <a href="/assets/projects_data/2nd_pj_data/2nd_project.html" class="text-xl font-black tracking-tighter italic text-theme-main hover:text-theme-accent transition-all group flex items-center">
+                <i class="fa-solid fa-arrow-left text-[10px] mr-3 text-theme-accent group-hover:-translate-x-1 transition"></i>BACK
             </a>
-            <div
-                class="
-                    font-mono uppercase text-neoGreen/60
-                    text-[9px] tracking-[0.25em]
-                    max-w-[140px] text-right leading-snug
-                    md:text-[10px] md:tracking-[0.4em] md:max-w-none
-                    ">
+            
+            <div class="flex items-center gap-6">
+                <div class="font-mono uppercase text-theme-accent/80 text-[9px] tracking-[0.25em] max-w-[140px] text-right leading-snug md:text-[10px] md:tracking-[0.4em] md:max-w-none">
                     System Status: In Development
+                </div>
+                
+                <button id="theme-toggle" class="w-10 h-10 rounded-full border border-theme-border flex items-center justify-center text-theme-accent hover:bg-theme-accent hover:text-white transition-all duration-300">
+                    <i class="fas fa-sun text-lg dark-icon"></i>
+                    <i class="fas fa-moon text-lg light-icon"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <main class="relative z-10 flex-grow flex items-center justify-center px-10 py-20">
+    <main class="relative z-10 flex-grow flex items-center justify-center px-10 py-24 mt-10">
         <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div class="reveal lg:col-span-7">
-                <div class="inline-block px-3 py-1 rounded-full bg-deepEmerald/20 border border-deepEmerald/30 text-neoGreen mb-6 text-[10px] font-mono uppercase tracking-widest">
+                <div class="inline-block px-3 py-1 rounded-full bg-theme-accent/10 border border-theme-accent text-theme-accent mb-6 text-[10px] font-mono uppercase tracking-widest transition-colors duration-300">
                     Project Pipeline // 2026
                 </div>
-                <h1 class="text-6xl md:text-8xl xl:text-9xl font-black italic leading-[0.9] tracking-tighter mb-4">
+                <h1 class="text-6xl md:text-8xl xl:text-9xl font-black italic leading-[0.9] tracking-tighter mb-4 text-theme-main transition-colors duration-300">
                     WORKS IN <br> 
-                    <span class="text-neoGreen drop-shadow-[0_0_30px_rgba(1,222,130,0.3)]">PROGRESS</span>
+                    <span class="text-theme-accent glow-text">PROGRESS</span>
                 </h1>
-                <div class="h-1 w-20 bg-neoGreen/50 rounded-full"></div>
+                <div class="h-1 w-20 !bg-white [[data-theme='light']_&]:!bg-black rounded-full transition-colors duration-300"></div>
             </div>
 
-            <div class="reveal lg:col-span-5 space-y-8 lg:border-l lg:border-white/10 lg:pl-16">
+            <div class="reveal lg:col-span-5 space-y-8 lg:border-l !border-white [[data-theme='light']_&]:!border-black lg:pl-16 transition-colors duration-300">
                 <div class="space-y-4">
-                    <h2 class="text-xl font-bold text-white uppercase tracking-widest flex items-center gap-3">
-                        <span class="w-8 h-[1px] bg-neoGreen"></span>
+                    <h2 class="text-xl font-bold text-theme-main uppercase tracking-widest flex items-center gap-3 transition-colors duration-300">
+                        <span class="w-8 h-[1px] bg-theme-accent"></span>
                         Grateful for your visit
                     </h2>
-                    <p class="text-gray-400 text-lg leading-relaxed font-light">
+                    <p class="text-theme-muted text-lg leading-relaxed font-light transition-colors duration-300">
                         I am currently refining a new series of data analytics projects. I sincerely apologize that this section isn't live yet, but I want to ensure that what I share with you is of the highest quality.
                     </p>
                 </div>
 
-                <div class="p-8 bg-abyss/50 border border-white/10 rounded-3xl neo-border relative overflow-hidden backdrop-blur-sm">
-                    <i class="fa-solid fa-quote-left absolute -top-2 -left-2 text-4xl text-white/5"></i>
-                    <p class="italic text-gray-300 leading-relaxed relative z-10">
+                <div class="p-8 bg-theme-card neo-border rounded-3xl relative overflow-hidden backdrop-blur-sm transition-colors duration-300">
+                    <i class="fa-solid fa-quote-left absolute -top-2 -left-2 text-4xl text-theme-muted opacity-20 transition-colors duration-300"></i>
+                    <p class="italic text-theme-muted leading-relaxed relative z-10 transition-colors duration-300">
                         "Thank you for your patience and for taking the time to explore my portfolio. It means a lot to have you follow my journey."
                     </p>
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-8">
-                    <a href="/index.html" class="bg-white text-black font-black px-10 py-4 rounded-2xl hover:bg-neoGreen transition-all duration-500 flex items-center gap-3 group shadow-xl">
-                        <i class="fa-solid fa-home group-hover:scale-125 transition"></i>
-                        <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i>
-                        BACK TO HOME  
+                    <a href="/index.html" class="btn-neo hover:!transform-none px-10 py-4 rounded-2xl flex items-center gap-3 group relative overflow-hidden !text-black [[data-theme='light']_&]:!text-white border border-transparent hover:border-white/30 transition-colors duration-300">
+    
+                        <div class="absolute inset-0 w-full h-full -translate-x-[150%] group-hover:translate-x-[150%] bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 transition-transform duration-700 ease-in-out z-0 pointer-events-none"></div>
+                        
+                        <i class="fa-solid fa-home group-hover:scale-125 transition-transform duration-300 relative z-10"></i>
+                        <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform duration-300 relative z-10"></i>
+                        <span class="relative z-10">BACK TO HOME</span>  
                     </a>
-                    <div class="flex items-center gap-3 text-neoGreen font-mono text-[10px] uppercase tracking-widest">
-                        <span class="relative flex h-2 w-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neoGreen opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-neoGreen"></span>
+                    
+                    <div class="group cursor-pointer flex items-center gap-3 text-theme-accent font-mono text-[10px] uppercase tracking-widest">
+    
+                        <span class="relative flex h-2 w-2 flex-shrink-0">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-theme-accent opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-theme-accent"></span>
                         </span>
-                        Live Update Soon
+                        
+                        <div class="relative h-6 overflow-hidden">
+                            
+                            <div class="flex flex-col transition-transform duration-500 ease-in-out group-hover:-translate-y-1/2">
+                                <span class="h-6 flex items-center">Live Update Soon</span>
+                                <span class="h-6 flex items-center font-bold tracking-[0.2em] drop-shadow-[0_0_5px_var(--accent-glow)] whitespace-nowrap">
+                                    FETCHING_DATA<span class="animate-pulse">_</span>
+                                </span>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -133,22 +154,36 @@
         </div>
     </main>
 
-    <footer class="relative z-10 px-10 py-8 flex flex-col md:flex-row justify-between items-center border-t border-white/5 gap-4">
-        <p class="text-gray-600 font-mono text-[9px] uppercase tracking-[0.3em]">
+    <footer class="relative z-10 px-10 py-8 flex flex-col md:flex-row justify-between items-center border-t border-theme-border gap-4 transition-colors duration-300">
+        <p class="text-theme-muted font-mono text-[9px] uppercase tracking-[0.3em] transition-colors duration-300">
             &copy; Abhi Sarkar &bull; Personal Portfolio 2026
         </p>
-        <div class="flex gap-8 text-gray-400">
-            <a href="https://github.com/Techwithabhi" class="hover:text-neoGreen transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
-            <a href="https://www.linkedin.com/in/techwithabhi/" class="hover:text-neoGreen transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+        <div class="flex gap-8 text-theme-muted transition-colors duration-300">
+            <a href="https://github.com/Techwithabhi" class="hover:text-theme-accent transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+            <a href="https://www.linkedin.com/in/techwithabhi/" class="hover:text-theme-accent transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
         </div>
     </footer>
 
     <script>
+        // 1. Local Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        }
+
+        // 2. GSAP Animations
         document.addEventListener('DOMContentLoaded', () => {
             const loader = document.getElementById('loader');
             const tl = gsap.timeline();
 
-            // 1. Initial Load Sequence
+            // Initial Load Sequence
             tl.to("#loader-text", {
                 opacity: 1,
                 y: -10,
@@ -166,7 +201,7 @@
                 duration: 0.4,
                 ease: "power2.in"
             })
-            // 2. Dismiss Loader
+            // Dismiss Loader
             .to(loader, {
                 opacity: 0,
                 display: "none",
@@ -175,7 +210,7 @@
                     document.body.classList.remove('loading');
                 }
             })
-            // 3. Reveal Content with better stagger
+            // Reveal Content
             .to(".reveal", {
                 opacity: 1,
                 y: 0,
