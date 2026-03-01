@@ -54,11 +54,10 @@
 </head>
 
 <body class="antialiased bg-theme-main text-theme-main flex flex-col min-h-screen loading transition-colors duration-300">
-
-    <div id="loader" class="fixed inset-0 z- bg-black flex items-center justify-center">
+    <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
         <div class="relative px-6 text-center">
-            <h1 id="loader-text" class="text-5xl sm:text-6xl md:text-6xl font-black italic tracking-tighter opacity-0 text-white">
-                PROGRESS<span class="text-neoGreen">.P2</span>
+            <h1 id="loader-text" class="text-4xl sm:text-6xl font-black italic tracking-tighter opacity-0 text-white">
+                PROGRESS<span class="text-neoGreen">.P1</span>
             </h1>
             <div id="loader-bar" class="absolute -bottom-4 left-0 h-[2px] bg-neoGreen w-0"></div>
         </div>
@@ -154,14 +153,38 @@
         </div>
     </main>
 
-    <footer class="relative z-10 px-10 py-8 flex flex-col md:flex-row justify-between items-center border-t border-theme-border gap-4 transition-colors duration-300">
-        <p class="text-theme-muted font-mono text-[9px] uppercase tracking-[0.3em] transition-colors duration-300">
-            &copy; Abhi Sarkar &bull; Personal Portfolio 2026
-        </p>
-        <div class="flex gap-8 text-theme-muted transition-colors duration-300">
-            <a href="https://github.com/Techwithabhi" class="hover:text-theme-accent transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
-            <a href="https://www.linkedin.com/in/techwithabhi/" class="hover:text-theme-accent transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+    <footer class="py-12 text-center border-t border-theme-border bg-theme-main transition-colors duration-300">
+        
+        <div class="flex justify-center items-center gap-6 mb-8">
+            <a href="https://www.linkedin.com/in/techwithabhi/"  
+               class="group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-linkedin-in text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+            
+            <a href="https://github.com/Techwithabhi"  
+               class="group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-github text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.instagram.com/i_am_abhi_sarkar/"  
+               class="group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-instagram text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.facebook.com/abhi.sarkar.50364592/"  
+               class="group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-facebook-f text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@techwithabhi-d8y"  
+               class="group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-youtube text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
         </div>
+
+        <p class="text-theme-muted text-[10px] font-mono uppercase tracking-[0.3em] px-4">
+            &copy; 2026 Abhi Sarkar || Data & Design || Optimized for Impact
+        </p>
     </footer>
 
     <script>
