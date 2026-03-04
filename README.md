@@ -10,7 +10,7 @@
     <a href="https://techwithabhi.github.io/">
       <img src="https://img.shields.io/badge/View_Portfolio-000000?style=for-the-badge&logo=Google-Chrome&logoColor=white" alt="Website" />
     </a>
-    <a href="https://drive.google.com/file/d/ 120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing">
+    <a href="https://drive.google.com/file/d/120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing">
      <img src="https://img.shields.io/badge/Download_Resume-FF5722?style=for-the-badge&logo=adobeacrobat&logoColor=white" alt="Resume" />
     </a>
   </p>
@@ -26,7 +26,7 @@
 I specialize in **Data Analysis, Data Visualization, and Data Mining**, with a keen ability to apply forecasting and performance metrics for data-driven decision-making. I am committed to driving organizational success by implementing effective solutions in fast-paced environments, optimizing processes, and translating financial insights to enhance business efficiency.
 
 * **📈 Efficiency Boost:** Proven track record of +45% optimization in previous projects.
-* **🤖 AI Native:** Leveraging ChatGPT, Claude, and Gemini for workflow automation.
+* **🤖 AI Native:** Leveraging ChatGPT, Claude, Gemini, and DeepSeek for workflow automation and prompt engineering.
 * **💡 Innovator:** Transforming data into stories that drive smarter decisions.
 
 ---
@@ -60,6 +60,12 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
 
+### **AI & Automation**
+<img src="https://img.shields.io/badge/ChatGPT-74AA9C?style=for-the-badge&logo=openai&logoColor=white" />
+<img src="https://img.shields.io/badge/Claude-CC785C?style=for-the-badge&logo=anthropic&logoColor=white" />
+<img src="https://img.shields.io/badge/Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" />
+<img src="https://img.shields.io/badge/DeepSeek-0066FF?style=for-the-badge&logo=deepseek&logoColor=white" />
+
 </div>
 
 ---
@@ -68,9 +74,10 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 
 | Project | Description | Tech Stack |
 | :--- | :--- | :--- |
-| **Sales Performance Analysis** | In-depth market trend analysis to identify high-growth revenue streams. | `SQL` `Power BI` `Python` |
+| **Sales Performance Analysis** | In-depth market trend analysis using SQL and Power BI to identify high-growth revenue streams. | `SQL` `Power BI` `Python` |
 | **Financial Forecasting** | Applying Python-based predictive modeling to forecast quarterly budget allocations with high accuracy. | `Python` `Pandas` `NumPy` |
 | **Advanced Excel Dashboard** | Automated operational reporting system using Pivot Tables, Power Query, and VBA for efficiency. | `Excel` `VBA` `Power Query` |
+| **React Timer & Stopwatch** | A fully responsive, interactive web application engineered with React for precise time tracking and lap management. | `React` `JavaScript` `CSS` |
 
 ---
 
@@ -88,8 +95,11 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
  ┃   ┣ 📂 2nd_pj_data
  ┃   ┃ ┣ 📄 2nd_project.html
  ┃   ┃ ┗ 📂 images
- ┃   ┗ 📂 3rd_pj_data
- ┃     ┣ 📄 3rd_project.html
+ ┃   ┣ 📂 3rd_pj_data
+ ┃   ┃ ┣ 📄 3rd_project.html
+ ┃   ┃ ┗ 📂 images
+ ┃   ┗ 📂 4th_pj_data
+ ┃     ┣ 📄 4th_project.html      # React Timer & Stopwatch app
  ┃     ┗ 📂 images
  ┣ 📄 index.html                  # Main portfolio entry point
  ┣ 🎨 styles.css                  # Global stylesheet & responsive rules
@@ -108,7 +118,7 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 <br>
 <img src="assets/icon/animation2.gif" width="430" style="border: 2px solid #58A6FF; border-radius: 10px; box-shadow: 0 0 15px #58A6FF;" alt="Player Avatar" />
 <br><br>
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&pause=1000&color=58A6FF&center=true&width=300&lines=ABHI+SARKAR;DATA+ALCHEMIST;UI%2FUX+SORCERER;READY+FOR+ACTION..." alt="Typing Animation" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&pause=1000&color=58A6FF&center=true&width=300&lines=ABHI+SARKAR;DATA+ALCHEMIST;UI%2FUX+SORCERER;REACT+DEVELOPER;READY+FOR+ACTION..." alt="Typing Animation" />
 </td>
 <td align="left" width="450" bgcolor="#0D1117" style="padding: 20px; color: #C9D1D9; font-family: monospace;">
 <code><b>CLASS:</b> Full-Stack Data Mage</code><br><br>
@@ -117,6 +127,7 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 <code><b>SPECIAL ABILITIES:</b></code><br>
 🔮 <i>Predictive Modeling (Passive)</i><br>
 ⚡ <i>DOM Manipulation (Active)</i><br>
+⚛️ <i>React Development (Active)</i><br>
 🌌 <i>Pixel-Perfect UI (Ultimate)</i><br><br>
 <code><b>CURRENT QUEST:</b></code><br>
 <i>Building the future of web architecture while discovering hidden stories in complex datasets...</i>
@@ -150,5 +161,5 @@ Whether launching a new project or exploring fresh ideas, I'm here to turn your 
 <div align="center">
   <img src="https://komarev.com/ghpvc/?username=techwithabhi&style=flat-square&color=blue" alt="Profile Views" />
   <br />
-  <small>© 2026 Abhi Sarkar // Optimized for Impact</small>
+  <small>© 026 Abhi Sarkar || Data & Design || Optimized for Impact</small>
 </div>
