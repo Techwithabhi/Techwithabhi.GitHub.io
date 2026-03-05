@@ -164,48 +164,39 @@
 
                 <!-- RIGHT IMAGE -->
                 <div class="relative flex justify-center hero-anim">
+    <div class="w-full max-w-[900px] aspect-16/9
+                bg-theme-card rounded-3xl neo-border
+                relative overflow-hidden group">
+        
+        <div class="absolute inset-0
+                    bg-gradient-to-t from-theme-main/60 to-transparent
+                    z-10 pointer-events-none">
+        </div>
 
-                    <div class="w-64 h-64 sm:w-72 sm:h-72 md:w-[450px] md:h-[450px]
-                                bg-theme-card rounded-3xl neo-border
-                                relative overflow-hidden group">
-                        <div class="absolute inset-0
-                                    bg-gradient-to-t from-theme-main/60 to-transparent
-                                    z-10 pointer-events-none"></div>
+        <img src="/assets/icon/background2.png"
+             alt="Profile Image"
+             class="glow-image hero-glow-pulse w-full h-full object-cover relative z-0">
+    </div>
 
-                        <img src="/assets/icon/dp2icon.png"
-                            alt="Profile Image"
-                            class="glow-image hero-glow-pulse w-full h-full object-cover relative z-0 mb-6 sm:mb-0">
-                    </div>
-
-                    <!-- FLOATING CARD -->
-                    <div class="absolute -bottom-6 -right-6 md:right-10
-                                bg-theme-card p-4 sm:p-6 rounded-xl
-                                neo-border z-20 hidden sm:block">
-                        <div class="flex items-center gap-3 sm:gap-4">
-
-                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded
-                                        bg-theme-accent/20
-                                        flex items-center justify-center">
-                                <i class="fa-solid fa-chart-line
-                                        text-theme-accent
-                                        text-sm sm:text-base"></i>
-                            </div>
-
-                            <div>
-                                <p class="text-xs text-theme-muted uppercase">
-                                    Efficiency Boost
-                                </p>
-                                <p class="font-bold text-theme-main text-sm sm:text-base">
-                                    +45% Optimization
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
+    <div class="absolute -bottom-10 -right-5 -md:right-0
+                bg-theme-card p-4 sm:p-6 rounded-xl
+                neo-border z-20 hidden sm:block">
+        <div class="flex items-center gap-3 sm:gap-4">
+            <div class="w-14 h-19 sm:w-14 sm:h-12 rounded
+                        bg-theme-accent/20
+                        flex items-center justify-center">
+                <i class="fa-solid fa-chart-line text-theme-accent text-sm sm:text-base"></i>
+            </div>
+            <div>
+                <p class="text-xs text-theme-muted uppercase">Efficiency Boost</p>
+                <p class="font-bold text-theme-main text-sm sm:text-base">+45% Optimization</p>
+            </div>
+        </div>
+    </div>
+</div>
             </div>
         </section>
+
         <section id="about" class="py-16 sm:py-24 md:py-32 px-4 sm:px-6 gradient-theme cursor-default">
             <div class="max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center">
