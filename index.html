@@ -146,18 +146,26 @@
 
                     <div class="flex flex-col sm:flex-row gap-4 hero-anim">
                         <a href="#projects"
-                        class="btn-neo px-8 py-4 rounded text-center text-black">
-                            PROJECTS
+                        class="group relative w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-sm bg-theme-accent text-black font-bold tracking-[0.15em] uppercase transition-colors duration-300 hover:translate-y-0 hover:scale-100 btn-neo">
+                            <span>Projects</span>
+                            <i class="fa-solid fa-arrow-right text-sm transform transition-transform duration-300 group-hover:rotate-90" ></i>
                         </a>
 
                         <a href="#contact"
-                        class="px-8 py-4 rounded text-center
-                                border border-theme-border
-                                text-theme-main
-                                hover:border-theme-accent
-                                hover:shadow-[0_0_10px_var(--accent)]
-                                transition-all duration-300">
-                            HIRE ME
+                        class="group relative w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-none neo-border antialiased font-bold tracking-[0.15-em] uppercase 
+                        hover:translate-y-0 hover:scale-100
+                                /* --- Default State: Solid Accent Background --- */
+                                bg-theme-accent text-2x1 border border-theme-accent
+                                /* --- Hover State: Glass Effect & Border --- */
+                                hover:bg-white/10 hover:backdrop-blur-md hover:text-theme-accent hover:border-theme-accent
+                                /* --- Dark Mode Default --- */
+                                dark:bg-theme-accent dark:text-2x1
+                                /* --- Dark Mode Hover --- */
+                                dark:hover:bg-theme-card-darker/40 dark:hover:text-theme-accent dark:hover:border-theme-accent">
+                            
+                            <span>Hire Me</span>
+                            
+                            <i class="fa-solid fa-paper-plane text-sm transition-all duration-300 transform opacity-70 group-hover:opacity-100 group-hover:-translate-y-1 group-hover:translate-x-1"></i>
                         </a>
                     </div>
                 </div>
@@ -261,8 +269,8 @@
                                 <h4 class="font-bold text-xs sm:text-sm text-theme-main">HTML & CSS</h4>
                             </div>
                             <div class="flex-[0.8] hover:flex-[1.2] w-full group transition-all duration-500 ease-in-out p-3 bg-theme-card-darker neo-border rounded-2xl text-center flex flex-col items-center justify-center cursor-pointer overflow-hidden">
-                                <i class="fa-solid fa-arrow-trend-up text-lg text-theme-accent mb-2 glow-image group-hover:scale-110 transition-transform"></i>
-                                <h4 class="font-bold text-[10px] sm:text-xs text-theme-main">Forecast</h4>
+                                <i class="fa-solid fa-brain text-lg text-theme-accent mb-2 glow-image group-hover:scale-110 transition-transform"></i>
+                                <h4 class="font-bold text-[10px] sm:text-xs text-theme-main">Think & Build</h4>
                             </div>
                             <div class="flex-[1.4] hover:flex-[1.8] w-full group transition-all duration-500 ease-in-out p-4 bg-theme-card-darker neo-border rounded-2xl text-center flex flex-col items-center justify-center cursor-pointer overflow-hidden cursor-default">
                                 <i class="fa-solid fa-people-group text-xl sm:text-2xl text-theme-accent mb-2 glow-image group-hover:scale-110 transition-transform"></i>
