@@ -184,6 +184,27 @@ body.loading {
     );
 }
 
+/* ── Base ── */
+.skill-item {
+    cursor: default;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* ── Default (Dark mode): glowing white ── */
+.skill-item:hover {
+    color: #ffffff !important;
+    text-shadow:
+        0 0 6px rgba(255, 255, 255, 0.95),
+        0 0 14px rgba(255, 255, 255, 0.65),
+        0 0 28px rgba(255, 255, 255, 0.35) !important;
+}
+
+/* ── Light mode: solid black, no glow ── */
+[data-theme="light"] .skill-item:hover {
+    color: #000000 !important;
+    text-shadow: none !important;
+}
+
 @media (max-width: 768px) {
     #interactive-glow {
         background: radial-gradient(
@@ -311,4 +332,35 @@ body.loading {
 @media (min-width: 768px) and (max-width: 1024px) {
     h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
     h2 { font-size: clamp(2rem, 4vw, 3rem); }
+}
+
+/* ── Tooltip — DARK mode: black text on accent ── */
+.social-icon::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    background: var(--accent);
+    color: #000000;        /* ← Black text in dark mode */
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.social-icon:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ── Tooltip — LIGHT mode: white text on accent ── */
+[data-theme="light"] .social-icon::before {
+    color: #ffffff;        /* ← White text in light mode */
 }
