@@ -69,8 +69,7 @@
             <!-- Right Controls -->
             <div class="flex items-center gap-4">
 
-                <a href="https://drive.google.com/file/d/120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing"
-                
+                <a href="https://drive.google.com/file/d/13zUWVMi-oVe0ccorul4m9rcg4tyK6jwL/view?usp=drive_link" target="_blank"
                 class="hidden sm:inline-block px-4 py-2 border border-theme-accent text-theme-accent text-xs rounded-full hover:bg-theme-accent hover:text-white transition">
                     RESUME
                 </a>
@@ -105,7 +104,7 @@
                 
                 <div class="h-[1px] w-full bg-theme-border opacity-50 "></div>
                 
-                <a href="https://drive.google.com/file/d/120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing"  class="btn-neo py-4 rounded-x1 text-center text-black">
+                <a href="https://drive.google.com/file/d/13zUWVMi-oVe0ccorul4m9rcg4tyK6jwL/view?usp=drive_link"  class="btn-neo py-4 rounded-x1 text-center text-black">
                     RESUME
                 </a>
             </div>
@@ -544,18 +543,25 @@
                         </div>
 
                         <form id="contact-form" class="space-y-3 sm:space-y-4">
-                            <input type="text" name="user_name" placeholder="Full Name" required
-                                class="w-full bg-theme-main/30 border border-theme-border p-4 sm:p-5 rounded-xl sm:rounded-2xl focus:border-theme-accent outline-black transition text-black text-sm sm:text-base">
+                             <div class="field-wrap">
+                                <input type="text" name="user_name" placeholder=" " required>
+                                <label>Full Name</label>
+                            </div>
 
-                            <input type="email" name="user_email" placeholder="Email Address" required
-                                class="w-full bg-theme-main/30 border border-theme-border p-4 sm:p-5 rounded-xl sm:rounded-2xl focus:border-theme-accent outline-black transition text-black text-sm sm:text-base">
+                            <div class="field-wrap">
+                                <input type="email" name="user_email" placeholder=" " required>
+                                <label>Email Address</label>
+                            </div>
 
-                            <textarea rows="3" name="message" placeholder="Your Message" required
-                                class="w-full bg-theme-main/30 border border-theme-border p-4 sm:p-5 rounded-xl sm:rounded-2xl focus:border-theme-accent outline-black transition text-black text-sm sm:text-base"></textarea>
+                            <div class="field-wrap textarea-wrap">
+                                <textarea rows="3" name="message" placeholder=" " required></textarea>
+                                <label>Your Message</label>
+                            </div>
 
-                            <button type="submit" class="btn-neo w-full py-4 sm:py-5 rounded-xl sm:rounded-2xl text-sm sm:text-base font-bold text-black">
+                            <button type="submit" class="btn-neo-end w-full py-4 sm:py-5 rounded-xl sm:rounded-2xl text-sm sm:text-base font-bold text-black">
                                 DROP YOUR THOUGHTS
                             </button>
+
                         </form>
                     </div>
                     <div class="absolute -bottom-20 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-theme-accent/5 blur-[120px] rounded-full"></div>

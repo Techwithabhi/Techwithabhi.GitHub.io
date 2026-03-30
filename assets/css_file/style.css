@@ -384,3 +384,185 @@ body.loading {
 [data-theme="light"] .social-icon::before {
     color: #ffffff;        /* ← White text in light mode */
 }
+
+/* =========================================
+   CONTACT FORM — FLOATING LABEL FIELDS
+   ========================================= */
+
+.field-wrap {
+    position: relative;
+    width: 100%;
+}
+
+/* Base input & textarea */
+.field-wrap input,
+.field-wrap textarea {
+    width: 100%;
+    background-color: var(--bg-card);
+    border: 1.5px solid var(--border-color);
+    padding: 1.35rem 1.2rem 0.5rem 1.2rem;
+    border-radius: 0.85rem;
+    outline: none;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-family: inherit;
+    resize: none;
+    transition:
+        border-color 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Dark mode — default */
+.field-wrap input,
+.field-wrap textarea {
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Light mode */
+[data-theme="light"] .field-wrap input,
+[data-theme="light"] .field-wrap textarea {
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+.field-wrap input::placeholder,
+.field-wrap textarea::placeholder {
+    color: transparent;
+}
+
+/* Focus */
+.field-wrap input:focus,
+.field-wrap textarea:focus {
+    border-color: var(--accent);
+    background-color: var(--bg-card-dark);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* Filled but not focused */
+.field-wrap input:not(:placeholder-shown),
+.field-wrap textarea:not(:placeholder-shown) {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+/* ---- Label ---- */
+.field-wrap label {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    line-height: 1;
+    transition:
+        top 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        font-size 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.22s ease,
+        font-weight 0.22s ease;
+}
+
+/* Textarea label sits at top, not center */
+.textarea-wrap label {
+    top: 1.2rem;
+    transform: none;
+}
+
+/* ---- Floated state ---- */
+.field-wrap input:focus ~ label,
+.field-wrap input:not(:placeholder-shown) ~ label,
+.field-wrap textarea:focus ~ label,
+.field-wrap textarea:not(:placeholder-shown) ~ label {
+    top: 0.42rem;
+    transform: none;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+}
+
+/* =========================================
+   BUTTON — SHINE + UNDERLINE ANIMATION
+   ========================================= */
+
+.btn-neo-end {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    cursor: pointer;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+/* Diagonal shine sweep */
+.btn-neo-end::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.35) 50%,
+        transparent 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.55s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Accent underline slide */
+.btn-neo-end::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: var(--accent);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.btn-neo-end:hover::before {
+    left: 150%;
+}
+
+.btn-neo-end:hover::after {
+    width: 100%;
+}
+
+.btn-neo-end {
+    background: var(--accent);
+    color: #ffffff; /* White text looks better on both Green and Blue buttons */
+    font-weight: 700;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+/* Ensure button text is white in light mode */
+[data-theme="light"] .btn-neo-end {
+    color: #ffffff;
+}
+
+/* Subtle letter spacing on hover */
+.btn-neo-end:hover {
+    letter-spacing: 0.08em;
+}
+
+/* Click press feel */
+.btn-neo-end:active {
+    opacity: 0.85;
+}
+
+.btn-neo-end {
+    transform: none !important;
+}
+
+.btn-neo-end:hover,
+.btn-neo-end:focus,
+.btn-neo-end:active {
+    transform: none !important;
+}
