@@ -1,275 +1,309 @@
-// Register GSAP Plugins
+// =============================================================================
+// MAIN.JS — Portfolio Site Scripts
+// =============================================================================
+
+// --- Plugin Registration ---
 gsap.registerPlugin(ScrollTrigger);
 
-// --- 0. Theme Toggle Logic (Immediate Execution) ---
+
+// =============================================================================
+// 1. THEME
+// =============================================================================
+
 const toggleBtn = document.getElementById('theme-toggle');
 
-document.addEventListener("click", (e) => {
-  const sparkCount = 25;
-
-  for (let i = 0; i < sparkCount; i++) {
-    const spark = document.createElement("div");
-    spark.className = "click-spark";
-
-    const angle = Math.random() * Math.PI * 5;
-    const distance = Math.random() * 20 + 15;
-
-    const dx = Math.cos(angle) * distance;
-    const dy = Math.sin(angle) * distance;
-
-    spark.style.left = e.pageX + "px";
-    spark.style.top = e.pageY + "px";
-    spark.style.setProperty("--dx", `${dx}px`);
-    spark.style.setProperty("--dy", `${dy}px`);
-    spark.style.transform = `rotate(${angle}rad)`;
-
-    document.body.appendChild(spark);
-
-    setTimeout(() => spark.remove(), 600);
-  }
-});
-
-// Helper to set theme
 function setTheme(themeName) {
     document.documentElement.setAttribute('data-theme', themeName);
     localStorage.setItem('theme', themeName);
 }
 
-// Check Local Storage or System Preference
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    setTheme(savedTheme);
-} else {
-    // Optional: Auto-detect system preference
-    // if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    //     setTheme('light');
-    // }
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) setTheme(savedTheme);
 }
 
-if (toggleBtn) {
+function initThemeToggle() {
+    if (!toggleBtn) return;
     toggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        if (currentTheme === 'light') {
-            setTheme('dark');
-        } else {
-            setTheme('light');
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'light' ? 'dark' : 'light');
+    });
+}
+
+
+// =============================================================================
+// 2. CLICK SPARKS
+// =============================================================================
+
+function initClickSparks() {
+    document.addEventListener('click', (e) => {
+        const SPARK_COUNT = 25;
+
+        for (let i = 0; i < SPARK_COUNT; i++) {
+            const spark = document.createElement('div');
+            spark.className = 'click-spark';
+
+            const angle    = Math.random() * Math.PI * 5;
+            const distance = Math.random() * 20 + 15;
+
+            spark.style.left = `${e.pageX}px`;
+            spark.style.top  = `${e.pageY}px`;
+            spark.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
+            spark.style.setProperty('--dy', `${Math.sin(angle) * distance}px`);
+            spark.style.transform = `rotate(${angle}rad)`;
+
+            document.body.appendChild(spark);
+            setTimeout(() => spark.remove(), 600);
         }
     });
 }
 
-// --- Mobile Menu Toggle ---
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileLinks = document.querySelectorAll('.mobile-link');
 
-if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        const icon = mobileMenuBtn.querySelector('i');
-        if (mobileMenu.classList.contains('hidden')) {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        } else {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        }
+// =============================================================================
+// 3. MOBILE MENU
+// =============================================================================
+
+function initMobileMenu() {
+    const menuBtn   = document.getElementById('mobile-menu-btn');
+    const menu      = document.getElementById('mobile-menu');
+    const links     = document.querySelectorAll('.mobile-link');
+
+    if (!menuBtn || !menu) return;
+
+    function setIcon(isOpen) {
+        const icon = menuBtn.querySelector('i');
+        icon.classList.toggle('fa-bars',  !isOpen);
+        icon.classList.toggle('fa-times',  isOpen);
+    }
+
+    function closeMenu() {
+        menu.classList.add('hidden');
+        setIcon(false);
+    }
+
+    menuBtn.addEventListener('click', () => {
+        const isHidden = menu.classList.toggle('hidden');
+        setIcon(!isHidden);
     });
 
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        });
-    });
+    links.forEach(link => link.addEventListener('click', closeMenu));
 }
 
-// --- 1. Interactive Glow Follower ---
-const glow = document.getElementById('interactive-glow');
-if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    window.addEventListener('mousemove', (e) => {
-        glow.style.setProperty('--x', e.clientX + 'px');
-        glow.style.setProperty('--y', e.clientY + 'px');
-    });
-} else {
-    if (glow) glow.style.display = 'none';
-}
 
-// --- 2. Loader and Hero Entry Sequence ---
-window.addEventListener('load', () => {
-    const mainContent = document.getElementById('main-content');
-    const mainNav = document.getElementById('main-nav');
-    
-    const tl = gsap.timeline({
-        onComplete: () => {
-            document.body.classList.remove('loading');
-            document.getElementById('loader').classList.add('hide');
-        }
-    });
+// =============================================================================
+// 4. INTERACTIVE GLOW FOLLOWER
+// =============================================================================
 
-    tl.to("#loader-text", {
-        opacity: 1,
-        y: -10,
-        duration: 1,
-        ease: "power4.out"
-    })
-    .to("#loader-bar", {
-        width: "100%",
-        duration: 0.6,
-        ease: "expo.inOut"
-    }, "-=0.3")
-    .to("#loader-text", {
-        opacity: 0,
-        y: -20,
-        duration: 0.2,
-        ease: "power2.in"
-    })
-    .to(mainNav, {
-        autoAlpha: 1, 
-        duration: 0.5,
-        ease: "power2.out"
-    }, "-=0.2") 
-    .to(mainContent, {
-        filter: "blur(0px)",
-        duration: 0.5,
-        ease: "power2.out",
-        onComplete: () => {
-            mainContent.classList.add('blur-clear');
-        }
-    }, "-=1.2")
-    .from(".hero-anim", {
-        y: 30,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.2,
-        ease: "power3.out"
-    }, "-=0.8");
-});
+function initGlowFollower() {
+    const glow = document.getElementById('interactive-glow');
+    if (!glow) return;
 
-// --- 3. Scroll Reveal for Sections ---
-gsap.utils.toArray(".reveal").forEach(el => {
-    gsap.from(el, {
-        scrollTrigger: {
-            trigger: el,
-            start: "top 80%"
-        },
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-    });
-});
+    const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-// --- 4. JavaScript Fallback Enhancements for Cards ---
-const cards = document.querySelectorAll('.neo-border');
-const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
-
-cards.forEach(card => {
-    if (isTouch) {
-        card.addEventListener('touchstart', () => {
-            gsap.to(card, { borderColor: getComputedStyle(document.documentElement).getPropertyValue('--accent'), duration: 0.2 });
-        });
-        card.addEventListener('touchend', () => {
-            gsap.to(card, { borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border-color'), duration: 0.3 });
+    if (hasHover) {
+        window.addEventListener('mousemove', (e) => {
+            glow.style.setProperty('--x', `${e.clientX}px`);
+            glow.style.setProperty('--y', `${e.clientY}px`);
         });
     } else {
-        card.addEventListener('mouseenter', () => {
-            gsap.to(card, { borderColor: getComputedStyle(document.documentElement).getPropertyValue('--accent'), duration: 0.3 });
-        });
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, { borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border-color'), duration: 0.3 });
-        });
+        glow.style.display = 'none';
     }
-});
+}
 
-// --- 5. Image Glow Interaction ---
-const glowImages = document.querySelectorAll('.glow-image');
 
-glowImages.forEach(img => {
-    if (isTouch) {
-        img.addEventListener('touchstart', () => {
-            gsap.to(img, {
-                filter: "drop-shadow(0 0 20px " + getComputedStyle(document.documentElement).getPropertyValue('--accent') + ")",
-                duration: 0.3
-            });
-        });
-        img.addEventListener('touchend', () => {
-            const isHero = img.classList.contains('hero-glow-pulse');
-            gsap.to(img, {
-                filter: isHero ? "" : "drop-shadow(0 0 0px rgba(0,0,0,0))",
-                duration: 0.3,
-                clearProps: isHero ? "filter" : "" 
-            });
-        });
-    } else {
-        img.addEventListener('mouseenter', () => {
-            gsap.to(img, {
-                filter: "drop-shadow(0 0 30px " + getComputedStyle(document.documentElement).getPropertyValue('--accent') + ")",
-                duration: 0.4
-            });
-        });
-        img.addEventListener('mouseleave', () => {
-            const isHero = img.classList.contains('hero-glow-pulse');
-            gsap.to(img, {
-                filter: isHero ? "" : "drop-shadow(0 0 0px rgba(0,0,0,0))",
-                duration: 0.4,
-                clearProps: isHero ? "filter" : "" 
-            });
-        });
-    }
-});
+// =============================================================================
+// 5. PAGE LOADER & HERO ENTRY ANIMATION
+// =============================================================================
 
-// --- 6. Smooth Scroll ---
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && href.length > 1) {
+function initLoader() {
+    window.addEventListener('load', () => {
+        const mainContent = document.getElementById('main-content');
+        const mainNav     = document.getElementById('main-nav');
+
+        gsap.timeline({
+            onComplete: () => {
+                document.body.classList.remove('loading');
+                document.getElementById('loader').classList.add('hide');
+            }
+        })
+        .to('#loader-text', { opacity: 1, y: -10,   duration: 0.6, ease: 'power4.out' })
+        .to('#loader-bar',  { width: '100%',         duration: 0.6, ease: 'expo.inOut'  }, '-=0.3')
+        .to('#loader-text', { opacity: 0, y: -20,   duration: 0.2, ease: 'power2.in'   })
+        .to(mainNav,        { autoAlpha: 1,          duration: 0.5, ease: 'power2.out'  }, '-=0.2')
+        .to(mainContent,    {
+            filter: 'blur(0px)',
+            duration: 0.5,
+            ease: 'power2.out',
+            onComplete: () => mainContent.classList.add('blur-clear')
+        }, '-=1.2')
+        .from('.hero-anim', { y: 30, opacity: 0,    duration: 0.5, stagger: 0.2, ease: 'power3.out' }, '-=0.8');
+    });
+}
+
+
+// =============================================================================
+// 6. SCROLL REVEAL
+// =============================================================================
+
+function initScrollReveal() {
+    gsap.utils.toArray('.reveal').forEach(el => {
+        gsap.from(el, {
+            scrollTrigger: { trigger: el, start: 'top 80%' },
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+    });
+}
+
+
+// =============================================================================
+// 7. CARD BORDER HOVER (NEO-BORDER)
+// =============================================================================
+
+function initCardHover() {
+    const cards   = document.querySelectorAll('.neo-border');
+    const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+    const accentColor      = () => getComputedStyle(document.documentElement).getPropertyValue('--accent');
+    const borderColor      = () => getComputedStyle(document.documentElement).getPropertyValue('--border-color');
+
+    cards.forEach(card => {
+        if (isTouch) {
+            card.addEventListener('touchstart', () => gsap.to(card, { borderColor: accentColor(), duration: 0.2 }));
+            card.addEventListener('touchend',   () => gsap.to(card, { borderColor: borderColor(), duration: 0.3 }));
+        } else {
+            card.addEventListener('mouseenter', () => gsap.to(card, { borderColor: accentColor(), duration: 0.3 }));
+            card.addEventListener('mouseleave', () => gsap.to(card, { borderColor: borderColor(), duration: 0.3 }));
+        }
+    });
+}
+
+
+// =============================================================================
+// 8. IMAGE GLOW INTERACTION
+// =============================================================================
+
+function initImageGlow() {
+    const images  = document.querySelectorAll('.glow-image');
+    const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+    const accentColor = () => getComputedStyle(document.documentElement).getPropertyValue('--accent');
+
+    images.forEach(img => {
+        const isHero = img.classList.contains('hero-glow-pulse');
+
+        function onEnter() {
+            gsap.to(img, {
+                filter: `drop-shadow(0 0 ${isTouch ? 20 : 30}px ${accentColor()})`,
+                duration: isTouch ? 0.3 : 0.4
+            });
+        }
+
+        function onLeave() {
+            gsap.to(img, {
+                filter:     isHero ? '' : 'drop-shadow(0 0 0px rgba(0,0,0,0))',
+                duration:   isTouch ? 0.3 : 0.4,
+                clearProps: isHero ? 'filter' : ''
+            });
+        }
+
+        if (isTouch) {
+            img.addEventListener('touchstart', onEnter);
+            img.addEventListener('touchend',   onLeave);
+        } else {
+            img.addEventListener('mouseenter', onEnter);
+            img.addEventListener('mouseleave', onLeave);
+        }
+    });
+}
+
+
+// =============================================================================
+// 9. SMOOTH SCROLL
+// =============================================================================
+
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href.length <= 1) return;
+
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
-                const offsetTop = target.offsetTop - 80;
                 window.scrollTo({
-                    top: offsetTop,
+                    top: target.offsetTop - 80,
                     behavior: 'smooth'
                 });
             }
-        }
+        });
     });
-});
+}
 
-// --- 7. Viewport & Resize ---
-const setVH = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-};
-setVH();
-window.addEventListener('resize', setVH);
 
-let resizeTimeout;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-        ScrollTrigger.refresh();
-    }, 250);
-}, { passive: true });
+// =============================================================================
+// 10. VIEWPORT HEIGHT (--vh) & SCROLL-TRIGGER RESIZE
+// =============================================================================
 
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
-      const rotY =  ((x - cx) / cx) * 10;
-      const rotX = -((y - cy) / cy) * 8;
+function initViewport() {
+    const setVH = () => {
+        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
 
-      card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
-      card.style.setProperty('--mx', `${(x / rect.width) * 100}%`);
-      card.style.setProperty('--my', `${(y / rect.height) * 100}%`);
+    setVH();
+    window.addEventListener('resize', setVH);
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => ScrollTrigger.refresh(), 250);
+    }, { passive: true });
+}
+
+
+// =============================================================================
+// 11. PROJECT CARD 3D TILT
+// =============================================================================
+
+function initProjectCardTilt() {
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x    = e.clientX - rect.left;
+            const y    = e.clientY - rect.top;
+            const cx   = rect.width  / 2;
+            const cy   = rect.height / 2;
+
+            const rotY =  ((x - cx) / cx) * 10;
+            const rotX = -((y - cy) / cy) * 8;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
+            card.style.setProperty('--mx', `${(x / rect.width)  * 100}%`);
+            card.style.setProperty('--my', `${(y / rect.height) * 100}%`);
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+        });
     });
+}
 
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
-    });
-  });
+
+// =============================================================================
+// INIT — Run Everything
+// =============================================================================
+
+initTheme();
+initThemeToggle();
+initClickSparks();
+initMobileMenu();
+initGlowFollower();
+initLoader();
+initScrollReveal();
+initCardHover();
+initImageGlow();
+initSmoothScroll();
+initViewport();
+initProjectCardTilt();

@@ -1,61 +1,89 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
 
 /* =========================================
+   TABLE OF CONTENTS
+   1.  COLOR PALETTES & THEME CONFIG
+   2.  SEMANTIC UTILITY CLASSES
+   3.  RESET & BASE STYLES
+   4.  PRELOADER & NAV INIT
+   5.  NAVBAR
+   6.  MOBILE MENU
+   7.  INTERACTIVE GLOW
+   8.  SKILLS SECTION
+   9.  NEO BORDER & CARDS
+   10. VISUAL EFFECTS (Glow, Pulse, Buttons)
+   11. PROJECT CARDS
+   12. SOCIAL ICONS (Ripple + Tooltip)
+   13. CONTACT FORM (Floating Labels)
+   14. SUBMIT BUTTON (Shine + Underline)
+   15. SCROLLBAR
+   16. CLICK SPARK
+   17. MEDIA QUERIES
+   ========================================= */
+
+
+/* =========================================
    1. COLOR PALETTES & THEME CONFIG
    ========================================= */
 
-/* DEFAULT DARK THEME (Neon Green & Deep Black) */
+/* DEFAULT — Dark Theme (Neon Green & Deep Black) */
 :root {
-    --bg-main: #000000;         /* Pitch Black */
-    --bg-card: #020E0E;         /* Abyss */
-    --bg-card-dark: #000000;    /* Darker Card bg */
-    --text-main: #ffffff;       /* White */
-    --text-muted: #bec1c7;      /* Gray 400 */
-    --accent: #01DE82;          /* Neon Green */
-    --accent-glow: rgba(1, 222, 130, 0.12);
-    --border-color: rgba(1, 222, 130, 0.1);
-    
+    --bg-main:       #000000;
+    --bg-card:       #020E0E;
+    --bg-card-dark:  #000000;
+    --text-main:     #ffffff;
+    --text-muted:    #bec1c7;
+    --accent:        #01DE82;
+    --accent-glow:   rgba(1, 222, 130, 0.12);
+    --border-color:  rgba(1, 222, 130, 0.1);
     --gradient-start: #000000;
-    --gradient-end: #020E0E;
+    --gradient-end:   #020E0E;
 }
 
-/* LIGHT MODE (Clean Professional Theme) */
-/* Requested Palette: 000000 (Text), FFFFFF (BG), 2872A1 (Accent), CBDDE9 (Card/Decor) */
+/* LIGHT MODE — Clean Professional Theme */
 [data-theme="light"] {
-    --bg-main: #c3f8eb;         /* Pure White Background */
-    --bg-card: #8fead6;         /* Light Blue/Grey Card Background */
-    --bg-card-dark: #b8f5e6;    /* Lighter/White-ish blue for "darker" areas to contrast with card */
-    --text-main: #000000;       /* Pitch Black Text */
-    --text-muted: #434d5e;      /* Dark Slate Grey for muted text (readable on white) */
-    --accent: #1d9478;          /* Strong Blue Accent */
-    --accent-glow: rgba(40, 114, 161, 0.15); /* Blue Glow */
-    --border-color: rgba(40, 114, 161, 0.2); /* Subtle Blue Border */
-    
+    --bg-main:       #c3f8eb;
+    --bg-card:       #8fead6;
+    --bg-card-dark:  #b8f5e6;
+    --text-main:     #000000;
+    --text-muted:    #434d5e;
+    --accent:        #1d9478;
+    --accent-glow:   rgba(40, 114, 161, 0.15);
+    --border-color:  rgba(40, 114, 161, 0.2);
     --gradient-start: #ffffff;
-    --gradient-end: #F0F7FA;
+    --gradient-end:   #F0F7FA;
 }
+
 
 /* =========================================
-   2. SEMANTIC CLASSES (Maps Variables to Tailwind)
+   2. SEMANTIC UTILITY CLASSES
    ========================================= */
 
-.bg-theme-main { background-color: var(--bg-main); }
-.bg-theme-card { background-color: var(--bg-card); }
+.bg-theme-main        { background-color: var(--bg-main); }
+.bg-theme-card        { background-color: var(--bg-card); }
 .bg-theme-card-darker { background-color: var(--bg-card-dark); }
 
-.text-theme-main { color: var(--text-main); }
-.text-theme-muted { color: var(--text-muted); }
-.text-theme-accent { color: var(--accent); }
-.border-theme-border { border-color: var(--border-color); }
-.border-theme-accent { border-color: var(--accent); }
+.text-theme-main      { color: var(--text-main); }
+.text-theme-muted     { color: var(--text-muted); }
+.text-theme-accent    { color: var(--accent); }
 
-/* Dynamic Gradients */
+.border-theme-border  { border-color: var(--border-color); }
+.border-theme-accent  { border-color: var(--accent); }
+
 .gradient-theme {
     background: linear-gradient(180deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
 }
 
+/* Theme toggle icon visibility */
+.light-icon { display: none; }
+.dark-icon  { display: block; }
+
+[data-theme="light"] .light-icon { display: block; }
+[data-theme="light"] .dark-icon  { display: none; }
+
+
 /* =========================================
-   3. CORE STYLES & RESET
+   3. RESET & BASE STYLES
    ========================================= */
 
 body {
@@ -67,36 +95,37 @@ body.loading {
     overflow: hidden;
 }
 
-.click-spark {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: linear-gradient(to top, #00ff95, #918f8f);
-  pointer-events: none;
-  transform-origin: center bottom;
-  animation: spark-move 1000ms ease forwards;
-  filter: drop-shadow(0 0 6px #01de82);
+.aspect-16\/9 {
+    aspect-ratio: 16 / 9;
 }
 
-@keyframes spark-move {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--dx), var(--dy)) scale(0.3);
-  }
+@supports not (aspect-ratio: 16 / 9) {
+    .aspect-16\/9 {
+        height: 0;
+        padding-bottom: 56.25%;
+        position: relative;
+    }
 }
 
-/* Navigation Fix */
+/* Performance hints */
+.glow-image,
+.neo-border,
+.btn-neo {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+
+/* =========================================
+   4. PRELOADER & NAV INIT
+   ========================================= */
+
 #main-nav {
     opacity: 0;
     visibility: hidden;
     transition: none !important;
 }
 
-/* Preloader */
 #loader {
     transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -106,9 +135,10 @@ body.loading {
     pointer-events: none;
 }
 
-/* ===============================
-   NAVBAR THEME-AWARE HOVER
-   =============================== */
+
+/* =========================================
+   5. NAVBAR
+   ========================================= */
 
 .nav-link {
     position: relative;
@@ -116,22 +146,10 @@ body.loading {
     transition: color 0.3s ease;
 }
 
-/* Text color follows theme accent */
 .nav-link:hover {
     color: var(--accent);
+    text-shadow: 0 0 6px var(--accent-glow);
 }
-
-/* Animated underline */
-/* .nav-link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background-color: var(--accent);
-    transition: width 0.3s ease;
-} */
 
 .nav-link:hover::after {
     width: 100%;
@@ -141,32 +159,23 @@ body.loading {
     display: none;
 }
 
-/* Mobile menu spacing adjustment */
-/* Syncing Mobile Menu with Nav transparency and blur */
+
+/* =========================================
+   6. MOBILE MENU
+   ========================================= */
+
 #mobile-menu {
-    /* Uses the theme variable at 90% opacity to match the nav */
     background: color-mix(in srgb, var(--bg-main), transparent 10%);
-    
-    /* Standardizes the blur to match Tailwind's 'backdrop-blur-md' */
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-
-    /* Matching nav border */
     border-bottom: 1px solid var(--border-color);
-    
-    /* Optional: Remove these if you want it flush with the screen edges */
-    /* border-radius: 0; */ 
-    
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.nav-link:hover {
-    text-shadow: 0 0 6px var(--accent-glow);
-}
 
 /* =========================================
-   4. VISUAL EFFECTS
+   7. INTERACTIVE CURSOR GLOW
    ========================================= */
 
 #interactive-glow {
@@ -176,76 +185,57 @@ body.loading {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 2; 
+    z-index: 2;
     background: radial-gradient(
-        450px circle at var(--x, 50%) var(--y, 50%), 
-        var(--accent-glow), 
+        450px circle at var(--x, 50%) var(--y, 50%),
+        var(--accent-glow),
         transparent 80%
     );
-}
-
-/* ── Base ── */
-.skill-item {
-    cursor: default;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-/* ── Default (Dark mode): glowing white ── */
-.skill-item:hover {
-    color: #ffffff !important;
-    text-shadow:
-        0 0 6px rgba(255, 255, 255, 0.95),
-        0 0 14px rgba(255, 255, 255, 0.65),
-        0 0 28px rgba(255, 255, 255, 0.35) !important;
-}
-
-/* ── Light mode: solid black, no glow ── */
-[data-theme="light"] .skill-item:hover {
-    color: #000000 !important;
-    text-shadow: none !important;
 }
 
 @media (max-width: 768px) {
     #interactive-glow {
         background: radial-gradient(
-            250px circle at var(--x, 50%) var(--y, 50%), 
-            var(--accent-glow), 
+            250px circle at var(--x, 50%) var(--y, 50%),
+            var(--accent-glow),
             transparent 80%
         );
     }
 }
 
-.aspect-16\/9 {
-    aspect-ratio: 16 / 9;
+
+/* =========================================
+   8. SKILLS SECTION
+   ========================================= */
+
+.skill-item {
+    cursor: default;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Fallback for very old browsers */
-@supports not (aspect-ratio: 16 / 9) {
-    .aspect-16\/9 {
-        height: 0;
-        padding-bottom: 56.25%; /* (9 / 16 * 100) */
-        position: relative;
-    }
+/* Dark mode hover — glowing white */
+.skill-item:hover {
+    color: #ffffff !important;
+    text-shadow:
+        0 0 6px  rgba(255, 255, 255, 0.95),
+        0 0 14px rgba(255, 255, 255, 0.65),
+        0 0 28px rgba(255, 255, 255, 0.35) !important;
 }
 
-.neo-border {
-    border: 1px solid rgba(var(--accent-rgb), 0.2);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+/* Light mode hover — solid black, no glow */
+[data-theme="light"] .skill-item:hover {
+    color: #000000 !important;
+    text-shadow: none !important;
 }
 
-/* Add a subtle pulse to the floating card icon */
-.fa-chart-line {
-    animation: subtlePulse 3s infinite ease-in-out;
-}
 
-@keyframes subtlePulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(1.1); }
-}
+/* =========================================
+   9. NEO BORDER & CARDS
+   ========================================= */
 
-/* Borders & Hover Effects */
 .neo-border {
     border: 1px solid var(--border-color);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -253,40 +243,20 @@ body.loading {
     border-color: var(--accent);
     box-shadow: 0 0 25px var(--accent-glow);
     transform: translateY(-5px);
-    background-color: var(--bg-card); 
+    background-color: var(--bg-card);
 }
 
-/* Typography Accents */
-.text-neoGreen {
-    color: var(--accent);
-    text-shadow: 0 0 10px var(--accent-glow);
-}
 
-/* Buttons */
-.btn-neo {
-    background: var(--accent);
-    color: #ffffff; /* White text looks better on both Green and Blue buttons */
-    font-weight: 700;
-    transition: all 0.3s;
-    display: inline-block;
-}
+/* =========================================
+   10. VISUAL EFFECTS — Glow, Pulse, Buttons
+   ========================================= */
 
-/* Ensure button text is white in light mode */
-[data-theme="light"] .btn-neo {
-    color: #ffffff;
-}
-
-.btn-neo:hover {
-    box-shadow: 0 0 20px var(--accent-glow);
-    transform: scale(1.05);
-}
-
-/* Profile & Hero Animations */
+/* Profile / hero icon pulse */
 .glow-image {
     transition: all 0.5s ease;
 }
 
-.group:hover .glow-image, 
+.group:hover .glow-image,
 .glow-image:hover {
     filter: drop-shadow(0 0 15px var(--accent));
     transform: scale(1.05);
@@ -297,44 +267,122 @@ body.loading {
 }
 
 @keyframes imagePulse {
-    0%, 100% { filter: drop-shadow(0 0 8px var(--accent-glow)); }
-    50% { filter: drop-shadow(0 0 25px var(--accent-glow)); }
+    0%, 100% { filter: drop-shadow(0 0  8px var(--accent-glow)); }
+    50%       { filter: drop-shadow(0 0 25px var(--accent-glow)); }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg-main); }
-::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+/* Chart-line icon subtle pulse */
+.fa-chart-line {
+    animation: subtlePulse 3s infinite ease-in-out;
+}
 
-/* Toggle Icons Visibility Logic 
-   Default (Dark Mode): .dark-icon (Sun) is Visible. .light-icon (Moon) is Hidden.
-   Light Mode: .dark-icon (Sun) is Hidden. .light-icon (Moon) is Visible.
-*/
-.light-icon { display: none; }
-.dark-icon { display: block; }
+@keyframes subtlePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.7; transform: scale(1.1); }
+}
 
-[data-theme="light"] .light-icon { display: block; }
-[data-theme="light"] .dark-icon { display: none; }
+/* Typography accent */
+.text-neoGreen {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
 
+/* Base button */
+.btn-neo {
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 700;
+    display: inline-block;
+    transition: all 0.3s;
+}
 
-/* --- UTILITIES & MEDIA QUERIES --- */
+[data-theme="light"] .btn-neo {
+    color: #ffffff;
+}
+
+.btn-neo:hover {
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
-    ::-webkit-scrollbar { width: 3px; }
     .btn-neo:active { transform: scale(0.98); }
 }
 
-.glow-image, .neo-border, .btn-neo {
+
+/* =========================================
+   11. PROJECT CARDS
+   ========================================= */
+
+.project-card {
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    transition: box-shadow 0.15s ease;
     will-change: transform;
-    backface-visibility: hidden;
+    cursor: pointer;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-    h2 { font-size: clamp(2rem, 4vw, 3rem); }
+/* Shine overlay (follows cursor via JS) */
+.project-card .shine {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        circle at var(--mx, 50%) var(--my, 50%),
+        rgba(255, 255, 255, 0.08) 0%,
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 20;
 }
 
-/* ── Ripple ring on hover ── */
+.project-card:hover .shine {
+    opacity: 1;
+}
+
+/* Card icon float on hover */
+.card-icon {
+    transition: transform 0.4s ease, color 0.4s ease, filter 0.4s ease;
+}
+
+.project-card:hover .card-icon {
+    transform: translateY(-6px) scale(1.1);
+    filter: drop-shadow(0 0 12px var(--accent-glow, rgba(255, 255, 255, 0.4)));
+}
+
+/* Tag background pop on hover */
+.project-card .tag {
+    transition: all 0.2s ease;
+}
+
+.project-card:hover .tag {
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* Stagger fade-up entrance animation */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-wrap {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+}
+
+.card-wrap:nth-child(1) { animation-delay: 0.05s; }
+.card-wrap:nth-child(2) { animation-delay: 0.15s; }
+.card-wrap:nth-child(3) { animation-delay: 0.25s; }
+.card-wrap:nth-child(4) { animation-delay: 0.35s; }
+
+
+/* =========================================
+   12. SOCIAL ICONS — Ripple + Tooltip
+   ========================================= */
+
+/* Ripple ring */
 .social-icon::after {
     content: '';
     position: absolute;
@@ -351,10 +399,10 @@ body.loading {
 
 @keyframes ripple-ring {
     0%   { transform: scale(1);   opacity: 0.8; }
-    100% { transform: scale(1.9); opacity: 0;   }
+    100% { transform: scale(1.9); opacity: 0; }
 }
 
-/* ── Tooltip — DARK mode: black text on accent ── */
+/* Tooltip — dark mode: black text on accent */
 .social-icon::before {
     content: attr(data-tooltip);
     position: absolute;
@@ -362,7 +410,7 @@ body.loading {
     left: 50%;
     transform: translateX(-50%) translateY(6px);
     background: var(--accent);
-    color: #000000;        /* ← Black text in dark mode */
+    color: #000000;
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -380,68 +428,14 @@ body.loading {
     transform: translateX(-50%) translateY(0);
 }
 
-/* ── Tooltip — LIGHT mode: white text on accent ── */
+/* Tooltip — light mode: white text on accent */
 [data-theme="light"] .social-icon::before {
-    color: #ffffff;        /* ← White text in light mode */
+    color: #ffffff;
 }
 
-.project-card {
-    transform-style: preserve-3d;
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-    transition: box-shadow 0.15s ease;
-    will-change: transform;
-    cursor: pointer;
-  }
-
-  .project-card .shine {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.08) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    z-index: 20;
-  }
-
-  .project-card:hover .shine {
-    opacity: 1;
-  }
-
-  /* Stagger fade-up on load */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(32px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .card-wrap {
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-  }
-  .card-wrap:nth-child(1) { animation-delay: 0.05s; }
-  .card-wrap:nth-child(2) { animation-delay: 0.15s; }
-  .card-wrap:nth-child(3) { animation-delay: 0.25s; }
-  .card-wrap:nth-child(4) { animation-delay: 0.35s; }
-
-  /* Icon float animation */
-  .card-icon {
-    transition: transform 0.4s ease, color 0.4s ease, filter 0.4s ease;
-  }
-  .project-card:hover .card-icon {
-    transform: translateY(-6px) scale(1.1);
-    filter: drop-shadow(0 0 12px var(--accent-glow, rgba(255,255,255,0.4)));
-  }
-
-  /* Tag pop */
-  .project-card .tag {
-    transition: all 0.2s ease;
-  }
-  .project-card:hover .tag {
-    background-color: color-mix(in srgb, var(--color-accent, #fff) 10%, transparent);
-  }
 
 /* =========================================
-   CONTACT FORM — FLOATING LABEL FIELDS
+   13. CONTACT FORM — Floating Labels
    ========================================= */
 
 .field-wrap {
@@ -449,12 +443,12 @@ body.loading {
     width: 100%;
 }
 
-/* Base input & textarea */
+/* Input & textarea base */
 .field-wrap input,
 .field-wrap textarea {
     width: 100%;
     background-color: var(--bg-card);
-    border: 1.5px solid var(--border-color);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
     padding: 1.35rem 1.2rem 0.5rem 1.2rem;
     border-radius: 0.85rem;
     outline: none;
@@ -468,24 +462,19 @@ body.loading {
         box-shadow 0.25s ease;
 }
 
-/* Dark mode — default */
-.field-wrap input,
-.field-wrap textarea {
-    border-color: rgba(255, 255, 255, 0.25);
-}
-
-/* Light mode */
+/* Light mode border */
 [data-theme="light"] .field-wrap input,
 [data-theme="light"] .field-wrap textarea {
     border-color: rgba(0, 0, 0, 0.3);
 }
 
+/* Hide placeholder (used for floating label trick) */
 .field-wrap input::placeholder,
 .field-wrap textarea::placeholder {
     color: transparent;
 }
 
-/* Focus */
+/* Focus state */
 .field-wrap input:focus,
 .field-wrap textarea:focus {
     border-color: var(--accent);
@@ -493,13 +482,13 @@ body.loading {
     box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
-/* Filled but not focused */
+/* Filled but unfocused */
 .field-wrap input:not(:placeholder-shown),
 .field-wrap textarea:not(:placeholder-shown) {
     border-color: color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
-/* ---- Label ---- */
+/* Floating label base */
 .field-wrap label {
     position: absolute;
     left: 1.2rem;
@@ -517,13 +506,13 @@ body.loading {
         font-weight 0.22s ease;
 }
 
-/* Textarea label sits at top, not center */
+/* Textarea label starts at top */
 .textarea-wrap label {
     top: 1.2rem;
     transform: none;
 }
 
-/* ---- Floated state ---- */
+/* Floated label state */
 .field-wrap input:focus ~ label,
 .field-wrap input:not(:placeholder-shown) ~ label,
 .field-wrap textarea:focus ~ label,
@@ -536,8 +525,9 @@ body.loading {
     letter-spacing: 0.04em;
 }
 
+
 /* =========================================
-   BUTTON — SHINE + UNDERLINE ANIMATION
+   14. SUBMIT BUTTON — Shine + Underline
    ========================================= */
 
 .btn-neo-end {
@@ -545,7 +535,16 @@ body.loading {
     overflow: hidden;
     isolation: isolate;
     cursor: pointer;
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 700;
+    display: inline-block;
+    transform: none !important;
     transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+[data-theme="light"] .btn-neo-end {
+    color: #ffffff;
 }
 
 /* Diagonal shine sweep */
@@ -581,43 +580,60 @@ body.loading {
     z-index: 1;
 }
 
-.btn-neo-end:hover::before {
-    left: 150%;
-}
+.btn-neo-end:hover::before { left: 150%; }
+.btn-neo-end:hover::after  { width: 100%; }
 
-.btn-neo-end:hover::after {
-    width: 100%;
-}
-
-.btn-neo-end {
-    background: var(--accent);
-    color: #ffffff; /* White text looks better on both Green and Blue buttons */
-    font-weight: 700;
-    transition: all 0.3s;
-    display: inline-block;
-}
-
-/* Ensure button text is white in light mode */
-[data-theme="light"] .btn-neo-end {
-    color: #ffffff;
-}
-
-/* Subtle letter spacing on hover */
 .btn-neo-end:hover {
     letter-spacing: 0.08em;
+    transform: none !important;
 }
 
-/* Click press feel */
 .btn-neo-end:active {
     opacity: 0.85;
-}
-
-.btn-neo-end {
     transform: none !important;
 }
 
-.btn-neo-end:hover,
-.btn-neo-end:focus,
-.btn-neo-end:active {
-    transform: none !important;
+
+/* =========================================
+   15. SCROLLBAR
+   ========================================= */
+
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+@media (max-width: 768px) {
+    ::-webkit-scrollbar { width: 3px; }
+}
+
+
+/* =========================================
+   16. CLICK SPARK
+   ========================================= */
+
+.click-spark {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: linear-gradient(to top, #00ff95, #918f8f);
+    pointer-events: none;
+    transform-origin: center bottom;
+    animation: spark-move 1000ms ease forwards;
+    filter: drop-shadow(0 0 6px #01de82);
+}
+
+@keyframes spark-move {
+    0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3); }
+}
+
+
+/* =========================================
+   17. MEDIA QUERIES
+   ========================================= */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); }
 }
