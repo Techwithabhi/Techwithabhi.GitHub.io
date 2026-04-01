@@ -11,7 +11,7 @@
     <a href="https://techwithabhi.github.io/">
       <img src="https://img.shields.io/badge/View_Portfolio-000000?style=for-the-badge&logo=Google-Chrome&logoColor=white" alt="Website" />
     </a>
-    <a href="https://drive.google.com/file/d/120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing">
+    <a href="https://drive.google.com/file/d/1Ku83n3RqIoNzMlI_0hrAMVpPtHnlUN3Z/view?usp=sharing">
      <img src="https://img.shields.io/badge/Download_Resume-FF5722?style=for-the-badge&logo=adobeacrobat&logoColor=white" alt="Resume" />
     </a>
   </p>
@@ -214,7 +214,7 @@ open index.html
 [![Email](https://img.shields.io/badge/📧_Email-Drop_a_Line-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:abhisarkar6038@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Let's_Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/techwithabhi/)
 [![Twitter](https://img.shields.io/badge/🐦_Twitter-Follow_Me-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/AbhiSarkar2025)
-[![Resume](https://img.shields.io/badge/📄_Resume-Download_Now-FF5722?style=for-the-badge&logo=adobeacrobat&logoColor=white)](https://drive.google.com/file/d/120EP6tsKezaLIB9WZKcVAXCEKPNvJSUy/view?usp=sharing)
+[![Resume](https://img.shields.io/badge/📄_Resume-Download_Now-FF5722?style=for-the-badge&logo=adobeacrobat&logoColor=white)](https://drive.google.com/file/d/1Ku83n3RqIoNzMlI_0hrAMVpPtHnlUN3Z/view?usp=sharing)
 
 
 <br />
