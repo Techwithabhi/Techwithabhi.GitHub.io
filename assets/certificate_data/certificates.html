@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate's | Abhi Sarkar</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css_file/style.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="antialiased loading bg-theme-main text-theme-main transition-colors duration-300">
+
+    <!-- Loader -->
+    <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+        <div class="relative px-6 text-center">
+            <h1 id="loader-text" class="text-4xl sm:text-6xl font-black italic tracking-tighter opacity-0 text-white">
+            CERTIFICATE<span class="text-neoGreen"> .LIBRARY</span>
+            </h1>
+            <div id="loader-bar" class="absolute -bottom-4 left-0 h-[2px] bg-neoGreen w-0"></div>
+        </div>
+    </div>
+
+    <div id="interactive-glow"></div>
+
+    <!-- Nav -->
+    <nav id="main-nav" class="fixed w-full z-50 px-4 sm:px-6 py-4 bg-theme-main/90 backdrop-blur-md border-b border-theme-border">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/index.html" class="group flex items-center gap-2 text-theme-main font-bold tracking-tighter italic">
+                <i class="fa-solid fa-arrow-left text-theme-accent group-hover:-translate-x-1 transition-transform"></i>
+                BACK <span class="hidden sm:inline">TO PORTFOLIO</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="w-10 h-10 rounded-full border border-theme-border flex items-center justify-center text-theme-accent hover:bg-theme-accent hover:text-white transition-all">
+                    <i class="fas fa-sun text-lg dark-icon"></i>
+                    <i class="fas fa-moon text-lg light-icon hidden"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" class="pt-32 pb-20 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="inline-block px-3 py-1 rounded-full bg-theme-accent/10 border border-theme-accent text-theme-accent text-[10px] font-mono mb-6 hero-anim">
+                    VISUAL SHOWCASE
+                </div>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black italic mb-4 hero-anim leading-tight text-theme-main">
+                    GALLERY OF <br><span class="text-theme-accent">CERTIFICATE's</span>
+                </h1>
+                <p class="text-theme-muted font-medium text-sm max-w-xl hero-anim">
+                    A structured collection of industry-recognized certifications in Data Analytics, AI, Excel, Power BI and many other domain — reflecting practical expertise and ongoing upskilling.
+                </p>
+            </header>
+
+            <!-- Filter pills -->
+            <div class="flex flex-wrap gap-3 mb-10 hero-anim">
+                <button class="filter-pill active" data-filter="all">All</button>
+                <button class="filter-pill" data-filter="data">Data</button>
+                <button class="filter-pill" data-filter="web">Web</button>
+                <button class="filter-pill" data-filter="design">Design</button>
+                <button class="filter-pill" data-filter="ai">AI</button>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="cards-grid" id="cards-container">
+
+                <!-- Card 1 -->
+                <a href="https://drive.google.com/file/d/1Vmpq_j4auQNlbQKZGCr4yHsV9nHEVRFS/view?usp=sharing" target="_blank" class="img-card reveal" data-category="data">
+                    <div class="img-card__glint"></div>
+                    <img class="img-card__photo" src="/assets/icon/certificate/certificate2.png" alt="Sales Dashboard">
+                    <div class="img-card__overlay"></div>
+                    <span class="img-card__tag">Data</span>
+                    <div class="img-card__body">
+                        <h3 class="img-card__title">Sales Performance<br>Dashboard</h3>
+                        <p class="img-card__desc">SQL + Power BI market trend analysis uncovering high-growth revenue streams in real time.</p>
+                        <div class="img-card__stats">
+                            <span class="img-card__stat"><i class="fa-solid fa-chart-bar text-[10px]"></i> Power BI</span>
+                            <span class="img-card__stat"><i class="fa-solid fa-database text-[10px]"></i> SQL</span>
+                        </div>
+                    </div>
+                    <div class="img-card__bar"></div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="https://drive.google.com/file/d/1Vmpq_j4auQNlbQKZGCr4yHsV9nHEVRFS/view?usp=sharing" target="_blank" class="img-card reveal" data-category="web">
+                    <div class="img-card__glint"></div>
+                    <img class="img-card__photo" src="/assets/icon/certificate/certificate2.png" alt="React App">
+                    <div class="img-card__overlay"></div>
+                    <span class="img-card__tag">Web</span>
+                    <div class="img-card__body">
+                        <h3 class="img-card__title">React Timer<br>& Stopwatch</h3>
+                        <p class="img-card__desc">Fully responsive React app with lap tracking, split timing, and smooth animations.</p>
+                        <div class="img-card__stats">
+                            <span class="img-card__stat"><i class="fa-brands fa-react text-[10px]"></i> React</span>
+                            <span class="img-card__stat"><i class="fa-brands fa-js text-[10px]"></i> ES6+</span>
+                        </div>
+                    </div>
+                    <div class="img-card__bar"></div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="https://drive.google.com/file/d/1Vmpq_j4auQNlbQKZGCr4yHsV9nHEVRFS/view?usp=sharing" target="_blank" class="img-card reveal" data-category="data">
+                    <div class="img-card__glint"></div>
+                    <img class="img-card__photo" src="/assets/icon/certificate/certificate2.png" alt="EDA Report">
+                    <div class="img-card__overlay"></div>
+                    <span class="img-card__tag">Data</span>
+                    <div class="img-card__body">
+                        <h3 class="img-card__title">Exploratory<br>Data Analysis</h3>
+                        <p class="img-card__desc">End-to-end logistics data analysis with an interactive Streamlit dashboard. Internship project.</p>
+                        <div class="img-card__stats">
+                            <span class="img-card__stat"><i class="fa-brands fa-python text-[10px]"></i> Python</span>
+                            <span class="img-card__stat"><i class="fa-solid fa-book-open text-[10px]"></i> Pandas</span>
+                        </div>
+                    </div>
+                    <div class="img-card__bar"></div>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="https://drive.google.com/file/d/1Vmpq_j4auQNlbQKZGCr4yHsV9nHEVRFS/view?usp=sharing" target="_blank" class="img-card reveal" data-category="design">
+                    <div class="img-card__glint"></div>
+                    <img class="img-card__photo" src="/assets/icon/certificate/certificate2.png" alt="Excel Dashboard">
+                    <div class="img-card__overlay"></div>
+                    <span class="img-card__tag">Design</span>
+                    <div class="img-card__body">
+                        <h3 class="img-card__title">Advanced Excel<br>Dashboard</h3>
+                        <p class="img-card__desc">Automated reporting using Pivot Tables, Power Query, and VBA — 4-hour task → 1 click.</p>
+                        <div class="img-card__stats">
+                            <span class="img-card__stat"><i class="fa-solid fa-table text-[10px]"></i> Excel</span>
+                            <span class="img-card__stat"><i class="fa-solid fa-code text-[10px]"></i> VBA</span>
+                        </div>
+                    </div>
+                    <div class="img-card__bar"></div>
+                </a>
+
+                <!-- Card 5 -->
+                <a href="https://drive.google.com/file/d/1Vmpq_j4auQNlbQKZGCr4yHsV9nHEVRFS/view?usp=sharing" target="_blank" class="img-card reveal" data-category="ai">
+                    <div class="img-card__glint"></div>
+                    <img class="img-card__photo" src="/assets/icon/certificate/certificate2.png" alt="AI Automation">
+                    <div class="img-card__overlay"></div>
+                    <span class="img-card__tag">AI</span>
+                    <div class="img-card__body">
+                        <h3 class="img-card__title">AI-Powered<br>Automation</h3>
+                        <p class="img-card__desc">Prompt engineering pipeline that automates repetitive data tasks using LLMs and Python scripts.</p>
+                        <div class="img-card__stats">
+                            <span class="img-card__stat"><i class="fa-solid fa-robot text-[10px]"></i> Claude</span>
+                            <span class="img-card__stat"><i class="fa-brands fa-python text-[10px]"></i> Python</span>
+                        </div>
+                    </div>
+                    <div class="img-card__bar"></div>
+                </a>
+
+                <!-- Card 6 -->
+                <a href="https://drive.google.com/file/d/1Vmpq_j4auQNlbQKZGCr4yHsV9nHEVRFS/view?usp=sharing" target="_blank" class="img-card reveal" data-category="web">
+                    <div class="img-card__glint"></div>
+                    <img class="img-card__photo" src="/assets/icon/certificate/certificate2.png" alt="Portfolio Site">
+                    <div class="img-card__overlay"></div>
+                    <span class="img-card__tag">Web</span>
+                    <div class="img-card__body">
+                        <h3 class="img-card__title">Portfolio<br>Website</h3>
+                        <p class="img-card__desc">Personal portfolio with dark/light mode, GSAP animations, interactive cursor glow, and click sparks.</p>
+                        <div class="img-card__stats">
+                            <span class="img-card__stat"><i class="fa-brands fa-html5 text-[10px]"></i> HTML</span>
+                            <span class="img-card__stat"><i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> GSAP</span>
+                        </div>
+                    </div>
+                    <div class="img-card__bar"></div>
+                </a>
+
+                <!-- Card 7 -->
+                <a href="https://drive.google.com/file/d/1Vmpq_j4auQNlbQKZGCr4yHsV9nHEVRFS/view?usp=sharing" target="_blank" class="img-card reveal" data-category="design">
+                    <div class="img-card__glint"></div>
+                    <img class="img-card__photo" src="/assets/icon/certificate/certificate2.png" alt="Nutrition App">
+                    <div class="img-card__overlay"></div>
+                    <span class="img-card__tag">Design</span>
+                    <div class="img-card__body">
+                        <h3 class="img-card__title">Nutrition<br>Tracker</h3>
+                        <p class="img-card__desc">Interactive nutritional tracking app deployed on Vercel with real-time calorie calculations.</p>
+                        <div class="img-card__stats">
+                            <span class="img-card__stat"><i class="fa-brands fa-react text-[10px]"></i> React</span>
+                            <span class="img-card__stat"><i class="fa-solid fa-cloud text-[10px]"></i> Vercel</span>
+                        </div>
+                    </div>
+                    <div class="img-card__bar"></div>
+                </a>
+
+                <!-- Card 8 -->
+                <a href="https://drive.google.com/file/d/1Vmpq_j4auQNlbQKZGCr4yHsV9nHEVRFS/view?usp=sharing" target="_blank" class="img-card reveal" data-category="ai">
+                    <div class="img-card__glint"></div>
+                    <img class="img-card__photo" src="/assets/icon/certificate/certificate2.png" alt="Prompt Engineering">
+                    <div class="img-card__overlay"></div>
+                    <span class="img-card__tag">AI</span>
+                    <div class="img-card__body">
+                        <h3 class="img-card__title">Prompt<br>Engineering</h3>
+                        <p class="img-card__desc">A collection of structured prompts designed to extract high-quality insights from large language models.</p>
+                        <div class="img-card__stats">
+                            <span class="img-card__stat"><i class="fa-solid fa-lightbulb text-[10px]"></i> GPT</span>
+                            <span class="img-card__stat"><i class="fa-solid fa-terminal text-[10px]"></i> Gemini</span>
+                        </div>
+                    </div>
+                    <div class="img-card__bar"></div>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center border-t border-theme-border bg-theme-main transition-colors duration-300">
+    
+        <div class="flex justify-center items-center gap-6 mb-8">
+            <a href="https://www.linkedin.com/in/techwithabhi/" target="_blank" data-tooltip="LinkedIn"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-linkedin-in text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+            
+            <a href="https://github.com/Techwithabhi" target="_blank" data-tooltip="GitHub"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-github text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.instagram.com/i_am_abhi_sarkar/" target="_blank" data-tooltip="Instagram"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-instagram text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.facebook.com/abhi.sarkar.50364592/" target="_blank" data-tooltip="Facebook"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-facebook-f text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@techwithabhi-d8y" target="_blank" data-tooltip="YouTube"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-youtube text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+        </div>
+
+        <p class="text-theme-muted text-[10px] font-mono uppercase tracking-[0.3em] px-4">
+            &copy; 2026 Abhi Sarkar || Data & Design || Optimized for Impact
+        </p>
+    </footer>
+
+    <!-- Global script (theme toggle, loader, cursor glow, etc.) -->
+    <script src="/assets/js_file/script.js"></script>
+</body>
+</html>
