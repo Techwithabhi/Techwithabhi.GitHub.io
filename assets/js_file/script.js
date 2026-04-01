@@ -147,10 +147,10 @@ function initLoader() {
 
 function initScrollReveal() {
     gsap.utils.toArray('.reveal').forEach(el => {
-        gsap.from(el, {
+        gsap.to(el, { // 1. Change gsap.from to gsap.to
             scrollTrigger: { trigger: el, start: 'top 80%' },
-            y: 30,
-            opacity: 0,
+            y: 0,         // 2. Animate TO y: 0 (its natural position)
+            opacity: 1,   // 3. Animate TO opacity: 1 (fully visible)
             duration: 1,
             ease: 'power3.out'
         });
@@ -290,6 +290,92 @@ function initProjectCardTilt() {
     });
 }
 
+
+// =============================================================================
+// 12. CERTIFICATE PAGE
+// =============================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* ── Only run on pages that have the gallery cards ── */
+    const pills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.img-card');
+    if (!pills.length && !cards.length) return;
+
+    /* ── Inject fadeInUp keyframe once ── */
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    /* ── Filter pills ── */
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            pills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+
+            const filter = pill.dataset.filter;
+
+            cards.forEach(card => {
+                const match = filter === 'all' || card.dataset.category === filter;
+                if (match) {
+                    card.removeAttribute('data-hidden');
+                    card.style.animation = 'none';
+                    requestAnimationFrame(() => {
+                        card.style.animation = 'fadeInUp .4s ease forwards';
+                    });
+                } else {
+                    card.setAttribute('data-hidden', '');
+                }
+            });
+        });
+    });
+
+    /* ── Click ripple ── */
+    cards.forEach(card => {
+        card.addEventListener('click', function (e) {
+            const link = this.dataset.link;
+            if (link && link !== '#') window.location.href = link;
+
+            const ripple = document.createElement('div');
+            ripple.classList.add('img-card__ripple');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.cssText = `
+                width:${size}px; height:${size}px;
+                left:${e.clientX - rect.left - size / 2}px;
+                top:${e.clientY - rect.top  - size / 2}px;
+            `;
+            this.appendChild(ripple);
+            ripple.addEventListener('animationend', () => ripple.remove());
+        });
+    });
+
+    /* ── GSAP scroll reveal for gallery cards ── */
+    if (typeof gsap !== 'undefined') {
+        gsap.utils.toArray('.img-card.reveal').forEach((el, i) => {
+            gsap.fromTo(el,
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1, y: 0,
+                    duration: .7,
+                    ease: 'power3.out',
+                    delay: (i % 4) * 0.08,
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 88%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+    }
+
+});
 
 // =============================================================================
 // INIT — Run Everything
