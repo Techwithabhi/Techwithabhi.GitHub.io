@@ -806,7 +806,7 @@ body.loading {
     border-radius: 1.5rem;
     overflow: hidden;
     cursor: pointer;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 5 / 3; 
     border: 1px solid var(--border-color);
     box-shadow: 0 0 20px rgba(0,0,0,.35);
     transition:
@@ -817,17 +817,12 @@ body.loading {
     will-change: transform;
 }
 
-.img-card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 40px var(--accent-glow), 0 20px 60px rgba(0,0,0,.5);
-    transform: translateY(-10px) scale(1.02);
-}
-
 /* Main image */
 .img-card__photo {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;        /* ← fills fully, no gaps */
+    object-position: center;  /* keeps certificate centered */
     transition: transform .6s cubic-bezier(.25,.46,.45,.94),
                 filter   .6s ease;
     filter: brightness(.85) saturate(1.1);
@@ -912,7 +907,7 @@ body.loading {
     font-weight: 900;
     font-style: italic;
     letter-spacing: -.02em;
-    color: #fff;
+    color: white;
     text-transform: uppercase;
     line-height: 1.2;
     margin-bottom: .4rem;
@@ -920,7 +915,7 @@ body.loading {
 
 .img-card__desc {
     font-size: .72rem;
-    color: var(--text-muted);
+    color: white;
     line-height: 1.5;
     opacity: 0;
     max-height: 0;
@@ -951,10 +946,14 @@ body.loading {
 .img-card__stat {
     font-size: .6rem;
     font-family: 'JetBrains Mono', monospace;
-    color: var(--accent);
+    color: var(--accent);          /* dark mode → accent green */
     display: flex;
     align-items: center;
     gap: .3rem;
+}
+
+[data-theme="light"] .img-card__stat {
+    color: var(--bg-main);         /* light mode → bg-main */
 }
 
 /* Accent bar at bottom */
@@ -1024,16 +1023,16 @@ body.loading {
 /* Grid masonry-ish layout */
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* wider min */
     gap: 1.5rem;
 }
 
 @media (min-width: 768px) {
-    .cards-grid { grid-template-columns: repeat(3, 1fr); }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }  /* was 3 */
 }
 
 @media (min-width: 1024px) {
-    .cards-grid { grid-template-columns: repeat(4, 1fr); }
+    .cards-grid { grid-template-columns: repeat(3, 1fr); }  /* was 4 */
 }
 
 /* Card hidden for filter */
