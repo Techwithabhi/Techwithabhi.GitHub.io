@@ -52,9 +52,12 @@
             </a>
 
             <div class="flex items-center gap-4">
-                <button id="theme-toggle" class="w-10 h-10 rounded-full border border-theme-border flex items-center justify-center text-theme-accent hover:bg-theme-accent hover:text-white transition-all">
-                    <i class="fas fa-sun text-lg dark-icon"></i>
-                    <i class="fas fa-moon text-lg light-icon hidden"></i>
+                <button id="theme-toggle" class="theme-toggle-btn">
+                    <div class="toggle-track">
+                        <i class="fas fa-sun toggle-icon sun-icon"></i>
+                        <i class="fas fa-moon toggle-icon moon-icon"></i>
+                    </div>
+                    <div class="toggle-ring"></div>
                 </button>
             </div>
         </div>
@@ -64,8 +67,11 @@
         <div class="max-w-5xl mx-auto">
         
             <header class="mb-12">
-                <div class="inline-block px-3 py-1 rounded-full bg-theme-accent/10 border border-theme-accent text-theme-accent text-[10px] font-mono mb-6 hero-anim">
-                    CASE STUDY: WEB APPLICATION
+                <div class="status-badge hero-anim">
+                    <span class="status-dot"></span>
+                    <span class="text-xs [10px] font-mono uppercase tracking-tighter">
+                        CASE STUDY: WEB APPLICATION
+                    </span>
                 </div>
                 <h1 class="text-4xl sm:text-6xl md:text-7xl font-black italic mb-8 hero-anim leading-tight text-theme-main">
                     REACT TIMER & <br> <span class="text-theme-accent">STOPWATCH</span>

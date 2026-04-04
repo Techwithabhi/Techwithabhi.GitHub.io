@@ -27,6 +27,13 @@ function initThemeToggle() {
     toggleBtn.addEventListener('click', () => {
         const current = document.documentElement.getAttribute('data-theme');
         setTheme(current === 'light' ? 'dark' : 'light');
+
+        // ── ADD ONLY THESE 3 LINES ──────────────────────
+        toggleBtn.classList.remove('ripple');
+        void toggleBtn.offsetWidth; // restart animation
+        toggleBtn.classList.add('ripple');
+        setTimeout(() => toggleBtn.classList.remove('ripple'), 450);
+        // ────────────────────────────────────────────────
     });
 }
 

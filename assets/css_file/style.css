@@ -159,6 +159,175 @@ body.loading {
     display: none;
 }
 
+/* ── RESUME BUTTON ─────────────────────────────────── */
+
+.resume-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  overflow: hidden;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Fill layer that slides up on hover */
+.resume-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+/* Arrow icon + text sit above the fill */
+.resume-btn span,
+.resume-btn svg {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+/* Hover: fill slides up, text turns white/black */
+.resume-btn:hover::before {
+  transform: translateY(0);
+}
+
+.resume-btn:hover {
+  color: #fff;
+}
+
+/* Arrow nudges up-right on hover */
+.resume-btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* Press feedback */
+.resume-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── LIGHT MODE overrides ───────────────────────────── */
+/* When light theme is active, filled state uses accent color
+   and text turns dark so it stays readable */
+
+[data-theme="light"] .resume-btn:hover,
+.light-mode .resume-btn:hover,
+body.light .resume-btn:hover {
+  color: #fff;   /* adjust if your --accent is a light hue */
+}
+
+/* ── THEME TOGGLE BUTTON ───────────────────────────── */
+
+.theme-toggle-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+  padding: 0;
+}
+
+/* Ripple ring that expands on click */
+.toggle-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: none;
+  pointer-events: none;
+}
+
+.theme-toggle-btn.ripple .toggle-ring {
+  animation: ring-burst 0.45s ease-out forwards;
+}
+
+@keyframes ring-burst {
+  0%   { opacity: 0.8; transform: scale(0.6); }
+  100% { opacity: 0;   transform: scale(1.5); }
+}
+
+/* Icon container — stacks sun on top of moon */
+.toggle-track {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.toggle-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--accent);
+  transition: 
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.35s ease;
+  line-height: 20px;
+}
+
+/* Default (dark mode): sun visible, moon hidden below */
+.sun-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.moon-icon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+/* Light mode: moon visible, sun hidden above */
+body.light-mode .sun-icon,
+[data-theme="light"] .sun-icon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+body.light-mode .moon-icon,
+[data-theme="light"] .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Hover — subtle glow pulse on the icon */
+.theme-toggle-btn:hover .toggle-icon {
+  filter: drop-shadow(0 0 5px var(--accent));
+}
+
+/* Hover — border brightens */
+.theme-toggle-btn:hover {
+  border-color: var(--accent);
+}
+
+/* Press */
+.theme-toggle-btn:active {
+  transform: scale(0.92);
+}
+
 
 /* =========================================
    6. MOBILE MENU
@@ -171,6 +340,79 @@ body.loading {
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* =========================================
+   HERO STATUS BADGE
+   ========================================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent-glow);
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer sweep on load */
+.status-badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.12),
+        transparent
+    );
+    animation: badge-shimmer 3s ease-in-out infinite;
+    animation-delay: 1.2s;
+}
+
+@keyframes badge-shimmer {
+    0%   { left: -60%; }
+    100% { left: 130%; }
+}
+
+/* Pulsing live dot */
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.status-dot::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.35;
+    animation: dot-ping 1.8s ease-out infinite;
+}
+
+@keyframes dot-ping {
+    0%   { transform: scale(1);   opacity: 0.35; }
+    70%  { transform: scale(2.2); opacity: 0; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Light mode — keep dot readable */
+[data-theme="light"] .status-dot,
+[data-theme="light"] .status-dot::before {
+    background: var(--accent);
 }
 
 

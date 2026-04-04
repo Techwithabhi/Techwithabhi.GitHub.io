@@ -177,9 +177,12 @@
             </a>
             
             <div class="relative z-10 flex items-center gap-4">
-                <button id="theme-toggle" class="w-10 h-10 rounded-full border border-theme-border bg-theme-card flex items-center justify-center text-theme-accent hover:bg-theme-accent hover:text-white transition-all shadow-sm">
-                    <i class="fas fa-sun text-lg" id="sun-icon"></i>
-                    <i class="fas fa-moon text-lg hidden" id="moon-icon"></i>
+                <button id="theme-toggle" class="theme-toggle-btn">
+                    <div class="toggle-track">
+                        <i class="fas fa-sun toggle-icon sun-icon"></i>
+                        <i class="fas fa-moon toggle-icon moon-icon"></i>
+                    </div>
+                    <div class="toggle-ring"></div>
                 </button>
             </div>
         </div>
