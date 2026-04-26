@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Case Study: European Bank Churn Analysis | Abhi Sarkar</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css_file/style.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { 
+                extend: { 
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'], 
+                        mono: ['JetBrains Mono', 'monospace'] 
+                    },
+                    screens: {
+                        'xs': '375px',
+                    }
+                } 
+            }
+        }
+    </script>
+
+    <style>
+        /* ── Global box-sizing & Strict Mobile Overflow Fix ── */
+        *, *::before, *::after { box-sizing: border-box; }
+        
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        /* ── Infinite Marquee ── */
+        .marquee-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            width: 100%;
+        }
+        .marquee-content {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            min-width: 100%;
+        }
+        @keyframes scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ── Ambient Glowing Background Orb ── */
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.15;
+            filter: blur(60px);
+            animation: pulse-orb 8s ease-in-out infinite alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+        @keyframes pulse-orb {
+            0%   { transform: scale(1) translate(0, 0);        opacity: 0.1; }
+            100% { transform: scale(1.5) translate(50px,-50px); opacity: 0.2; }
+        }
+
+        @media (max-width: 640px) {
+            .ambient-orb:first-of-type  { width: 220px !important; height: 220px !important; }
+            .ambient-orb:last-of-type   { width: 320px !important; height: 320px !important; }
+        }
+
+        /* ── Mock Code Editor Syntax Highlighting ── */
+        .keyword  { color: #ff7b72; }
+        .function { color: #886ea5; }
+        .string   { color: #a5d6ff; }
+        .variable { color: var(--accent); }
+        .comment  { color: #8d9e8b; }
+
+        /* ── Theme-Aware Glassmorphism ── */
+        .glass-card {
+            background: color-mix(in srgb, var(--bg-card), transparent 40%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* ── Flowing Text Gradient Animation ── */
+        .animate-text-glow {
+            background-size: 200% auto;
+            animation: flowGradient 4s linear infinite;
+            filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent), transparent 60%));
+        }
+        @keyframes flowGradient {
+            0%   { background-position: 0%    center; }
+            100% { background-position: 200%  center; }
+        }
+
+        /* ── Code block ── */
+        .code-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .code-scroll pre {
+            min-width: max-content; 
+        }
+
+        @media (max-width: 374px) {
+            .hero-heading { font-size: clamp(2rem, 12vw, 5rem); }
+            .hero-span    { font-size: clamp(2rem, 12vw, 5rem); }
+        }
+
+        .code-scroll::-webkit-scrollbar { height: 4px; }
+        .code-scroll::-webkit-scrollbar-track { background: transparent; }
+        .code-scroll::-webkit-scrollbar-thumb { background: rgba(1,222,130,0.3); border-radius: 2px; }
+
+        /* ── Safe-area insets ── */
+        nav {
+            padding-left: max(1rem, env(safe-area-inset-left));
+            padding-right: max(1rem, env(safe-area-inset-right));
+        }
+        main {
+            padding-left: max(1rem, env(safe-area-inset-left));
+            padding-right: max(1rem, env(safe-area-inset-right));
+        }
+        footer {
+            padding-bottom: max(3rem, env(safe-area-inset-bottom));
+        }
+
+        code {
+            word-break: break-word;
+            white-space: normal;
+        }
+        .code-scroll code { white-space: pre; }
+
+        @media (max-width: 480px) {
+            .glass-card { padding: 1.25rem !important; }
+        }
+
+        /* ── FIXED: Scale down CTA on tiny screens instead of column ── */
+        @media (max-width: 360px) {
+            .cta-btn { 
+                padding-left: 1rem; 
+                padding-right: 1rem; 
+                font-size: 0.65rem; 
+            }
+            .cta-btn i { font-size: 0.875rem; }
+            .cta-btn > span:nth-child(4) { width: 2rem; height: 2rem; }
+        }
+
+        @media (max-width: 380px) {
+            .footer-icons { gap: 0.75rem !important; }
+            .footer-icons a { width: 2.25rem !important; height: 2.25rem !important; }
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-theme-main text-theme-main relative">
+
+    <div class="ambient-orb w-[400px] h-[400px] top-[-100px] left-[-100px]"></div>
+    <div class="ambient-orb w-[600px] h-[600px] bottom-[20%] right-[-200px]" style="animation-delay: -4s;"></div>
+
+    <nav class="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-4 bg-theme-main/80 backdrop-blur-md border-b border-theme-border">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/assets/projects_data/1st_pj_data/1st_project.html" class="group relative z-10 flex items-center gap-2 text-theme-main font-bold tracking-tighter italic text-sm sm:text-base">
+                <i class="fa-solid fa-arrow-left text-theme-accent group-hover:-translate-x-1 transition-transform"></i>
+                BACK <span class="hidden xs:inline">TO PROJECT</span>
+            </a>
+            
+            <div class="relative z-10 flex items-center gap-4">
+                <button id="theme-toggle" class="theme-toggle-btn">
+                    <div class="toggle-track">
+                        <i class="fas fa-sun toggle-icon sun-icon"></i>
+                        <i class="fas fa-moon toggle-icon moon-icon"></i>
+                    </div>
+                    <div class="toggle-ring"></div>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-28 sm:pt-32 pb-20 px-4 sm:px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+
+            <header class="text-center mb-14 sm:mb-20 relative">
+                <p class="text-theme-accent font-mono text-xs sm:text-sm tracking-[0.25em] sm:tracking-[0.4em] uppercase mb-4 animate-fade-in-up">Architecture Deep Dive</p>
+
+                <h1 class="hero-heading text-4xl xs:text-5xl sm:text-7xl md:text-8xl font-black italic tracking-tighter mb-5 sm:mb-6 text-theme-main drop-shadow-lg cursor-default leading-none">
+                    CHURN
+                    <span class="hero-span text-transparent bg-clip-text border-b-4 pr-2 sm:pr-4 pb-1 inline-block animate-text-glow transition-all duration-500 hover:scale-105"
+                        style="background-image: linear-gradient(to right, var(--text-main), var(--accent), var(--text-main), var(--accent), var(--text-main)); border-color: var(--accent);">
+                        INTELLIGENCE
+                    </span>
+                </h1>
+
+                <p class="max-w-2xl mx-auto text-theme-muted text-base sm:text-lg md:text-xl leading-relaxed px-2">
+                    How I transformed raw European bank customer records into actionable retention intelligence — uncovering churn patterns, high-risk segments, geographic trends, and behavioral insights through end-to-end data analysis.
+                </p>
+            </header>
+
+            <div class="w-full border-y border-theme-border py-3 sm:py-4 mb-16 sm:mb-24 bg-theme-card/30 backdrop-blur-sm -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div class="marquee-wrapper">
+                    <div class="marquee-content flex items-center gap-8 sm:gap-12 font-mono text-[10px] xs:text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] text-theme-accent uppercase opacity-80">
+                        <span><i class="fa-brands fa-python"></i> Python 3.10+</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-table"></i> Pandas &amp; NumPy</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-chart-line"></i> Plotly &amp; Seaborn</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-gauge-high"></i> Streamlit Dashboard</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-building-columns"></i> European Bank Data</span>
+                        <span>•</span>
+                        <span><i class="fa-brands fa-python"></i> Python 3.10+</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-table"></i> Pandas &amp; NumPy</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-chart-line"></i> Plotly &amp; Seaborn</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-gauge-high"></i> Streamlit Dashboard</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-building-columns"></i> European Bank Data</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Section 1: The Problem & Solution ── -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-20 sm:mb-32 items-center">
+
+                <div class="space-y-8 sm:space-y-10 order-2 lg:order-1 gs-reveal">
+                    <div>
+                        <div class="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-theme-card border border-theme-border mb-4 sm:mb-6 shadow-[0_0_15px_rgba(1,222,130,0.15)]">
+                            <i class="fa-solid fa-triangle-exclamation text-lg sm:text-xl text-theme-accent"></i>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">The Raw Data Problem</h2>
+                        <p class="text-theme-muted leading-relaxed text-sm sm:text-base">
+                            The European bank's dataset contained 10,000 customer records with demographics, account activity, product usage, and churn labels — but without structured analysis, the data was noise. There was no visibility into which customer segments were leaving, which geographies had the highest risk, or what behavioral signals predicted churn before it happened.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-theme-card border border-theme-border mb-4 sm:mb-6 shadow-[0_0_15px_rgba(1,222,130,0.15)]">
+                            <i class="fa-solid fa-magnifying-glass-chart text-lg sm:text-xl text-theme-accent"></i>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">The EDA-First Approach</h2>
+                        <p class="text-theme-muted leading-relaxed text-sm sm:text-base">
+                            I applied a systematic Exploratory Data Analysis pipeline using <code class="text-theme-accent">pandas</code> for wrangling and <code class="text-theme-accent">plotly</code> for interactive visualization. Rather than jumping to conclusions, the analysis was driven by distributional patterns, correlations, and demographic segmentation — letting the data surface its own story.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 gs-reveal">
+                    <div class="rounded-2xl bg-[#0d1117] border border-gray-800 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden relative group">
+                        <div class="px-3 sm:px-4 py-2 sm:py-3 bg-[#161b22] border-b border-gray-800 flex items-center gap-1.5 sm:gap-2">
+                            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
+                            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
+                            <span class="ml-3 sm:ml-4 font-mono text-[9px] sm:text-[10px] text-gray-400 truncate">European_Bank_Churn_Analysis.ipynb</span>
+                        </div>
+                        <div class="code-scroll p-4 sm:p-6 font-mono text-xs sm:text-sm leading-relaxed relative text-gray-200">
+                            <div class="absolute inset-0 bg-theme-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <pre><code><span class="comment"># Load and inspect the raw dataset</span>
+<span class="keyword">import</span> <span class="variable">pandas</span> <span class="keyword">as</span> <span class="variable">pd</span>
+<span class="keyword">import</span> <span class="variable">plotly.express</span> <span class="keyword">as</span> <span class="variable">px</span>
+
+<span class="variable">df</span> = <span class="variable">pd</span>.<span class="function">read_csv</span>(<span class="string">'bank_churn.csv'</span>)
+
+<span class="comment"># Identify churned customers</span>
+<span class="variable">df</span>[<span class="string">'Churned'</span>] = <span class="variable">df</span>[<span class="string">'Exited'</span>] == <span class="number">1</span>
+
+<span class="comment"># Segment by age group</span>
+<span class="variable">df</span>[<span class="string">'AgeGroup'</span>] = <span class="variable">pd</span>.<span class="function">cut</span>(
+    <span class="variable">df</span>[<span class="string">'Age'</span>],
+    bins=[<span class="number">0</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">100</span>],
+    labels=[<span class="string">'<30'</span>, <span class="string">'30-40'</span>, <span class="string">'40-50'</span>, <span class="string">'50+'</span>]
+)
+
+<span class="comment"># Churn rate per age segment</span>
+<span class="variable">churn_by_age</span> = <span class="variable">df</span>.<span class="function">groupby</span>(<span class="string">'AgeGroup'</span>)[<span class="string">'Churned'</span>].<span class="function">mean</span>()</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Section 2: Key Analysis Techniques ── -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-20 sm:mb-32 items-center">
+
+                <div class="gs-reveal">
+                    <div class="rounded-2xl bg-[#0d1117] border border-gray-800 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden relative group">
+                        <div class="px-3 sm:px-4 py-2 sm:py-3 bg-[#161b22] border-b border-gray-800 flex items-center gap-1.5 sm:gap-2">
+                            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
+                            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
+                            <span class="ml-3 sm:ml-4 font-mono text-[9px] sm:text-[10px] text-gray-400 truncate">churn_segment_analysis.py</span>
+                        </div>
+                        <div class="code-scroll p-4 sm:p-6 font-mono text-xs sm:text-sm leading-relaxed relative text-gray-200">
+                            <div class="absolute inset-0 bg-theme-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <pre><code><span class="comment"># Geographic churn rate aggregation</span>
+<span class="variable">geo_churn</span> = (
+    <span class="variable">df</span>.<span class="function">groupby</span>(<span class="string">'Geography'</span>)
+    .<span class="function">agg</span>(
+        churn_rate=(<span class="string">'Exited'</span>, <span class="string">'mean'</span>),
+        total_customers=(<span class="string">'CustomerId'</span>, <span class="string">'count'</span>),
+        avg_balance=(<span class="string">'Balance'</span>, <span class="string">'mean'</span>)
+    )
+    .<span class="function">sort_values</span>(<span class="string">'churn_rate'</span>, ascending=<span class="keyword">False</span>)
+    .<span class="function">reset_index</span>()
+)
+
+<span class="variable">fig</span> = <span class="variable">px</span>.<span class="function">bar</span>(
+    <span class="variable">geo_churn</span>, x=<span class="string">'Geography'</span>, y=<span class="string">'churn_rate'</span>,
+    color=<span class="string">'avg_balance'</span>, title=<span class="string">'Churn Rate by Country'</span>
+)</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-8 sm:space-y-10 gs-reveal">
+                    <div>
+                        <div class="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-theme-card border border-theme-border mb-4 sm:mb-6 shadow-[0_0_15px_rgba(1,222,130,0.15)]">
+                            <i class="fa-solid fa-globe text-lg sm:text-xl text-theme-accent"></i>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Geographic Intelligence</h2>
+                        <p class="text-theme-muted leading-relaxed text-sm sm:text-base">
+                            Using <code class="text-theme-accent">groupby</code> aggregations, I computed per-country KPIs — churn rate, customer count, and average account balance. This revealed that Germany has a ~32% churn rate, nearly double that of France and Spain, exposing a critical geographic risk concentration in the bank's European portfolio.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-theme-card border border-theme-border mb-4 sm:mb-6 shadow-[0_0_15px_rgba(1,222,130,0.15)]">
+                            <i class="fa-solid fa-users text-lg sm:text-xl text-theme-accent"></i>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Demographic Segmentation</h2>
+                        <p class="text-theme-muted leading-relaxed text-sm sm:text-base">
+                            Age-group segmentation revealed a dramatic churn spike in the 50+ cohort, with a ~49% exit rate — nearly one in every two senior customers churns. Cross-referencing with account balance and product usage unlocked multi-dimensional risk profiles that simple aggregate statistics would have missed entirely.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Section 3: Key Insights ── -->
+            <div class="mb-16 sm:mb-20 text-center gs-reveal">
+                <h2 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black mb-8 sm:mb-12 italic text-theme-main">
+                    KEY <span class="text-theme-accent">INSIGHTS</span>
+                </h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl text-left group hover:bg-theme-card transition-all duration-500 hover:-translate-y-2 cursor-default relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 text-7xl opacity-5 text-theme-main group-hover:text-theme-accent group-hover:opacity-20 transition-all duration-500"><i class="fa-solid fa-user-minus"></i></div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-theme-main">20% Overall Churn Rate</h3>
+                        <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">1 in 5 customers exits the bank, representing a significant revenue loss potential. This baseline churn rate formed the benchmark for all segmentation and risk analysis performed in the project.</p>
+                    </div>
+
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl text-left group hover:bg-theme-card transition-all duration-500 hover:-translate-y-2 cursor-default relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 text-7xl opacity-5 text-theme-main group-hover:text-theme-accent group-hover:opacity-20 transition-all duration-500"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-theme-main">Inactive Member Risk</h3>
+                        <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">Inactive members are ~2× more likely to churn than active ones. Engagement-driven retention campaigns targeting this group could significantly cut overall attrition across all geographies.</p>
+                    </div>
+
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl text-left group hover:bg-theme-card transition-all duration-500 hover:-translate-y-2 cursor-default relative overflow-hidden sm:col-span-2 md:col-span-1">
+                        <div class="absolute -right-6 -top-6 text-7xl opacity-5 text-theme-main group-hover:text-theme-accent group-hover:opacity-20 transition-all duration-500"><i class="fa-solid fa-person-cane"></i></div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-theme-main">Senior Customer Exodus</h3>
+                        <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">Customers aged 50+ show a ~49% churn rate — the highest across all age groups. This reveals a critical retention gap for senior demographics that requires targeted product and service strategies.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Section 4: Dashboard Architecture ── -->
+            <div class="mb-16 sm:mb-20 text-center gs-reveal">
+                <h2 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black mb-8 sm:mb-12 italic text-theme-main">
+                    DASHBOARD <span class="text-theme-accent">ARCHITECTURE</span>
+                </h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl text-left group hover:bg-theme-card transition-all duration-500 hover:-translate-y-2 cursor-default relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 text-7xl opacity-5 text-theme-main group-hover:text-theme-accent group-hover:opacity-20 transition-all duration-500"><i class="fa-solid fa-sliders"></i></div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-theme-main">Interactive Filters</h3>
+                        <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">Built dynamic Streamlit sidebar controls — multi-select dropdowns for geography, gender, age group, and activity status — that push filter state directly into Plotly chart re-renders with zero page reloads.</p>
+                    </div>
+
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl text-left group hover:bg-theme-card transition-all duration-500 hover:-translate-y-2 cursor-default relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 text-7xl opacity-5 text-theme-main group-hover:text-theme-accent group-hover:opacity-20 transition-all duration-500"><i class="fa-solid fa-chart-pie"></i></div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-theme-main">Multi-Chart Visualizations</h3>
+                        <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">Engineered a rich suite of Plotly charts — histograms, box plots, heatmaps, scatter plots, and donut charts — each dynamically tied to sidebar filter state for real-time exploratory analysis of churn patterns.</p>
+                    </div>
+
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl text-left group hover:bg-theme-card transition-all duration-500 hover:-translate-y-2 cursor-default relative overflow-hidden sm:col-span-2 md:col-span-1">
+                        <div class="absolute -right-6 -top-6 text-7xl opacity-5 text-theme-main group-hover:text-theme-accent group-hover:opacity-20 transition-all duration-500"><i class="fa-solid fa-file-arrow-down"></i></div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-theme-main">CSV Export Pipeline</h3>
+                        <p class="text-theme-muted text-xs sm:text-sm leading-relaxed">Implemented a one-click filtered data export using Streamlit's download button, converting the live-filtered DataFrame to a CSV in-memory buffer for zero-friction user downloads of any segmented customer view.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── CTA Buttons ── -->
+            <div class="text-center pt-12 sm:pt-16 pb-8 border-t border-theme-border flex flex-wrap justify-center gap-4 sm:gap-6">
+
+                <!-- Live Dashboard Button -->
+                <a href="https://zenodo.org/records/19762403" target="_blank" rel="noopener noreferrer"
+                    class="cta-btn group relative flex items-center gap-3 sm:gap-4 px-5 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-all duration-500 hover:-translate-y-1 hover:scale-105 cursor-pointer"
+                    style="background-color: var(--bg-card); color: var(--text-main); box-shadow: 0 15px 35px -10px var(--accent-glow);">
+
+                    <span class="absolute inset-0 rounded-full border border-theme-border group-hover:border-transparent transition-colors duration-500"></span>
+                    <span class="absolute inset-0 rounded-full border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style="border-color: var(--accent); box-shadow: inset 0 0 15px var(--accent-glow);"></span>
+                    <span class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-10 scale-90 group-hover:scale-100 transition-all duration-500 ease-out"
+                        style="background-color: var(--accent);"></span>
+
+                    <span class="relative z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]"
+                        style="background-color: var(--accent); color: var(--bg-main);">
+                        <i class="fa-solid fa-file-pdf text-base sm:text-xl"></i>
+                    </span>
+
+                    <span class="relative z-10 transition-transform duration-500 group-hover:translate-x-1">
+                        Research Paper
+                    </span>
+
+                    <span class="relative z-10 flex items-center justify-center overflow-hidden w-0 group-hover:w-5 transition-all duration-500 ease-out">
+                        <i class="fa-solid fa-arrow-right transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 delay-75"
+                            style="color: var(--accent);"></i>
+                    </span>
+                </a>
+
+                <!-- GitHub Repository Button -->
+                <a href="https://github.com/Techwithabhi/data_analysis_project-01" target="_blank" rel="noopener noreferrer"
+                    class="cta-btn group relative flex items-center gap-3 sm:gap-4 px-5 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase transition-all duration-500 hover:-translate-y-1 hover:scale-105 cursor-pointer"
+                    style="background-color: var(--bg-card); color: var(--text-main); box-shadow: 0 15px 35px -10px var(--accent-glow);">
+
+                    <span class="absolute inset-0 rounded-full border border-theme-border group-hover:border-transparent transition-colors duration-500"></span>
+                    <span class="absolute inset-0 rounded-full border-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style="border-color: var(--accent); box-shadow: inset 0 0 15px var(--accent-glow);"></span>
+                    <span class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-10 scale-90 group-hover:scale-100 transition-all duration-500 ease-out"
+                        style="background-color: var(--accent);"></span>
+
+                    <span class="relative z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]"
+                        style="background-color: var(--accent); color: var(--bg-main);">
+                        <i class="fa-brands fa-github text-base sm:text-xl"></i>
+                    </span>
+
+                    <span class="relative z-10 transition-transform duration-500 group-hover:translate-x-1">
+                        Explore Repository
+                    </span>
+
+                    <span class="relative z-10 flex items-center justify-center overflow-hidden w-0 group-hover:w-5 transition-all duration-500 ease-out">
+                        <i class="fa-solid fa-arrow-right transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 delay-75"
+                            style="color: var(--accent);"></i>
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-12 text-center border-t border-theme-border bg-theme-main transition-colors duration-300">
+    
+        <div class="flex justify-center items-center gap-6 mb-8">
+            <a href="https://www.linkedin.com/in/techwithabhi/" target="_blank" data-tooltip="LinkedIn"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-linkedin-in text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+            
+            <a href="https://github.com/Techwithabhi" target="_blank" data-tooltip="GitHub"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-github text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.instagram.com/i_am_abhi_sarkar/" target="_blank" data-tooltip="Instagram"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-instagram text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.facebook.com/abhi.sarkar.50364592/" target="_blank" data-tooltip="Facebook"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-facebook-f text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@techwithabhi-d8y" target="_blank" data-tooltip="YouTube"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-youtube text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+        </div>
+
+        <p class="text-theme-muted text-[10px] font-mono uppercase tracking-[0.3em] px-4">
+            &copy; 2026 Abhi Sarkar || Data &amp; Design || Optimized for Impact
+        </p>
+    </footer>
+
+    <script>
+        // ── FIXED Theme Logic & Icon Toggling ──
+        const toggleBtn = document.getElementById('theme-toggle');
+        
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('theme', themeName);
+            
+            // Toggle the visibility of the sun and moon icons
+            const darkIcon = document.querySelector('.dark-icon');
+            const lightIcon = document.querySelector('.light-icon');
+            
+            if(darkIcon && lightIcon) {
+                if (themeName === 'dark') {
+                    darkIcon.classList.add('hidden');
+                    lightIcon.classList.remove('hidden');
+                } else {
+                    darkIcon.classList.remove('hidden');
+                    lightIcon.classList.add('hidden');
+                }
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) { 
+            setTheme(savedTheme); 
+        }
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                setTheme(currentTheme === 'light' ? 'dark' : 'light');
+            });
+        }
+
+        // ── GSAP Scroll Animations ──
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".gs-reveal").forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+    </script>
+</body>
+</html>
