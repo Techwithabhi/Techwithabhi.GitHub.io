@@ -7,17 +7,13 @@
     <meta name="description" content="Professional Experience of Abhi Sarkar - Data Analyst & Web Developer">
     <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
 
-    <!-- Tailwind — darkMode class matches main site -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- GSAP + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Main site stylesheet — provides ALL --color-*, bg-theme-*, text-theme-*, neo-border, etc. -->
     <link rel="stylesheet" href="/assets/css_file/style.css">
 
     <script>
@@ -85,18 +81,17 @@
         }
 
         /* ══════════════════════════════════════════════════
-           EXPERIENCE CARD
-           Front = image + org name always visible
-           Back  = slides up on hover (CSS) / tap (JS mobile)
+           EXPERIENCE CARD (16:9 Aspect Ratio)
         ══════════════════════════════════════════════════ */
         .exp-card {
-            width: 270px;
-            height: 360px;
+            width: 340px;
+            aspect-ratio: 16 / 9;
+            height: auto;
             border-radius: 1.25rem;
             position: relative;
             flex-shrink: 0;
             cursor: pointer;
-            overflow: hidden;           /* clips the back panel */
+            overflow: hidden; /* clips the back panel */
         }
 
         /* ── FRONT ── */
@@ -106,7 +101,7 @@
             z-index: 1;
         }
 
-        /* Image */
+        /* Image fully covers the 16:9 area */
         .exp-card-img {
             width: 100%; height: 100%;
             object-fit: cover;
@@ -118,7 +113,6 @@
             transform: scale(1.06);
         }
 
-        /* Placeholder icon when no image provided */
         .exp-card-placeholder {
             width: 100%; height: 100%;
             display: flex;
@@ -133,10 +127,10 @@
         .exp-card-scrim {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            height: 60%;
+            height: 70%;
             background: linear-gradient(to top,
-                rgba(0,0,0,.92) 0%,
-                rgba(0,0,0,.4) 55%,
+                rgba(0,0,0,.95) 0%,
+                rgba(0,0,0,.5) 55%,
                 transparent 100%);
             pointer-events: none;
             z-index: 2;
@@ -151,7 +145,7 @@
         .exp-card-label {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            padding: 2rem 1.2rem 1.2rem;
+            padding: 1.5rem 1.2rem 1rem;
             z-index: 3;
             transition: opacity .3s ease, transform .3s ease;
         }
@@ -164,7 +158,7 @@
         .exp-card-org {
             color: #fff;
             font-weight: 900;
-            font-size: clamp(.85rem, 2vw, 1rem);
+            font-size: clamp(.85rem, 2vw, 1.1rem);
             line-height: 1.2;
         }
         .exp-card-city {
@@ -183,7 +177,7 @@
             background: var(--card-bg-darker, #0d0d0d);
             border: 2px solid var(--color-accent, #00ff88);
             border-radius: 1.25rem;
-            padding: 1.4rem 1.3rem 1.2rem;
+            padding: 1rem 1.2rem 0.8rem;
             display: flex;
             flex-direction: column;
             z-index: 6;
@@ -195,69 +189,67 @@
                 opacity .38s cubic-bezier(.4,0,.2,1),
                 transform .42s cubic-bezier(.4,0,.2,1);
         }
-        /* CSS hover (desktop) */
         .exp-card:hover .exp-card-back {
             opacity: 1;
             transform: translateY(0);
         }
-        /* JS tap class (mobile) */
         .exp-card.tapped .exp-card-back {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Back panel typography — inherits theme vars */
+        /* Back panel typography - optimized for 16:9 landscape */
         .back-eyebrow {
             font-family: 'JetBrains Mono', monospace;
             font-size: 8px;
             letter-spacing: .28em;
             text-transform: uppercase;
             color: var(--color-accent, #00ff88);
-            margin-bottom: .5rem;
+            margin-bottom: .3rem;
         }
         .back-role {
             font-weight: 900;
-            font-size: clamp(.95rem, 2.2vw, 1.05rem);
-            line-height: 1.25;
+            font-size: clamp(.9rem, 2.2vw, 1rem);
+            line-height: 1.2;
             color: var(--text-primary, #f0f0f0);
-            margin: 0 0 .2rem;
+            margin: 0 0 .15rem;
         }
         .back-org {
-            font-size: .72rem;
+            font-size: .7rem;
             font-weight: 700;
             color: var(--color-accent, #00ff88);
-            margin-bottom: .6rem;
+            margin-bottom: .3rem;
         }
         .back-period {
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 10.5px;
+            font-size: 9.5px;
             color: var(--text-muted, #888);
-            margin-bottom: .7rem;
+            margin-bottom: .5rem;
         }
         .back-period i { color: var(--color-accent, #00ff88); font-size: 9px; }
 
         .back-rule {
             height: 1px;
             background: var(--border-color, rgba(255,255,255,.08));
-            margin-bottom: .65rem;
+            margin-bottom: .5rem;
         }
 
         .back-bullets {
             list-style: none;
-            padding: 0; margin: 0 0 .8rem;
+            padding: 0; margin: 0 0 .5rem;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 3px;
             flex: 1;
             overflow: hidden;
         }
         .back-bullets li {
-            font-size: 10.5px;
+            font-size: 9.5px;
             color: var(--text-muted, #888);
-            line-height: 1.5;
-            padding-left: 13px;
+            line-height: 1.4;
+            padding-left: 12px;
             position: relative;
         }
         .back-bullets li::before {
@@ -265,30 +257,30 @@
             position: absolute;
             left: 0;
             color: var(--color-accent, #00ff88);
-            font-size: 8.5px;
-            top: 1px;
+            font-size: 8px;
+            top: 2px;
         }
 
         .offer-btn {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            padding: 7px 14px;
+            padding: 5px 12px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
+            font-size: 8.5px;
             font-weight: 700;
             letter-spacing: .12em;
             text-transform: uppercase;
             color: #000;
             background: var(--color-accent, #00ff88);
-            border-radius: 5px;
+            border-radius: 4px;
             text-decoration: none;
             width: fit-content;
             margin-top: auto;
             transition: box-shadow .3s, transform .25s;
         }
         .offer-btn:hover {
-            box-shadow: 0 0 20px var(--color-accent, #00ff88);
+            box-shadow: 0 0 15px var(--color-accent, #00ff88);
             transform: translateY(-2px);
         }
 
@@ -299,43 +291,15 @@
         .from-right { opacity:0; transform:translateX(65px);  }
 
         /* ══════════════════════════════════════════════════
-           HUSTLE TEXT  — subtle shimmer, no over-glow
+           HUSTLE TEXT - Cleaned up animations
         ══════════════════════════════════════════════════ */
-
-        /* Gentle shimmer: accent colour breathes slightly, never blasts */
-        @keyframes hustleShimmer {
-            0%,100% {
-                opacity: 1;
-                text-shadow: 0 0 6px rgba(0,255,136,0.25);
-            }
-            50% {
-                opacity: .88;
-                text-shadow: 0 0 14px rgba(0,255,136,0.45),
-                             0 0 28px rgba(0,255,136,0.18);
-            }
-        }
-        #hustle-text {
-            animation: hustleShimmer 3.2s ease-in-out infinite;
-        }
-
-        /* Typewriter char reveal — each .tw-char starts invisible */
         .tw-char {
             display: inline-block;
             opacity: 0;
-            transform: translateY(12px);
-            transition: none; /* driven by GSAP */
+            will-change: transform, opacity, filter;
         }
 
-        /* Blinking cursor */
-        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
-        .cursor-blink {
-            display: inline-block;
-            animation: blink .85s step-start infinite;
-        }
-
-        /* ── Hustle section layout ── */
         #hustle-below {
-            /* lives OUTSIDE #tl-wrapper so the line never reaches it */
             padding: 2.5rem 1rem 3rem;
             text-align: center;
         }
@@ -350,25 +314,16 @@
         }
 
         /* ══════════════════════════════════════════════════
-           MOBILE — ≤ 767px
-           Timeline line goes to the left; entries stack
+           RESPONSIVE DESIGN
         ══════════════════════════════════════════════════ */
         @media (max-width: 767px) {
-
-            .tl-track, #tl-progress {
-                left: 20px;
-                transform: none;
-            }
-
-            /* Each row becomes a column aligned to left edge */
+            .tl-track, #tl-progress { left: 20px; transform: none; }
             .tl-entry {
                 flex-direction: column !important;
                 align-items: flex-start !important;
                 padding-left: 52px !important;
                 position: relative;
             }
-
-            /* Dot pins against left line */
             .tl-entry > .tl-dot {
                 position: absolute !important;
                 left: 11px !important;
@@ -376,46 +331,32 @@
                 margin: 0 !important;
                 flex-shrink: 0;
             }
-
-            /* Both card sides go full-width left */
             .card-side {
                 width: 100% !important;
                 justify-content: flex-start !important;
                 padding: 0 !important;
             }
-
-            /* Hide empty spacer divs */
             .side-spacer { display: none !important; }
-
-            /* Card fills available width */
             .exp-card {
                 width: 100% !important;
                 max-width: 420px !important;
-                height: 320px !important;
+                aspect-ratio: 16 / 9;
+                height: auto !important;
             }
-
-            /* Show tap hint chip */
             .tap-hint { display: inline-flex !important; }
         }
 
-        /* ══════════════════════════════════════════════════
-           SMALL PHONE — ≤ 479px
-        ══════════════════════════════════════════════════ */
         @media (max-width: 479px) {
             .tl-track, #tl-progress { left: 16px; }
             .tl-entry { padding-left: 42px !important; }
             .tl-entry > .tl-dot { left: 7px !important; }
-            .exp-card { height: 300px !important; }
+            .exp-card { max-width: none !important; }
         }
 
-        /* ══════════════════════════════════════════════════
-           LARGE DESKTOP — ≥ 1024px
-        ══════════════════════════════════════════════════ */
         @media (min-width: 1024px) {
-            .exp-card { width: 300px; height: 380px; }
+            .exp-card { width: 440px; aspect-ratio: 16 / 9; height: auto; }
         }
 
-        /* Tap hint pill — hidden on desktop, shown on mobile */
         .tap-hint {
             display: none;
             align-items: center;
@@ -428,12 +369,30 @@
             opacity: .75;
             margin-bottom: .5rem;
         }
+        #hustle-below .hustle-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: .35em;
+            text-transform: uppercase;
+            margin-bottom: .9rem;
+            /* Removed hardcoded color and opacity so Tailwind can manage it */
+        }
     </style>
 </head>
 
 <body class="antialiased bg-theme-main text-theme-main transition-colors duration-300">
 
-    <!-- ══════════════ NAVBAR ══════════════ -->
+    <div id="loader" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+        <div class="relative px-6 text-center">
+            <h1 id="loader-text" class="text-4xl sm:text-6xl font-black italic tracking-tighter opacity-0 text-white">
+                PROFESSIONAL <span class="text-neoGreen">EXPERIENCE.</span>
+            </h1>
+            <div id="loader-bar" class="absolute -bottom-4 left-0 h-[2px] bg-neoGreen w-0"></div>
+        </div>
+    </div>
+
+    <div id="interactive-glow"></div>
+
     <nav id="main-nav" class="fixed w-full z-50 px-4 sm:px-6 py-4 bg-theme-main/90 backdrop-blur-md border-b border-theme-border">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="/index.html" class="group flex items-center gap-2 text-theme-main font-bold tracking-tighter italic">
@@ -453,14 +412,11 @@
         </div>
     </nav>
 
-    <!-- ══════════════ HERO ══════════════ -->
     <section class="pt-32 pb-10 sm:pb-16 px-4 sm:px-6 text-center">
-        <p class="text-theme-accent font-mono text-[10px] sm:text-xs
-                  uppercase tracking-[.35em] mb-4">
+        <p class="text-theme-accent font-mono text-[10px] sm:text-xs uppercase tracking-[.35em] mb-4">
             Journey So Far
         </p>
-        <h1 class="text-4xl sm:text-6xl md:text-8xl font-black italic
-                   leading-none text-theme-main">
+        <h1 class="text-4xl sm:text-6xl md:text-8xl font-black italic leading-none text-theme-main">
             PROFESSIONAL<br>
             <span class="text-theme-accent">EXPERIENCE</span>
         </h1>
@@ -470,16 +426,12 @@
         <div class="w-20 h-[3px] bg-theme-accent mx-auto mt-6 rounded-full"></div>
     </section>
 
-    <!-- ══════════════ TIMELINE ══════════════ -->
     <section class="py-12 sm:py-20 px-4 sm:px-6">
         <div class="max-w-5xl mx-auto relative" id="tl-wrapper">
 
             <div class="tl-track"></div>
             <div id="tl-progress"></div>
 
-            <!-- ─────────────────────────────
-                 ENTRY 1 — LEFT
-            ───────────────────────────────── -->
             <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32">
 
                 <div class="w-1/2 flex justify-end pr-8 sm:pr-14 card-side from-left">
@@ -489,7 +441,6 @@
                         </p>
                         <div class="exp-card neo-border shadow-xl">
 
-                            <!-- FRONT -->
                             <div class="exp-card-front">
                                 <img src="/assets/icon/Tech_Mahindra.png" alt="Company 1" class="exp-card-img">
                             </div>
@@ -502,7 +453,6 @@
                                 </p>
                             </div>
 
-                            <!-- BACK (slides up on hover / tap) -->
                             <div class="exp-card-back">
                                 <p class="back-eyebrow">01 // Role</p>
                                 <h3 class="back-role">Your Job Title</h3>
@@ -513,9 +463,9 @@
                                 </div>
                                 <div class="back-rule"></div>
                                 <ul class="back-bullets">
-                                    <li>Key responsibility or achievement</li>
-                                    <li>Key responsibility or achievement</li>
-                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement here</li>
+                                    <li>Another key responsibility mentioned here</li>
+                                    <li>Final key responsibility or major achievement</li>
                                 </ul>
                                 <a href="#" target="_blank" class="offer-btn">
                                     <i class="fa-solid fa-file-contract" style="font-size:9px;"></i>
@@ -531,9 +481,6 @@
                 <div class="w-1/2 pl-8 sm:pl-14 side-spacer"></div>
             </div>
 
-            <!-- ─────────────────────────────
-                 ENTRY 2 — RIGHT
-            ───────────────────────────────── -->
             <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32">
 
                 <div class="w-1/2 pr-8 sm:pr-14 side-spacer"></div>
@@ -547,7 +494,7 @@
                         <div class="exp-card neo-border shadow-xl">
 
                             <div class="exp-card-front">
-                                <img src="/assets/icon/UM.png" alt="Company 1" class="exp-card-img">
+                                <img src="/assets/icon/UM.png" alt="Company 2" class="exp-card-img">
                             </div>
                             <div class="exp-card-scrim"></div>
                             <div class="exp-card-label">
@@ -568,9 +515,9 @@
                                 </div>
                                 <div class="back-rule"></div>
                                 <ul class="back-bullets">
-                                    <li>Key responsibility or achievement</li>
-                                    <li>Key responsibility or achievement</li>
-                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement here</li>
+                                    <li>Another key responsibility mentioned here</li>
+                                    <li>Final key responsibility or major achievement</li>
                                 </ul>
                                 <a href="#" target="_blank" class="offer-btn">
                                     <i class="fa-solid fa-file-contract" style="font-size:9px;"></i>
@@ -583,9 +530,6 @@
                 </div>
             </div>
 
-            <!-- ─────────────────────────────
-                 ENTRY 3 — LEFT
-            ───────────────────────────────── -->
             <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32">
 
                 <div class="w-1/2 flex justify-end pr-8 sm:pr-14 card-side from-left">
@@ -596,7 +540,7 @@
                         <div class="exp-card neo-border shadow-xl">
 
                             <div class="exp-card-front">
-                                <img src="/assets/icon/PURV.png" alt="Company 1" class="exp-card-img">
+                                <img src="/assets/icon/PURV.png" alt="Company 3" class="exp-card-img">
                             </div>
                             <div class="exp-card-scrim"></div>
                             <div class="exp-card-label">
@@ -617,9 +561,9 @@
                                 </div>
                                 <div class="back-rule"></div>
                                 <ul class="back-bullets">
-                                    <li>Key responsibility or achievement</li>
-                                    <li>Key responsibility or achievement</li>
-                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement here</li>
+                                    <li>Another key responsibility mentioned here</li>
+                                    <li>Final key responsibility or major achievement</li>
                                 </ul>
                                 <a href="#" target="_blank" class="offer-btn">
                                     <i class="fa-solid fa-file-contract" style="font-size:9px;"></i>
@@ -635,91 +579,62 @@
                 <div class="w-1/2 pl-8 sm:pl-14 side-spacer"></div>
             </div>
 
-            <!--
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                ADD MORE ENTRIES BELOW — alternate LEFT / RIGHT / LEFT …
-                Copy an entry block, switch:
-                  • from-left  ↔  from-right
-                  • justify-end pr-*  ↔  justify-start pl-*
-                  • move the .tl-dot and .side-spacer accordingly
-                  • update back-eyebrow number & content
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            -->
-
-            <!-- ══════════ TERMINAL END DOT — line stops HERE ══════════ -->
-            <!-- This dot is the last point on the timeline line.
-                 The hustle text lives BELOW, outside #tl-wrapper,
-                 so the green progress line never reaches it. -->
             <div class="flex justify-center pb-10 pt-2">
                 <div class="tl-dot" id="end-dot" style="width:20px;height:20px;"></div>
             </div>
 
-        </div><!-- /tl-wrapper — line ends here -->
+        </div>
     </section>
 
-    <!-- ══════════ HUSTLE TEXT — outside timeline, no line ══════════ -->
-    <div id="hustle-below" class="py-10 sm:py-14 px-4 text-center">
+    <div id="hustle-below" class="py-10 sm:py-14 px-4 text-center overflow-hidden">
         <p class="hustle-eyebrow">— And Still Going —</p>
         <h2 id="hustle-text"
-            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl
-                   font-black italic text-theme-accent leading-tight">
-            <!-- JS splits this into .tw-char spans for typewriter -->
-            Still Learning &amp; Hustling<span class="text-theme-main cursor-blink">_</span>
-        </h2>
+            class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+                   font-black italic text-theme-main leading-tight pt-2 pb-4">
+            </h2>
     </div>
 
-    <!-- ══════════════ FOOTER ══════════════ -->
     <footer class="py-12 text-center border-t border-theme-border bg-theme-main transition-colors duration-300">
-    
         <div class="flex justify-center items-center gap-6 mb-8">
             <a href="https://www.linkedin.com/in/techwithabhi/" target="_blank" data-tooltip="LinkedIn"
             class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                 <i class="fa-brands fa-linkedin-in text-lg text-theme-accent group-hover:text-white"></i>
             </a>
-            
             <a href="https://github.com/Techwithabhi" target="_blank" data-tooltip="GitHub"
             class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                 <i class="fa-brands fa-github text-lg text-theme-accent group-hover:text-white"></i>
             </a>
-
             <a href="https://www.instagram.com/i_am_abhi_sarkar/" target="_blank" data-tooltip="Instagram"
             class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                 <i class="fa-brands fa-instagram text-lg text-theme-accent group-hover:text-white"></i>
             </a>
-
             <a href="https://www.facebook.com/abhi.sarkar.50364592/" target="_blank" data-tooltip="Facebook"
             class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                 <i class="fa-brands fa-facebook-f text-lg text-theme-accent group-hover:text-white"></i>
             </a>
-
             <a href="https://www.youtube.com/@techwithabhi-d8y" target="_blank" data-tooltip="YouTube"
             class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                 <i class="fa-brands fa-youtube text-lg text-theme-accent group-hover:text-white"></i>
             </a>
         </div>
-
         <p class="text-theme-muted text-[10px] font-mono uppercase tracking-[0.3em] px-4">
             &copy; 2026 Abhi Sarkar || Data & Design || Optimized for Impact
         </p>
     </footer>
 
-    <!-- Main site script handles theme toggle — must come before GSAP block -->
     <script src="/assets/js_file/script.js"></script>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        /* ── 1. Growing timeline progress line
-               Ends exactly at the bottom of #tl-wrapper (the last dot),
-               NOT at the hustle text which lives outside the wrapper. ── */
+        /* ── 1. Growing timeline progress line ── */
         ScrollTrigger.create({
             trigger: '#tl-wrapper',
             start: 'top center',
             end:   'bottom center',
             scrub: 0.6,
             onUpdate(self){
-                document.getElementById('tl-progress').style.height =
-                    (self.progress * 100) + '%';
+                document.getElementById('tl-progress').style.height = (self.progress * 100) + '%';
             }
         });
 
@@ -733,8 +648,8 @@
             });
         });
 
-        /* ── 3. Cards slide in from left ── */
-        document.querySelectorAll('.from-left').forEach(el => {
+        /* ── 3 & 4. Cards slide in ── */
+        document.querySelectorAll('.from-left, .from-right').forEach(el => {
             gsap.to(el, {
                 opacity: 1, x: 0,
                 duration: 0.9, ease: 'power3.out',
@@ -742,66 +657,55 @@
             });
         });
 
-        /* ── 4. Cards slide in from right ── */
-        document.querySelectorAll('.from-right').forEach(el => {
-            gsap.to(el, {
-                opacity: 1, x: 0,
-                duration: 0.9, ease: 'power3.out',
-                scrollTrigger: { trigger: el, start: 'top 82%' }
-            });
-        });
-
-        /* ── 5. Typewriter reveal for hustle text ── */
+        /* ── 5. Clean & Modern Hustle Text Reveal ── */
         (function(){
             const h2 = document.getElementById('hustle-text');
             if (!h2) return;
 
-            // Grab the text node only (not the cursor span)
-            const cursor   = h2.querySelector('.cursor-blink');
-            const rawText  = h2.childNodes[0].textContent; // "Still Learning & Hustling"
-            h2.childNodes[0].textContent = '';             // clear it
-
-            // Wrap every character in a span
+            const rawText = "Still Learning & Hustling";
+            
+            // Wrap characters in spans
             const frag = document.createDocumentFragment();
             [...rawText].forEach(ch => {
                 const s = document.createElement('span');
                 s.className = 'tw-char';
-                s.textContent = ch === ' ' ? '\u00A0' : ch; // preserve spaces
+                s.textContent = ch === ' ' ? '\u00A0' : ch; 
+                
+                // Highlight the ampersand in the accent color
+                if (ch === '&') s.classList.add('text-theme-accent');
+                
                 frag.appendChild(s);
             });
-            h2.insertBefore(frag, cursor);
+            h2.appendChild(frag);
 
-            // Eyebrow line starts hidden
             const eyebrow = document.querySelector('#hustle-below .hustle-eyebrow');
-            gsap.set(eyebrow, { opacity: 0, y: 10 });
+            gsap.set(eyebrow, { opacity: 0, y: 15 });
 
             ScrollTrigger.create({
                 trigger: '#hustle-below',
-                start: 'top 88%',
+                start: 'top 85%',
                 once: true,
                 onEnter(){
-                    // 1. End dot pulses lit
+                    // Light up terminal dot
                     document.getElementById('end-dot').classList.add('lit');
 
-                    // 2. Eyebrow fades in
-                    gsap.to(eyebrow, {
-                        opacity: .7, y: 0,
-                        duration: .7, ease: 'power2.out'
-                    });
+                    // Fade up eyebrow
+                    gsap.to(eyebrow, { opacity: .7, y: 0, duration: .8, ease: 'power2.out' });
 
-                    // 3. Characters stagger up + fade in — typewriter feel
+                    // Staggered blur + slide up reveal for the main text
                     const chars = h2.querySelectorAll('.tw-char');
-                    gsap.to(chars, {
-                        opacity: 1,
-                        y: 0,
-                        duration: .04,          // each char snaps in fast
-                        ease: 'none',
-                        stagger: {
-                            each: 0.055,        // 55 ms between chars — readable pace
-                            from: 'start',
-                        },
-                        delay: .35,
-                    });
+                    gsap.fromTo(chars, 
+                        { opacity: 0, y: 35, filter: "blur(8px)" },
+                        {
+                            opacity: 1, 
+                            y: 0, 
+                            filter: "blur(0px)",
+                            duration: 0.85, 
+                            ease: 'power3.out',
+                            stagger: 0.035, // Premium smooth stagger effect
+                            delay: 0.15
+                        }
+                    );
                 }
             });
         })();
@@ -812,11 +716,8 @@
         document.querySelectorAll('.exp-card').forEach(card => {
             card.addEventListener('click', function(e){
                 if (!isMobile()) return;
-
-                // if tapping the offer-letter link, let it through
                 if (e.target.closest('.offer-btn')) return;
 
-                // close any other open card first
                 document.querySelectorAll('.exp-card.tapped').forEach(c => {
                     if (c !== card) c.classList.remove('tapped');
                 });
@@ -824,15 +725,12 @@
             });
         });
 
-        // Tap outside → close all
         document.addEventListener('click', function(e){
             if (!isMobile()) return;
             if (!e.target.closest('.exp-card')){
-                document.querySelectorAll('.exp-card.tapped')
-                    .forEach(c => c.classList.remove('tapped'));
+                document.querySelectorAll('.exp-card.tapped').forEach(c => c.classList.remove('tapped'));
             }
         });
     </script>
-
 </body>
 </html>
