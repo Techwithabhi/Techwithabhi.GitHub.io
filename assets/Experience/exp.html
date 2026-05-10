@@ -24,6 +24,10 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        neoGreen: '#01DE82',
+                        darkGreen: '#05614B'
                     }
                 }
             }
@@ -54,9 +58,9 @@
             height: 0%;
             transform: translateX(-50%);
             border-radius: 9999px;
-            background: var(--color-accent, #00ff88);
-            box-shadow: 0 0 10px var(--color-accent, #00ff88),
-                        0 0 26px rgba(0,255,136,0.3);
+            background: var(--color-accent, #01DE82);
+            box-shadow: 0 0 10px var(--color-accent, #01DE82),
+                        0 0 26px rgba(1,222,130,0.3);
             z-index: 2;
         }
 
@@ -74,17 +78,28 @@
             transition: background .4s, border-color .4s, box-shadow .4s;
         }
         .tl-dot.lit {
-            background: var(--color-accent, #00ff88);
-            border-color: var(--color-accent, #00ff88);
-            box-shadow: 0 0 0 4px rgba(0,255,136,.15),
-                        0 0 14px var(--color-accent, #00ff88);
+            background: var(--color-accent, #01DE82);
+            border-color: var(--color-accent, #01DE82);
+            box-shadow: 0 0 0 4px rgba(1,222,130,.15),
+                        0 0 14px var(--color-accent, #01DE82);
         }
 
         /* ══════════════════════════════════════════════════
            EXPERIENCE CARD (16:9 Aspect Ratio)
         ══════════════════════════════════════════════════ */
+        /* This wrapper ensures the card doesn't collapse on mobile */
+        .card-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .card-wrapper { width: auto; }
+        }
+
         .exp-card {
-            width: 340px;
+            width: 100%; /* Will follow the wrapper's width */
             aspect-ratio: 16 / 9;
             height: auto;
             border-radius: 1.25rem;
@@ -92,6 +107,13 @@
             flex-shrink: 0;
             cursor: pointer;
             overflow: hidden; /* clips the back panel */
+        }
+
+        @media (min-width: 768px) {
+            .exp-card { width: 340px; }
+        }
+        @media (min-width: 1024px) {
+            .exp-card { width: 440px; }
         }
 
         /* ── FRONT ── */
@@ -113,24 +135,14 @@
             transform: scale(1.06);
         }
 
-        .exp-card-placeholder {
-            width: 100%; height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg,
-                var(--card-bg-darker, #0d0d0d) 0%,
-                var(--card-bg, #1a1a2e) 100%);
-        }
-
         /* Gradient scrim — keeps org name legible */
         .exp-card-scrim {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            height: 70%;
+            height: 75%;
             background: linear-gradient(to top,
                 rgba(0,0,0,.95) 0%,
-                rgba(0,0,0,.5) 55%,
+                rgba(0,0,0,.6) 45%,
                 transparent 100%);
             pointer-events: none;
             z-index: 2;
@@ -158,16 +170,18 @@
         .exp-card-org {
             color: #fff;
             font-weight: 900;
-            font-size: clamp(.85rem, 2vw, 1.1rem);
+            font-size: clamp(.9rem, 2.5vw, 1.1rem);
             line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
         .exp-card-city {
             font-family: 'JetBrains Mono', monospace;
             font-size: 9px;
             letter-spacing: .22em;
             text-transform: uppercase;
-            color: var(--color-accent, #00ff88);
-            margin-top: 4px;
+            color: var(--color-accent, #01DE82);
+            margin-top: 6px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
 
         /* ── BACK — slides up on hover ── */
@@ -175,7 +189,7 @@
             position: absolute;
             inset: 0;
             background: var(--card-bg-darker, #0d0d0d);
-            border: 2px solid var(--color-accent, #00ff88);
+            border: 2px solid var(--color-accent, #01DE82);
             border-radius: 1.25rem;
             padding: 1rem 1.2rem 0.8rem;
             display: flex;
@@ -189,65 +203,67 @@
                 opacity .38s cubic-bezier(.4,0,.2,1),
                 transform .42s cubic-bezier(.4,0,.2,1);
         }
-        .exp-card:hover .exp-card-back {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .exp-card:hover .exp-card-back,
         .exp-card.tapped .exp-card-back {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Back panel typography - optimized for 16:9 landscape */
+        /* Back panel typography */
         .back-eyebrow {
             font-family: 'JetBrains Mono', monospace;
             font-size: 8px;
             letter-spacing: .28em;
             text-transform: uppercase;
-            color: var(--color-accent, #00ff88);
-            margin-bottom: .3rem;
+            color: var(--color-accent, #01DE82);
+            margin-bottom: .25rem;
         }
         .back-role {
             font-weight: 900;
             font-size: clamp(.9rem, 2.2vw, 1rem);
-            line-height: 1.2;
+            line-height: 1.1;
             color: var(--text-primary, #f0f0f0);
             margin: 0 0 .15rem;
         }
         .back-org {
             font-size: .7rem;
             font-weight: 700;
-            color: var(--color-accent, #00ff88);
+            color: var(--color-accent, #01DE82);
             margin-bottom: .3rem;
         }
         .back-period {
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 9.5px;
+            font-size: 9px;
             color: var(--text-muted, #888);
-            margin-bottom: .5rem;
+            margin-bottom: .4rem;
         }
-        .back-period i { color: var(--color-accent, #00ff88); font-size: 9px; }
 
         .back-rule {
             height: 1px;
             background: var(--border-color, rgba(255,255,255,.08));
             margin-bottom: .5rem;
+            flex-shrink: 0;
         }
 
+        /* Bullet points - Scrollable for mobile 16:9 ratio */
         .back-bullets {
             list-style: none;
             padding: 0; margin: 0 0 .5rem;
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 4px;
             flex: 1;
-            overflow: hidden;
+            overflow-y: auto; /* Allows scrolling if text is too long */
+            scrollbar-width: none; /* Firefox */
+        }
+        .back-bullets::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
         }
         .back-bullets li {
-            font-size: 9.5px;
-            color: var(--text-muted, #888);
+            font-size: clamp(8.5px, 2vw, 9.5px);
+            color: var(--text-muted, #ccc);
             line-height: 1.4;
             padding-left: 12px;
             position: relative;
@@ -256,7 +272,7 @@
             content: '▸';
             position: absolute;
             left: 0;
-            color: var(--color-accent, #00ff88);
+            color: var(--color-accent, #01DE82);
             font-size: 8px;
             top: 2px;
         }
@@ -265,33 +281,34 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            padding: 5px 12px;
+            padding: 6px 12px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 8.5px;
+            font-size: 8px;
             font-weight: 700;
             letter-spacing: .12em;
             text-transform: uppercase;
             color: #000;
-            background: var(--color-accent, #00ff88);
+            background: var(--color-accent, #01DE82);
             border-radius: 4px;
             text-decoration: none;
             width: fit-content;
             margin-top: auto;
+            flex-shrink: 0;
             transition: box-shadow .3s, transform .25s;
         }
         .offer-btn:hover {
-            box-shadow: 0 0 15px var(--color-accent, #00ff88);
+            box-shadow: 0 0 15px var(--color-accent, #01DE82);
             transform: translateY(-2px);
         }
 
         /* ══════════════════════════════════════════════════
            SCROLL-IN ANIMATION STATES
         ══════════════════════════════════════════════════ */
-        .from-left  { opacity:0; transform:translateX(-65px); }
-        .from-right { opacity:0; transform:translateX(65px);  }
+        .from-left  { opacity:0; transform:translateX(-50px); }
+        .from-right { opacity:0; transform:translateX(50px);  }
 
         /* ══════════════════════════════════════════════════
-           HUSTLE TEXT - Cleaned up animations
+           HUSTLE TEXT
         ══════════════════════════════════════════════════ */
         .tw-char {
             display: inline-block;
@@ -300,7 +317,7 @@
         }
 
         #hustle-below {
-            padding: 2.5rem 1rem 3rem;
+            padding: 3rem 1rem 4rem;
             text-align: center;
         }
         #hustle-below .hustle-eyebrow {
@@ -308,28 +325,30 @@
             font-size: 9px;
             letter-spacing: .35em;
             text-transform: uppercase;
-            color: var(--color-accent, #00ff88);
-            opacity: .7;
-            margin-bottom: .9rem;
+            margin-bottom: 1rem;
         }
 
         /* ══════════════════════════════════════════════════
-           RESPONSIVE DESIGN
+           RESPONSIVE DESIGN (Pure CSS Layout Fixes)
         ══════════════════════════════════════════════════ */
         @media (max-width: 767px) {
-            .tl-track, #tl-progress { left: 20px; transform: none; }
+            .tl-track, #tl-progress { 
+                left: 28px; 
+                transform: none; 
+            }
             .tl-entry {
                 flex-direction: column !important;
                 align-items: flex-start !important;
-                padding-left: 52px !important;
+                padding-left: 60px !important;
+                padding-right: 16px !important; /* Breathing room on the right */
                 position: relative;
+                margin-bottom: 4rem !important;
             }
             .tl-entry > .tl-dot {
                 position: absolute !important;
-                left: 11px !important;
-                top: 6px !important;
+                left: 21px !important; 
+                top: 0px !important;
                 margin: 0 !important;
-                flex-shrink: 0;
             }
             .card-side {
                 width: 100% !important;
@@ -337,24 +356,16 @@
                 padding: 0 !important;
             }
             .side-spacer { display: none !important; }
-            .exp-card {
-                width: 100% !important;
-                max-width: 420px !important;
-                aspect-ratio: 16 / 9;
-                height: auto !important;
-            }
+            
+            .exp-card-back { padding: 0.8rem 1rem 0.6rem; }
+            .exp-card-label { padding: 1rem 1rem 0.8rem; }
             .tap-hint { display: inline-flex !important; }
         }
 
         @media (max-width: 479px) {
-            .tl-track, #tl-progress { left: 16px; }
-            .tl-entry { padding-left: 42px !important; }
-            .tl-entry > .tl-dot { left: 7px !important; }
-            .exp-card { max-width: none !important; }
-        }
-
-        @media (min-width: 1024px) {
-            .exp-card { width: 440px; aspect-ratio: 16 / 9; height: auto; }
+            .tl-track, #tl-progress { left: 20px; }
+            .tl-entry { padding-left: 48px !important; padding-right: 12px !important; }
+            .tl-entry > .tl-dot { left: 13px !important; }
         }
 
         .tap-hint {
@@ -365,17 +376,9 @@
             font-size: 8px;
             letter-spacing: .15em;
             text-transform: uppercase;
-            color: var(--color-accent, #00ff88);
-            opacity: .75;
-            margin-bottom: .5rem;
-        }
-        #hustle-below .hustle-eyebrow {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            letter-spacing: .35em;
-            text-transform: uppercase;
-            margin-bottom: .9rem;
-            /* Removed hardcoded color and opacity so Tailwind can manage it */
+            color: var(--color-accent, #01DE82);
+            opacity: .8;
+            margin-bottom: .6rem;
         }
     </style>
 </head>
@@ -387,11 +390,12 @@
             <h1 id="loader-text" class="text-4xl sm:text-6xl font-black italic tracking-tighter opacity-0 text-white">
                 PROFESSIONAL <span class="text-neoGreen">EXPERIENCE.</span>
             </h1>
-            <div id="loader-bar" class="absolute -bottom-4 left-0 h-[2px] bg-neoGreen w-0"></div>
+            <!-- <div id="loader-bar" class="absolute -bottom-4 left-0 h-[2px] bg-neoGreen w-0"></div> -->
         </div>
     </div>
 
     <div id="interactive-glow"></div>
+
 
     <nav id="main-nav" class="fixed w-full z-50 px-4 sm:px-6 py-4 bg-theme-main/90 backdrop-blur-md border-b border-theme-border">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
@@ -412,7 +416,7 @@
         </div>
     </nav>
 
-    <section class="pt-32 pb-10 sm:pb-16 px-4 sm:px-6 text-center">
+    <section class="pt-32 pb-8 sm:pb-16 px-4 sm:px-6 text-center">
         <p class="text-theme-accent font-mono text-[10px] sm:text-xs uppercase tracking-[.35em] mb-4">
             Journey So Far
         </p>
@@ -423,95 +427,86 @@
         <p class="text-theme-muted text-sm mt-5 max-w-md mx-auto">
             Every role shaped a skill. Scroll to explore the timeline.
         </p>
-        <div class="w-20 h-[3px] bg-theme-accent mx-auto mt-6 rounded-full"></div>
+        <div class="w-16 sm:w-20 h-[3px] bg-theme-accent mx-auto mt-6 rounded-full"></div>
     </section>
 
-    <section class="py-12 sm:py-20 px-4 sm:px-6">
+    <section class="py-10 sm:py-20 px-0 sm:px-6">
         <div class="max-w-5xl mx-auto relative" id="tl-wrapper">
 
             <div class="tl-track"></div>
             <div id="tl-progress"></div>
 
             <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32">
-
                 <div class="w-1/2 flex justify-end pr-8 sm:pr-14 card-side from-left">
-                    <div>
+                    <div class="card-wrapper">
                         <p class="tap-hint">
-                            <i class="fa-solid fa-hand-pointer"></i>&nbsp; Tap card to reveal
+                            <i class="fa-solid fa-hand-pointer animate-pulse"></i>&nbsp; Tap to reveal
                         </p>
                         <div class="exp-card neo-border shadow-xl">
-
                             <div class="exp-card-front">
                                 <img src="/assets/icon/Tech_Mahindra.png" alt="Company 1" class="exp-card-img">
                             </div>
                             <div class="exp-card-scrim"></div>
                             <div class="exp-card-label">
-                                <p class="exp-card-org">Organization Name</p>
+                                <p class="exp-card-org">Tech Mahindra</p>
                                 <p class="exp-card-city">
                                     <i class="fa-solid fa-location-dot" style="font-size:8px;margin-right:3px;"></i>
-                                    City, Country
+                                    Kolkata, India
                                 </p>
                             </div>
-
                             <div class="exp-card-back">
                                 <p class="back-eyebrow">01 // Role</p>
-                                <h3 class="back-role">Your Job Title</h3>
-                                <p class="back-org">Organization Name</p>
+                                <h3 class="back-role">Customer Support Executive</h3>
+                                <p class="back-org">Tech Mahindra</p>
                                 <div class="back-period">
                                     <i class="fa-regular fa-calendar"></i>
-                                    Month Year – Month Year
+                                    Apr 2025 – Jan 2026
                                 </div>
                                 <div class="back-rule"></div>
                                 <ul class="back-bullets">
                                     <li>Key responsibility or achievement here</li>
                                     <li>Another key responsibility mentioned here</li>
-                                    <li>Final key responsibility or major achievement</li>
+                                    <li>Final key responsibility or major achievement that might wrap to a new line</li>
                                 </ul>
                                 <a href="#" target="_blank" class="offer-btn">
                                     <i class="fa-solid fa-file-contract" style="font-size:9px;"></i>
                                     Offer Letter
                                 </a>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
                 <div class="tl-dot"></div>
                 <div class="w-1/2 pl-8 sm:pl-14 side-spacer"></div>
             </div>
 
             <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32">
-
                 <div class="w-1/2 pr-8 sm:pr-14 side-spacer"></div>
                 <div class="tl-dot"></div>
-
                 <div class="w-1/2 flex justify-start pl-8 sm:pl-14 card-side from-right">
-                    <div>
+                    <div class="card-wrapper">
                         <p class="tap-hint">
-                            <i class="fa-solid fa-hand-pointer"></i>&nbsp; Tap card to reveal
+                            <i class="fa-solid fa-hand-pointer animate-pulse"></i>&nbsp; Tap to reveal
                         </p>
                         <div class="exp-card neo-border shadow-xl">
-
                             <div class="exp-card-front">
                                 <img src="/assets/icon/UM.png" alt="Company 2" class="exp-card-img">
                             </div>
                             <div class="exp-card-scrim"></div>
                             <div class="exp-card-label">
-                                <p class="exp-card-org">Organization Name</p>
+                                <p class="exp-card-org">Unified Mentor Pvt Ltd</p>
                                 <p class="exp-card-city">
                                     <i class="fa-solid fa-location-dot" style="font-size:8px;margin-right:3px;"></i>
-                                    City, Country
+                                    Gurgaon, India
                                 </p>
                             </div>
-
                             <div class="exp-card-back">
                                 <p class="back-eyebrow">02 // Role</p>
-                                <h3 class="back-role">Your Job Title</h3>
-                                <p class="back-org">Organization Name</p>
+                                <h3 class="back-role">Data Analyst (Internship)</h3>
+                                <p class="back-org">Unified Mentor Pvt Ltd</p>
                                 <div class="back-period">
                                     <i class="fa-regular fa-calendar"></i>
-                                    Month Year – Month Year
+                                    Feb 2026 – Apr 2026
                                 </div>
                                 <div class="back-rule"></div>
                                 <ul class="back-bullets">
@@ -524,40 +519,36 @@
                                     Offer Letter
                                 </a>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32">
-
+            <div class="tl-entry flex items-center justify-center relative mb-20 sm:mb-32">
                 <div class="w-1/2 flex justify-end pr-8 sm:pr-14 card-side from-left">
-                    <div>
+                    <div class="card-wrapper">
                         <p class="tap-hint">
-                            <i class="fa-solid fa-hand-pointer"></i>&nbsp; Tap card to reveal
+                            <i class="fa-solid fa-hand-pointer animate-pulse"></i>&nbsp; Tap to reveal
                         </p>
                         <div class="exp-card neo-border shadow-xl">
-
                             <div class="exp-card-front">
                                 <img src="/assets/icon/PURV.png" alt="Company 3" class="exp-card-img">
                             </div>
                             <div class="exp-card-scrim"></div>
                             <div class="exp-card-label">
-                                <p class="exp-card-org">Organization Name</p>
+                                <p class="exp-card-org">Purv Group Pvt Ltd</p>
                                 <p class="exp-card-city">
                                     <i class="fa-solid fa-location-dot" style="font-size:8px;margin-right:3px;"></i>
-                                    City, Country
+                                    Kolkata, India
                                 </p>
                             </div>
-
                             <div class="exp-card-back">
                                 <p class="back-eyebrow">03 // Role</p>
-                                <h3 class="back-role">Your Job Title</h3>
-                                <p class="back-org">Organization Name</p>
+                                <h3 class="back-role">Data Analyst</h3>
+                                <p class="back-org">Purv Group Pvt Ltd</p>
                                 <div class="back-period">
                                     <i class="fa-regular fa-calendar"></i>
-                                    Month Year – Present
+                                    Apr 2026 – Present
                                 </div>
                                 <div class="back-rule"></div>
                                 <ul class="back-bullets">
@@ -570,24 +561,22 @@
                                     Offer Letter
                                 </a>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
                 <div class="tl-dot"></div>
                 <div class="w-1/2 pl-8 sm:pl-14 side-spacer"></div>
             </div>
 
-            <div class="flex justify-center pb-10 pt-2">
-                <div class="tl-dot" id="end-dot" style="width:20px;height:20px;"></div>
+            <div class="flex justify-start md:justify-center pb-10 pt-2 pl-[21px] md:pl-0">
+                <div class="tl-dot" id="end-dot" style="width:20px;height:20px; z-index: 20;"></div>
             </div>
 
         </div>
     </section>
 
     <div id="hustle-below" class="py-10 sm:py-14 px-4 text-center overflow-hidden">
-        <p class="hustle-eyebrow">— And Still Going —</p>
+        <p class="hustle-eyebrow text-[#01DE82] dark:text-[#01DE82] opacity-80">— And Still Going —</p>
         <h2 id="hustle-text"
             class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl
                    font-black italic text-theme-main leading-tight pt-2 pb-4">
@@ -642,37 +631,37 @@
         document.querySelectorAll('.tl-dot').forEach(dot => {
             ScrollTrigger.create({
                 trigger: dot,
-                start: 'top 53%',
+                start: 'top 65%',
                 onEnter:     () => dot.classList.add('lit'),
                 onLeaveBack: () => dot.classList.remove('lit'),
             });
         });
 
-        /* ── 3 & 4. Cards slide in ── */
+        /* ── 3. Cards slide in ── */
         document.querySelectorAll('.from-left, .from-right').forEach(el => {
             gsap.to(el, {
                 opacity: 1, x: 0,
                 duration: 0.9, ease: 'power3.out',
-                scrollTrigger: { trigger: el, start: 'top 82%' }
+                scrollTrigger: { trigger: el, start: 'top 85%' }
             });
         });
 
-        /* ── 5. Clean & Modern Hustle Text Reveal ── */
+        /* ── 4. Clean & Modern Hustle Text Reveal ── */
         (function(){
             const h2 = document.getElementById('hustle-text');
             if (!h2) return;
 
             const rawText = "Still Learning & Hustling";
             
-            // Wrap characters in spans
             const frag = document.createDocumentFragment();
             [...rawText].forEach(ch => {
                 const s = document.createElement('span');
                 s.className = 'tw-char';
                 s.textContent = ch === ' ' ? '\u00A0' : ch; 
                 
-                // Highlight the ampersand in the accent color
-                if (ch === '&') s.classList.add('text-theme-accent');
+                if (ch === '&') {
+                    s.classList.add('text-[#01DE82]', 'dark:text-[#01DE82]');
+                }
                 
                 frag.appendChild(s);
             });
@@ -686,13 +675,9 @@
                 start: 'top 85%',
                 once: true,
                 onEnter(){
-                    // Light up terminal dot
                     document.getElementById('end-dot').classList.add('lit');
+                    gsap.to(eyebrow, { opacity: 0.8, y: 0, duration: .8, ease: 'power2.out' });
 
-                    // Fade up eyebrow
-                    gsap.to(eyebrow, { opacity: .7, y: 0, duration: .8, ease: 'power2.out' });
-
-                    // Staggered blur + slide up reveal for the main text
                     const chars = h2.querySelectorAll('.tw-char');
                     gsap.fromTo(chars, 
                         { opacity: 0, y: 35, filter: "blur(8px)" },
@@ -702,7 +687,7 @@
                             filter: "blur(0px)",
                             duration: 0.85, 
                             ease: 'power3.out',
-                            stagger: 0.035, // Premium smooth stagger effect
+                            stagger: 0.035,
                             delay: 0.15
                         }
                     );
@@ -710,17 +695,19 @@
             });
         })();
 
-        /* ── 6. Mobile: tap-to-reveal back panel ── */
+        /* ── 5. Mobile: tap-to-reveal back panel ── */
         const isMobile = () => window.innerWidth < 768;
 
         document.querySelectorAll('.exp-card').forEach(card => {
             card.addEventListener('click', function(e){
                 if (!isMobile()) return;
+                
                 if (e.target.closest('.offer-btn')) return;
 
                 document.querySelectorAll('.exp-card.tapped').forEach(c => {
                     if (c !== card) c.classList.remove('tapped');
                 });
+                
                 card.classList.toggle('tapped');
             });
         });
