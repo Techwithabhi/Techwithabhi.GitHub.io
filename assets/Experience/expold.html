@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Experience | Abhi Sarkar</title>
+    <meta name="description" content="Professional Experience of Abhi Sarkar - Data Analyst & Web Developer">
+    <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Google Fonts — matches portfolio's neo-tech identity -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,900&family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Inherit main site theme -->
+    <link rel="stylesheet" href="/assets/css_file/style.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans:    ['Syne', 'sans-serif'],
+                        mono:    ['JetBrains Mono', 'monospace'],
+                        display: ['Barlow Condensed', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ═══════════════════════════════════════════════════════
+           CSS VARIABLE BRIDGE
+           Mirrors what the main style.css defines so this page
+           works standalone AND inside the real site.
+        ════════════════════════════════════════════════════════ */
+        :root {
+            --bg:            #0a0a0a;
+            --bg-card:       #111118;
+            --bg-card-deep:  #0d0d14;
+            --accent:        #00ff88;
+            --accent-dim:    rgba(0,255,136,0.12);
+            --accent-glow:   rgba(0,255,136,0.35);
+            --text-main:     #f0f0f0;
+            --text-muted:    #888;
+            --border:        rgba(255,255,255,0.08);
+            --nav-bg:        rgba(10,10,10,0.92);
+        }
+        .light-mode {
+            --bg:            #f5f5f0;
+            --bg-card:       #ffffff;
+            --bg-card-deep:  #ededea;
+            --accent:        #00c060;
+            --accent-dim:    rgba(0,192,96,0.10);
+            --accent-glow:   rgba(0,192,96,0.28);
+            --text-main:     #111111;
+            --text-muted:    #666;
+            --border:        rgba(0,0,0,0.10);
+            --nav-bg:        rgba(245,245,240,0.94);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text-main);
+            font-family: 'Syne', sans-serif;
+            transition: background 0.35s, color 0.35s;
+            overflow-x: hidden;
+        }
+
+        /* ─── SUBTLE GRID TEXTURE ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.4;
+        }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 clamp(1rem,4vw,2.5rem);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.35s;
+        }
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(9px,1.8vw,11px);
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.25s;
+        }
+        .nav-back:hover { color: var(--accent); }
+        .nav-back i { color: var(--accent); transition: transform 0.25s; }
+        .nav-back:hover i { transform: translateX(-3px); }
+
+        .nav-logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-weight: 900;
+            font-size: clamp(20px,3.5vw,26px);
+            letter-spacing: -0.03em;
+            color: var(--text-main);
+        }
+        .nav-logo span { color: var(--accent); }
+
+        /* ─── THEME TOGGLE ─── */
+        .toggle-btn {
+            width: 44px; height: 24px;
+            border-radius: 999px;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent);
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 3px;
+            transition: background 0.3s;
+        }
+        .toggle-knob {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            transition: transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            color: #000;
+        }
+        .light-mode .toggle-knob { transform: translateX(20px); }
+
+        /* ─── HERO HEADER ─── */
+        .hero {
+            position: relative;
+            padding: clamp(6rem,12vw,9rem) clamp(1rem,4vw,2.5rem) clamp(2rem,5vw,3.5rem);
+            text-align: center;
+            z-index: 1;
+        }
+        .hero-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(9px,1.6vw,11px);
+            letter-spacing: .35em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+        }
+        .hero-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-weight: 900;
+            font-size: clamp(2.8rem,9vw,8rem);
+            line-height: .93;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+            margin: 0 0 .5rem;
+        }
+        .hero-title .accent { color: var(--accent); }
+        .hero-sub {
+            font-size: clamp(13px,2vw,15px);
+            color: var(--text-muted);
+            max-width: 400px;
+            margin: 1.2rem auto 0;
+            line-height: 1.6;
+        }
+        .hero-rule {
+            width: 56px; height: 3px;
+            background: var(--accent);
+            border-radius: 9999px;
+            margin: 1.6rem auto 0;
+        }
+
+        /* ─── SECTION WRAPPER ─── */
+        .exp-section {
+            position: relative;
+            z-index: 1;
+            padding: clamp(2rem,6vw,4rem) clamp(1rem,4vw,2.5rem) clamp(3rem,8vw,6rem);
+        }
+        .tl-max {
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* ─── TIMELINE TRACK ─── */
+        .tl-track {
+            position: absolute;
+            left: 50%;
+            top: 0; bottom: 0;
+            width: 2px;
+            transform: translateX(-50%);
+            background: var(--border);
+            border-radius: 9999px;
+        }
+        #tl-progress {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 0%;
+            transform: translateX(-50%);
+            border-radius: 9999px;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent), 0 0 26px var(--accent-glow);
+            z-index: 2;
+            transition: none;
+        }
+
+        /* ─── TIMELINE ENTRY ROW ─── */
+        .tl-entry {
+            display: grid;
+            grid-template-columns: 1fr 28px 1fr;
+            align-items: center;
+            margin-bottom: clamp(3rem,8vw,6rem);
+            gap: 0;
+        }
+        .tl-entry .side-left  { display: flex; justify-content: flex-end; padding-right: clamp(20px,3vw,48px); }
+        .tl-entry .side-right { display: flex; justify-content: flex-start; padding-left: clamp(20px,3vw,48px); }
+        .tl-entry .side-empty { }
+
+        /* ─── TIMELINE DOT ─── */
+        .tl-dot {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            background: var(--bg-card);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 10;
+            transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+            margin: 0 auto;
+        }
+        .tl-dot.lit {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 5px var(--accent-dim), 0 0 16px var(--accent);
+        }
+
+        /* ─── DATE BADGE ─── */
+        .date-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(8px,1.4vw,10px);
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            padding: 4px 10px;
+            width: fit-content;
+            margin-bottom: .8rem;
+        }
+        .side-left .date-badge  { margin-left: auto; }
+        .side-right .date-badge { margin-left: 0; }
+
+        /* ─── EXPERIENCE CARD ─── */
+        .exp-card {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            overflow: hidden;
+            position: relative;
+            transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+            cursor: pointer;
+        }
+        .exp-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent), 0 8px 40px var(--accent-glow);
+            transform: translateY(-4px);
+        }
+
+        /* image area */
+        .card-img-wrap {
+            position: relative;
+            height: 160px;
+            overflow: hidden;
+            background: var(--bg-card-deep);
+        }
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+        }
+        .exp-card:hover .card-img-wrap img { transform: scale(1.06); }
+
+        /* placeholder icon when no image */
+        .card-img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-card-deep) 0%, var(--bg-card) 100%);
+        }
+        .card-img-placeholder i {
+            font-size: 2.8rem;
+            color: var(--accent);
+            opacity: 0.22;
+        }
+
+        /* gradient overlay on image */
+        .card-img-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 70%;
+            background: linear-gradient(to top, var(--bg-card) 0%, transparent 100%);
+        }
+
+        /* company + location chip on image */
+        .card-img-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 1.4rem 1.1rem .9rem;
+        }
+        .card-img-label .company {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900;
+            font-size: clamp(14px,2vw,17px);
+            letter-spacing: .02em;
+            color: var(--text-main);
+            line-height: 1.1;
+        }
+        .card-img-label .location {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-top: 3px;
+        }
+
+        /* card body */
+        .card-body {
+            padding: 1rem 1.1rem 1.1rem;
+        }
+        .card-index {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: .75;
+            margin-bottom: .5rem;
+        }
+        .card-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900;
+            font-size: clamp(16px,2.5vw,20px);
+            letter-spacing: .01em;
+            color: var(--text-main);
+            margin: 0 0 .25rem;
+            line-height: 1.15;
+        }
+        .card-company {
+            font-size: clamp(11px,1.6vw,12px);
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: .7rem;
+        }
+
+        /* tag row */
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: .8rem;
+        }
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8.5px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 3px 8px;
+        }
+
+        /* bullet list */
+        .card-bullets {
+            list-style: none;
+            margin: 0 0 .9rem;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .card-bullets li {
+            font-size: clamp(10px,1.5vw,11px);
+            color: var(--text-muted);
+            line-height: 1.5;
+            padding-left: 14px;
+            position: relative;
+        }
+        .card-bullets li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 9px;
+            top: 1px;
+        }
+
+        /* offer letter button */
+        .offer-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #000;
+            background: var(--accent);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .offer-btn:hover {
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* divider in body */
+        .card-divider {
+            height: 1px;
+            background: var(--border);
+            margin: .75rem 0;
+        }
+
+        /* ─── ANIMATION STATES ─── */
+        .from-left  { opacity: 0; transform: translateX(-60px); }
+        .from-right { opacity: 0; transform: translateX(60px); }
+
+        /* ─── HUSTLE FOOTER ─── */
+        .hustle-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0 4rem;
+        }
+        .hustle-text-block {
+            margin-top: 2.5rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        .hustle-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: .35em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: .75rem;
+        }
+        #hustle-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-style: italic;
+            font-weight: 900;
+            font-size: clamp(1.8rem,5vw,4.2rem);
+            color: var(--accent);
+            line-height: 1;
+            animation: hustleGlow 2.8s ease-in-out infinite;
+        }
+        @keyframes hustleGlow {
+            0%,100% { text-shadow: 0 0 12px var(--accent), 0 0 28px var(--accent); }
+            50%      { text-shadow: 0 0 24px var(--accent), 0 0 60px var(--accent), 0 0 90px var(--accent-glow); }
+        }
+        @keyframes blink {
+            0%,100% { opacity:1; }
+            50%      { opacity:0; }
+        }
+        .cursor-blink {
+            display: inline-block;
+            color: var(--text-main);
+            animation: blink .9s step-start infinite;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            position: relative;
+            z-index: 1;
+            padding: clamp(2rem,5vw,3.5rem) clamp(1rem,4vw,2.5rem);
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+            text-align: center;
+        }
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .social-icon {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 16px;
+            text-decoration: none;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
+        }
+        .social-icon:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+            transform: translateY(-3px);
+        }
+        .footer-copy {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(8.5px,1.4vw,10px);
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ════════════════════════════════════════════════
+           RESPONSIVE — TABLET (< 768px)
+        ═══════════════════════════════════════════════ */
+        @media (max-width: 767px) {
+            /* Timeline line shifts left */
+            .tl-track, #tl-progress {
+                left: 16px;
+                transform: none;
+            }
+
+            /* Stack each entry vertically, aligned left */
+            .tl-entry {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 48px;
+                position: relative;
+                gap: 12px;
+            }
+            .tl-entry .tl-dot {
+                position: absolute;
+                left: 7px; /* centers the 18px dot on the 16px line */
+                top: 6px;
+                margin: 0;
+            }
+            .tl-entry .side-left,
+            .tl-entry .side-right {
+                padding: 0;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            .tl-entry .side-empty { display: none; }
+
+            .date-badge { margin-left: 0 !important; }
+
+            .exp-card {
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+
+        /* ════════════════════════════════════════════════
+           RESPONSIVE — SMALL PHONE (< 480px)
+        ═══════════════════════════════════════════════ */
+        @media (max-width: 479px) {
+            .tl-track, #tl-progress {
+                left: 14px;
+                transform: none;
+            }
+            .tl-entry {
+                padding-left: 40px;
+            }
+            .tl-entry .tl-dot {
+                left: 5px;
+            }
+            .card-img-wrap {
+                height: 130px;
+            }
+        }
+
+        /* ════════════════════════════════════════════════
+           RESPONSIVE — LARGE DESKTOP (> 1200px)
+        ═══════════════════════════════════════════════ */
+        @media (min-width: 1200px) {
+            .exp-card { max-width: 420px; }
+            .card-img-wrap { height: 180px; }
+        }
+    </style>
+</head>
+
+<body id="body-root">
+
+    <!-- ═══════ NAVBAR ═══════ -->
+    <nav>
+        <a href="/index.html" class="nav-back">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Portfolio
+        </a>
+
+        <span class="nav-logo">ABHI<span>.</span></span>
+
+        <!-- Theme toggle — drives the light-mode class on <body> -->
+        <button class="toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+            <div class="toggle-knob" id="toggle-knob">
+                <i class="fas fa-sun" id="toggle-icon"></i>
+            </div>
+        </button>
+    </nav>
+
+    <!-- ═══════ HERO ═══════ -->
+    <header class="hero">
+        <p class="hero-eyebrow">Journey So Far</p>
+        <h1 class="hero-title">
+            PROFESSIONAL<br><span class="accent">EXPERIENCE</span>
+        </h1>
+        <p class="hero-sub">Every role shaped a skill. Scroll to explore the timeline.</p>
+        <div class="hero-rule"></div>
+    </header>
+
+    <!-- ═══════ TIMELINE ═══════ -->
+    <section class="exp-section">
+        <div class="tl-max" id="tl-wrapper">
+
+            <!-- Static track + animated progress -->
+            <div class="tl-track"></div>
+            <div id="tl-progress"></div>
+
+            <!-- ───────────────────────────────
+                 ENTRY 1 — LEFT SIDE
+            ──────────────────────────────── -->
+            <div class="tl-entry">
+                <div class="side-left from-left">
+                    <div>
+                        <div class="date-badge">Month Year – Month Year</div>
+                        <div class="exp-card">
+                            <!-- Replace with: <img src="/assets/icon/exp1.png" alt="Company Name" class="..."> inside .card-img-wrap -->
+                            <div class="card-img-wrap">
+                                <div class="card-img-placeholder">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+                                <div class="card-img-overlay"></div>
+                                <div class="card-img-label">
+                                    <div class="company">Organization Name</div>
+                                    <div class="location"><i class="fa-solid fa-location-dot" style="font-size:8px;margin-right:4px;"></i>City, Country</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-index">01 // Role</div>
+                                <h3 class="card-title">Your Job Title</h3>
+                                <div class="card-company">Organization Name</div>
+                                <div class="card-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">SQL</span>
+                                    <span class="tag">Power BI</span>
+                                </div>
+                                <div class="card-divider"></div>
+                                <ul class="card-bullets">
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                </ul>
+                                <a href="#" target="_blank" class="offer-btn">
+                                    <i class="fa-solid fa-file-contract"></i>
+                                    Offer Letter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tl-dot"></div>
+                <div class="side-empty"></div>
+            </div>
+
+            <!-- ───────────────────────────────
+                 ENTRY 2 — RIGHT SIDE
+            ──────────────────────────────── -->
+            <div class="tl-entry">
+                <div class="side-empty"></div>
+                <div class="tl-dot"></div>
+
+                <div class="side-right from-right">
+                    <div>
+                        <div class="date-badge">Month Year – Month Year</div>
+                        <div class="exp-card">
+                            <div class="card-img-wrap">
+                                <div class="card-img-placeholder">
+                                    <i class="fa-solid fa-briefcase"></i>
+                                </div>
+                                <div class="card-img-overlay"></div>
+                                <div class="card-img-label">
+                                    <div class="company">Organization Name</div>
+                                    <div class="location"><i class="fa-solid fa-location-dot" style="font-size:8px;margin-right:4px;"></i>City, Country</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-index">02 // Role</div>
+                                <h3 class="card-title">Your Job Title</h3>
+                                <div class="card-company">Organization Name</div>
+                                <div class="card-tags">
+                                    <span class="tag">Excel</span>
+                                    <span class="tag">Tableau</span>
+                                    <span class="tag">Data Mining</span>
+                                </div>
+                                <div class="card-divider"></div>
+                                <ul class="card-bullets">
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                </ul>
+                                <a href="#" target="_blank" class="offer-btn">
+                                    <i class="fa-solid fa-file-contract"></i>
+                                    Offer Letter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ───────────────────────────────
+                 ENTRY 3 — LEFT SIDE
+            ──────────────────────────────── -->
+            <div class="tl-entry">
+                <div class="side-left from-left">
+                    <div>
+                        <div class="date-badge">Month Year – Present</div>
+                        <div class="exp-card">
+                            <div class="card-img-wrap">
+                                <div class="card-img-placeholder">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <div class="card-img-overlay"></div>
+                                <div class="card-img-label">
+                                    <div class="company">Organization Name</div>
+                                    <div class="location"><i class="fa-solid fa-location-dot" style="font-size:8px;margin-right:4px;"></i>City, Country</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-index">03 // Role</div>
+                                <h3 class="card-title">Your Job Title</h3>
+                                <div class="card-company">Organization Name</div>
+                                <div class="card-tags">
+                                    <span class="tag">React</span>
+                                    <span class="tag">JavaScript</span>
+                                    <span class="tag">CSS</span>
+                                </div>
+                                <div class="card-divider"></div>
+                                <ul class="card-bullets">
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                </ul>
+                                <a href="#" target="_blank" class="offer-btn">
+                                    <i class="fa-solid fa-file-contract"></i>
+                                    Offer Letter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tl-dot"></div>
+                <div class="side-empty"></div>
+            </div>
+
+            <!-- ═══════ HUSTLE END ═══════ -->
+            <div class="hustle-wrap" id="hustle-wrap">
+                <div class="tl-dot" id="end-dot" style="width:22px;height:22px;"></div>
+                <div class="hustle-text-block" id="hustle-block">
+                    <p class="hustle-eyebrow">— And Still Going —</p>
+                    <h2 id="hustle-title">
+                        Still Learning &amp; Hustling<span class="cursor-blink">_</span>
+                    </h2>
+                </div>
+            </div>
+
+        </div><!-- /tl-wrapper -->
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer>
+        <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/techwithabhi/" target="_blank" class="social-icon" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/Techwithabhi" target="_blank" class="social-icon" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/i_am_abhi_sarkar/" target="_blank" class="social-icon" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/abhi.sarkar.50364592/" target="_blank" class="social-icon" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.youtube.com/@techwithabhi-d8y" target="_blank" class="social-icon" aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Abhi Sarkar &nbsp;||&nbsp; Data &amp; Design &nbsp;||&nbsp; Optimized for Impact</p>
+    </footer>
+
+    <!-- ═══════ SCRIPTS ═══════ -->
+    <!-- Main site script handles theme toggle if present -->
+    <script src="/assets/js_file/script.js" onerror="void(0)"></script>
+
+    <script>
+    /* ── THEME TOGGLE (standalone fallback) ── */
+    (function(){
+        const body   = document.getElementById('body-root');
+        const btn    = document.getElementById('theme-toggle');
+        const knob   = document.getElementById('toggle-knob');
+        const icon   = document.getElementById('toggle-icon');
+        const DARK   = 'fa-moon';
+        const LIGHT  = 'fa-sun';
+
+        // restore saved preference
+        if(localStorage.getItem('theme') === 'light'){
+            body.classList.add('light-mode');
+            icon.classList.replace(LIGHT, DARK);
+        }
+
+        btn.addEventListener('click', function(){
+            const isLight = body.classList.toggle('light-mode');
+            icon.classList.replace(isLight ? LIGHT : DARK, isLight ? DARK : LIGHT);
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+    })();
+
+    /* ── GSAP TIMELINE ANIMATIONS ── */
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 1. Growing progress line
+    ScrollTrigger.create({
+        trigger: '#tl-wrapper',
+        start: 'top center',
+        end: 'bottom center',
+        scrub: 0.5,
+        onUpdate(self){
+            document.getElementById('tl-progress').style.height = (self.progress * 100) + '%';
+        }
+    });
+
+    // 2. Dot lights up on scroll
+    document.querySelectorAll('.tl-dot').forEach(dot => {
+        ScrollTrigger.create({
+            trigger: dot,
+            start: 'top 54%',
+            onEnter:    () => dot.classList.add('lit'),
+            onLeaveBack:() => dot.classList.remove('lit'),
+        });
+    });
+
+    // 3. Slide in from left
+    document.querySelectorAll('.from-left').forEach(el => {
+        gsap.to(el, {
+            opacity: 1, x: 0, duration: 0.85, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 84%' }
+        });
+    });
+
+    // 4. Slide in from right
+    document.querySelectorAll('.from-right').forEach(el => {
+        gsap.to(el, {
+            opacity: 1, x: 0, duration: 0.85, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 84%' }
+        });
+    });
+
+    // 5. Hustle block
+    ScrollTrigger.create({
+        trigger: '#hustle-wrap',
+        start: 'top 88%',
+        onEnter(){
+            gsap.to('#hustle-block', { opacity:1, y:0, duration:1.1, ease:'power3.out' });
+            document.getElementById('end-dot').classList.add('lit');
+        }
+    });
+    gsap.set('#hustle-block', { y: 28 });
+
+    /* ── MOBILE: reset from-left / from-right so GSAP still works ── */
+    function resetMobileAnims(){
+        const isMobile = window.innerWidth < 768;
+        if(isMobile){
+            // on mobile the side-left / side-right are stacked vertically;
+            // from-right cards come from the left on mobile too for visual consistency
+            document.querySelectorAll('.from-right').forEach(el => {
+                gsap.set(el, { x: -50, opacity:0 });
+            });
+        }
+    }
+    resetMobileAnims();
+    window.addEventListener('resize', resetMobileAnims);
+    </script>
+
+</body>
+</html>

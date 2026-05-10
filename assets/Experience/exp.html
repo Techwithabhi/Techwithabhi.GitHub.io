@@ -7,7 +7,7 @@
     <meta name="description" content="Professional Experience of Abhi Sarkar - Data Analyst & Web Developer">
     <link rel="icon" type="image/png" href="/assets/icon/logo.png"/>
 
-    <!-- Tailwind -->
+    <!-- Tailwind — darkMode class matches main site -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- GSAP + ScrollTrigger -->
@@ -17,7 +17,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Inherit main site theme -->
+    <!-- Main site stylesheet — provides ALL --color-*, bg-theme-*, text-theme-*, neo-border, etc. -->
     <link rel="stylesheet" href="/assets/css_file/style.css">
 
     <script>
@@ -35,243 +35,434 @@
     </script>
 
     <style>
-        /* ═══════════════════════════════════════════
-           TIMELINE LINE
-        ═══════════════════════════════════════════ */
-        #tl-wrapper {
-            position: relative;
-        }
+        /* ══════════════════════════════════════════════════
+           TIMELINE TRACK
+        ══════════════════════════════════════════════════ */
+        #tl-wrapper { position: relative; }
 
-        /* static dim track */
         .tl-track {
             position: absolute;
             left: 50%;
-            top: 0;
-            bottom: 0;
+            top: 0; bottom: 0;
             width: 2px;
             transform: translateX(-50%);
             background: var(--border-color, rgba(128,128,128,0.2));
             border-radius: 9999px;
         }
 
-        /* animated green progress line */
         #tl-progress {
             position: absolute;
             left: 50%;
             top: 0;
             width: 2px;
-            height: 0%;          /* animated by GSAP */
+            height: 0%;
             transform: translateX(-50%);
             border-radius: 9999px;
             background: var(--color-accent, #00ff88);
             box-shadow: 0 0 10px var(--color-accent, #00ff88),
-                        0 0 24px rgba(0,255,136,0.3);
+                        0 0 26px rgba(0,255,136,0.3);
             z-index: 2;
         }
 
-        /* timeline dot */
+        /* ══════════════════════════════════════════════════
+           TIMELINE DOT
+        ══════════════════════════════════════════════════ */
         .tl-dot {
-            width: 16px;
-            height: 16px;
+            width: 16px; height: 16px;
             border-radius: 50%;
             border: 2px solid var(--border-color, #444);
             background: var(--card-bg, #111);
             flex-shrink: 0;
             position: relative;
             z-index: 10;
-            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            transition: background .4s, border-color .4s, box-shadow .4s;
         }
         .tl-dot.lit {
             background: var(--color-accent, #00ff88);
             border-color: var(--color-accent, #00ff88);
-            box-shadow: 0 0 0 4px rgba(0,255,136,0.15),
+            box-shadow: 0 0 0 4px rgba(0,255,136,.15),
                         0 0 14px var(--color-accent, #00ff88);
         }
 
-        /* ═══════════════════════════════════════════
+        /* ══════════════════════════════════════════════════
            EXPERIENCE CARD
-        ═══════════════════════════════════════════ */
+           Front = image + org name always visible
+           Back  = slides up on hover (CSS) / tap (JS mobile)
+        ══════════════════════════════════════════════════ */
         .exp-card {
             width: 270px;
-            height: 340px;
+            height: 360px;
             border-radius: 1.25rem;
-            overflow: hidden;
             position: relative;
             flex-shrink: 0;
             cursor: pointer;
+            overflow: hidden;           /* clips the back panel */
         }
 
-        /* front: image */
+        /* ── FRONT ── */
+        .exp-card-front {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        /* Image */
         .exp-card-img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+            transition: transform .55s cubic-bezier(.4,0,.2,1);
         }
-        .exp-card:hover .exp-card-img {
-            transform: scale(1.07);
-        }
-
-        /* front name overlay */
-        .exp-card-front-info {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 2.5rem 1.2rem 1.2rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
-            pointer-events: none;
+        .exp-card:hover .exp-card-img,
+        .exp-card.tapped .exp-card-img {
+            transform: scale(1.06);
         }
 
-        /* img placeholder when no image set */
+        /* Placeholder icon when no image provided */
         .exp-card-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+            width: 100%; height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(135deg,
+                var(--card-bg-darker, #0d0d0d) 0%,
+                var(--card-bg, #1a1a2e) 100%);
         }
 
-        /* back: hover overlay slides up */
+        /* Gradient scrim — keeps org name legible */
+        .exp-card-scrim {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 60%;
+            background: linear-gradient(to top,
+                rgba(0,0,0,.92) 0%,
+                rgba(0,0,0,.4) 55%,
+                transparent 100%);
+            pointer-events: none;
+            z-index: 2;
+            transition: opacity .35s ease;
+        }
+        .exp-card:hover .exp-card-scrim,
+        .exp-card.tapped .exp-card-scrim {
+            opacity: 0;
+        }
+
+        /* Org name + location — sits on the scrim */
+        .exp-card-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 2rem 1.2rem 1.2rem;
+            z-index: 3;
+            transition: opacity .3s ease, transform .3s ease;
+        }
+        .exp-card:hover .exp-card-label,
+        .exp-card.tapped .exp-card-label {
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+        }
+        .exp-card-org {
+            color: #fff;
+            font-weight: 900;
+            font-size: clamp(.85rem, 2vw, 1rem);
+            line-height: 1.2;
+        }
+        .exp-card-city {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--color-accent, #00ff88);
+            margin-top: 4px;
+        }
+
+        /* ── BACK — slides up on hover ── */
         .exp-card-back {
             position: absolute;
             inset: 0;
             background: var(--card-bg-darker, #0d0d0d);
             border: 2px solid var(--color-accent, #00ff88);
             border-radius: 1.25rem;
-            padding: 1.4rem;
+            padding: 1.4rem 1.3rem 1.2rem;
             display: flex;
             flex-direction: column;
+            z-index: 6;
+
+            /* hidden — slid down */
             opacity: 0;
             transform: translateY(102%);
-            transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1),
-                        transform 0.42s cubic-bezier(0.4,0,0.2,1);
-            z-index: 5;
+            transition:
+                opacity .38s cubic-bezier(.4,0,.2,1),
+                transform .42s cubic-bezier(.4,0,.2,1);
         }
+        /* CSS hover (desktop) */
         .exp-card:hover .exp-card-back {
             opacity: 1;
             transform: translateY(0);
         }
+        /* JS tap class (mobile) */
+        .exp-card.tapped .exp-card-back {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        /* offer letter button */
+        /* Back panel typography — inherits theme vars */
+        .back-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--color-accent, #00ff88);
+            margin-bottom: .5rem;
+        }
+        .back-role {
+            font-weight: 900;
+            font-size: clamp(.95rem, 2.2vw, 1.05rem);
+            line-height: 1.25;
+            color: var(--text-primary, #f0f0f0);
+            margin: 0 0 .2rem;
+        }
+        .back-org {
+            font-size: .72rem;
+            font-weight: 700;
+            color: var(--color-accent, #00ff88);
+            margin-bottom: .6rem;
+        }
+        .back-period {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 10.5px;
+            color: var(--text-muted, #888);
+            margin-bottom: .7rem;
+        }
+        .back-period i { color: var(--color-accent, #00ff88); font-size: 9px; }
+
+        .back-rule {
+            height: 1px;
+            background: var(--border-color, rgba(255,255,255,.08));
+            margin-bottom: .65rem;
+        }
+
+        .back-bullets {
+            list-style: none;
+            padding: 0; margin: 0 0 .8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            overflow: hidden;
+        }
+        .back-bullets li {
+            font-size: 10.5px;
+            color: var(--text-muted, #888);
+            line-height: 1.5;
+            padding-left: 13px;
+            position: relative;
+        }
+        .back-bullets li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent, #00ff88);
+            font-size: 8.5px;
+            top: 1px;
+        }
+
         .offer-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            padding: 0.55rem 1rem;
-            font-size: 0.65rem;
+            gap: 5px;
+            padding: 7px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
             font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: .12em;
             text-transform: uppercase;
             color: #000;
             background: var(--color-accent, #00ff88);
-            border-radius: 0.4rem;
+            border-radius: 5px;
             text-decoration: none;
-            margin-top: auto;
             width: fit-content;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            margin-top: auto;
+            transition: box-shadow .3s, transform .25s;
         }
         .offer-btn:hover {
-            box-shadow: 0 0 18px var(--color-accent, #00ff88);
+            box-shadow: 0 0 20px var(--color-accent, #00ff88);
             transform: translateY(-2px);
         }
 
-        /* ═══════════════════════════════════════════
-           ENTRY ANIMATION STATES
-        ═══════════════════════════════════════════ */
-        .from-left  { opacity: 0; transform: translateX(-70px); }
-        .from-right { opacity: 0; transform: translateX(70px);  }
+        /* ══════════════════════════════════════════════════
+           SCROLL-IN ANIMATION STATES
+        ══════════════════════════════════════════════════ */
+        .from-left  { opacity:0; transform:translateX(-65px); }
+        .from-right { opacity:0; transform:translateX(65px);  }
 
-        /* ═══════════════════════════════════════════
-           HUSTLE TEXT
-        ═══════════════════════════════════════════ */
-        @keyframes hustleGlow {
-            0%, 100% {
-                text-shadow: 0 0 10px var(--color-accent, #00ff88),
-                             0 0 22px var(--color-accent, #00ff88);
+        /* ══════════════════════════════════════════════════
+           HUSTLE TEXT  — subtle shimmer, no over-glow
+        ══════════════════════════════════════════════════ */
+
+        /* Gentle shimmer: accent colour breathes slightly, never blasts */
+        @keyframes hustleShimmer {
+            0%,100% {
+                opacity: 1;
+                text-shadow: 0 0 6px rgba(0,255,136,0.25);
             }
             50% {
-                text-shadow: 0 0 20px var(--color-accent, #00ff88),
-                             0 0 50px var(--color-accent, #00ff88),
-                             0 0 80px rgba(0,255,136,0.4);
+                opacity: .88;
+                text-shadow: 0 0 14px rgba(0,255,136,0.45),
+                             0 0 28px rgba(0,255,136,0.18);
             }
         }
         #hustle-text {
-            animation: hustleGlow 2.8s ease-in-out infinite;
+            animation: hustleShimmer 3.2s ease-in-out infinite;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50%       { opacity: 0; }
+        /* Typewriter char reveal — each .tw-char starts invisible */
+        .tw-char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: none; /* driven by GSAP */
         }
+
+        /* Blinking cursor */
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
         .cursor-blink {
             display: inline-block;
-            animation: blink 0.9s step-start infinite;
+            animation: blink .85s step-start infinite;
         }
 
-        /* ═══════════════════════════════════════════
-           MOBILE: timeline shifts left
-        ═══════════════════════════════════════════ */
+        /* ── Hustle section layout ── */
+        #hustle-below {
+            /* lives OUTSIDE #tl-wrapper so the line never reaches it */
+            padding: 2.5rem 1rem 3rem;
+            text-align: center;
+        }
+        #hustle-below .hustle-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: .35em;
+            text-transform: uppercase;
+            color: var(--color-accent, #00ff88);
+            opacity: .7;
+            margin-bottom: .9rem;
+        }
+
+        /* ══════════════════════════════════════════════════
+           MOBILE — ≤ 767px
+           Timeline line goes to the left; entries stack
+        ══════════════════════════════════════════════════ */
         @media (max-width: 767px) {
+
             .tl-track, #tl-progress {
-                left: 24px;
+                left: 20px;
                 transform: none;
             }
-            .tl-dot { margin-left: 0 !important; }
 
-            .exp-card {
-                width: 90vw;
-                max-width: 300px;
-                height: 320px;
-            }
-
-            .mobile-card-col {
+            /* Each row becomes a column aligned to left edge */
+            .tl-entry {
                 flex-direction: column !important;
+                align-items: flex-start !important;
                 padding-left: 52px !important;
+                position: relative;
             }
-            .mobile-card-col .spacer { display: none; }
-            .mobile-card-col .card-side {
+
+            /* Dot pins against left line */
+            .tl-entry > .tl-dot {
+                position: absolute !important;
+                left: 11px !important;
+                top: 6px !important;
+                margin: 0 !important;
+                flex-shrink: 0;
+            }
+
+            /* Both card sides go full-width left */
+            .card-side {
+                width: 100% !important;
                 justify-content: flex-start !important;
                 padding: 0 !important;
             }
+
+            /* Hide empty spacer divs */
+            .side-spacer { display: none !important; }
+
+            /* Card fills available width */
+            .exp-card {
+                width: 100% !important;
+                max-width: 420px !important;
+                height: 320px !important;
+            }
+
+            /* Show tap hint chip */
+            .tap-hint { display: inline-flex !important; }
+        }
+
+        /* ══════════════════════════════════════════════════
+           SMALL PHONE — ≤ 479px
+        ══════════════════════════════════════════════════ */
+        @media (max-width: 479px) {
+            .tl-track, #tl-progress { left: 16px; }
+            .tl-entry { padding-left: 42px !important; }
+            .tl-entry > .tl-dot { left: 7px !important; }
+            .exp-card { height: 300px !important; }
+        }
+
+        /* ══════════════════════════════════════════════════
+           LARGE DESKTOP — ≥ 1024px
+        ══════════════════════════════════════════════════ */
+        @media (min-width: 1024px) {
+            .exp-card { width: 300px; height: 380px; }
+        }
+
+        /* Tap hint pill — hidden on desktop, shown on mobile */
+        .tap-hint {
+            display: none;
+            align-items: center;
+            gap: 5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8px;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--color-accent, #00ff88);
+            opacity: .75;
+            margin-bottom: .5rem;
         }
     </style>
 </head>
 
 <body class="antialiased bg-theme-main text-theme-main transition-colors duration-300">
 
-    <!-- ═══════════ NAVBAR ═══════════ -->
-    <nav class="fixed w-full z-50 px-4 sm:px-6 py-4 bg-theme-main/90 backdrop-blur-md border-b border-theme-border transition-colors duration-300">
+    <!-- ══════════════ NAVBAR ══════════════ -->
+    <nav id="main-nav" class="fixed w-full z-50 px-4 sm:px-6 py-4 bg-theme-main/90 backdrop-blur-md border-b border-theme-border">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-
-            <!-- Back -->
-            <a href="/index.html"
-               class="flex items-center gap-2 text-[10px] sm:text-xs font-bold tracking-widest uppercase text-theme-muted hover:text-theme-accent transition-colors duration-300 group">
-                <i class="fa-solid fa-arrow-left text-theme-accent transition-transform duration-300 group-hover:-translate-x-1"></i>
-                BACK TO PORTFOLIO
+            <a href="/index.html" class="group flex items-center gap-2 text-theme-main font-bold tracking-tighter italic">
+                <i class="fa-solid fa-arrow-left text-theme-accent group-hover:-translate-x-1 transition-transform"></i>
+                BACK <span class="hidden sm:inline">TO PORTFOLIO</span>
             </a>
 
-            <!-- Logo -->
-            <span class="text-xl font-black italic tracking-tighter text-theme-main">
-                ABHI<span class="text-theme-accent">.</span>
-            </span>
-
-            <!-- Theme Toggle — reuses main site class -->
-            <button id="theme-toggle" class="theme-toggle-btn">
-                <div class="toggle-track">
-                    <i class="fas fa-sun toggle-icon sun-icon"></i>
-                    <i class="fas fa-moon toggle-icon moon-icon"></i>
-                </div>
-                <div class="toggle-ring"></div>
-            </button>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="theme-toggle-btn">
+                    <div class="toggle-track">
+                        <i class="fas fa-sun toggle-icon sun-icon"></i>
+                        <i class="fas fa-moon toggle-icon moon-icon"></i>
+                    </div>
+                    <div class="toggle-ring"></div>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <!-- ═══════════ HERO HEADER ═══════════ -->
+    <!-- ══════════════ HERO ══════════════ -->
     <section class="pt-32 pb-10 sm:pb-16 px-4 sm:px-6 text-center">
-        <p class="text-theme-accent font-mono text-[10px] sm:text-xs uppercase tracking-[0.35em] mb-4">Journey So Far</p>
-        <h1 class="text-4xl sm:text-6xl md:text-8xl font-black italic leading-none text-theme-main">
-            PROFESSIONAL<br><span class="text-theme-accent">EXPERIENCE</span>
+        <p class="text-theme-accent font-mono text-[10px] sm:text-xs
+                  uppercase tracking-[.35em] mb-4">
+            Journey So Far
+        </p>
+        <h1 class="text-4xl sm:text-6xl md:text-8xl font-black italic
+                   leading-none text-theme-main">
+            PROFESSIONAL<br>
+            <span class="text-theme-accent">EXPERIENCE</span>
         </h1>
         <p class="text-theme-muted text-sm mt-5 max-w-md mx-auto">
             Every role shaped a skill. Scroll to explore the timeline.
@@ -279,287 +470,368 @@
         <div class="w-20 h-[3px] bg-theme-accent mx-auto mt-6 rounded-full"></div>
     </section>
 
-    <!-- ═══════════ TIMELINE ═══════════ -->
+    <!-- ══════════════ TIMELINE ══════════════ -->
     <section class="py-12 sm:py-20 px-4 sm:px-6">
         <div class="max-w-5xl mx-auto relative" id="tl-wrapper">
 
-            <!-- Static track -->
             <div class="tl-track"></div>
-            <!-- Animated progress -->
             <div id="tl-progress"></div>
 
-            <!-- ─────────────────────────────────────────
-                 ENTRY 1 — LEFT SIDE
-            ───────────────────────────────────────── -->
-            <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32 mobile-card-col">
+            <!-- ─────────────────────────────
+                 ENTRY 1 — LEFT
+            ───────────────────────────────── -->
+            <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32">
 
-                <!-- Card side -->
                 <div class="w-1/2 flex justify-end pr-8 sm:pr-14 card-side from-left">
-                    <div class="exp-card neo-border shadow-xl">
+                    <div>
+                        <p class="tap-hint">
+                            <i class="fa-solid fa-hand-pointer"></i>&nbsp; Tap card to reveal
+                        </p>
+                        <div class="exp-card neo-border shadow-xl">
 
-                        <!-- FRONT: replace src with your image, e.g. /assets/icon/exp1.png -->
-                        <div class="exp-card-placeholder">
-                            <i class="fa-solid fa-building text-5xl text-theme-accent opacity-30"></i>
-                        </div>
-                        <!-- ↑ Delete the placeholder div above & use this img tag instead:
-                             <img src="/assets/icon/exp1.png" alt="Company 1" class="exp-card-img"> -->
-
-                        <div class="exp-card-front-info">
-                            <p class="text-white font-black text-sm sm:text-base leading-snug">Organization Name</p>
-                            <p class="text-neoGreen font-mono text-[10px] uppercase tracking-widest mt-0.5">City, Country</p>
-                        </div>
-
-                        <!-- BACK: hover reveal -->
-                        <div class="exp-card-back">
-                            <p class="text-theme-accent font-mono text-[9px] uppercase tracking-[0.25em] mb-2">01 // Role</p>
-                            <h3 class="text-theme-main font-black text-base leading-tight mb-1">Your Job Title</h3>
-                            <p class="text-theme-accent text-xs font-bold mb-2">Organization Name</p>
-                            <div class="flex items-center gap-1.5 text-theme-muted text-[11px] mb-3">
-                                <i class="fa-regular fa-calendar text-theme-accent"></i>
-                                Month Year – Month Year
+                            <!-- FRONT -->
+                            <div class="exp-card-front">
+                                <img src="/assets/icon/Tech_Mahindra.png" alt="Company 1" class="exp-card-img">
                             </div>
-                            <ul class="space-y-1.5 text-theme-muted text-[11px] mb-3">
-                                <li class="skill-item">Key responsibility or achievement</li>
-                                <li class="skill-item">Key responsibility or achievement</li>
-                                <li class="skill-item">Key responsibility or achievement</li>
-                            </ul>
-                            <!-- Replace href="#" with your offer letter link (Drive/PDF) -->
-                            <a href="#" target="_blank" class="offer-btn">
-                                <i class="fa-solid fa-file-contract text-[11px]"></i>
-                                Offer Letter
-                            </a>
+                            <div class="exp-card-scrim"></div>
+                            <div class="exp-card-label">
+                                <p class="exp-card-org">Organization Name</p>
+                                <p class="exp-card-city">
+                                    <i class="fa-solid fa-location-dot" style="font-size:8px;margin-right:3px;"></i>
+                                    City, Country
+                                </p>
+                            </div>
+
+                            <!-- BACK (slides up on hover / tap) -->
+                            <div class="exp-card-back">
+                                <p class="back-eyebrow">01 // Role</p>
+                                <h3 class="back-role">Your Job Title</h3>
+                                <p class="back-org">Organization Name</p>
+                                <div class="back-period">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    Month Year – Month Year
+                                </div>
+                                <div class="back-rule"></div>
+                                <ul class="back-bullets">
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                </ul>
+                                <a href="#" target="_blank" class="offer-btn">
+                                    <i class="fa-solid fa-file-contract" style="font-size:9px;"></i>
+                                    Offer Letter
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
-                <!-- Center dot -->
                 <div class="tl-dot"></div>
-
-                <!-- Empty right -->
-                <div class="w-1/2 pl-8 sm:pl-14 spacer"></div>
+                <div class="w-1/2 pl-8 sm:pl-14 side-spacer"></div>
             </div>
 
-            <!-- ─────────────────────────────────────────
-                 ENTRY 2 — RIGHT SIDE
-            ───────────────────────────────────────── -->
-            <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32 mobile-card-col">
+            <!-- ─────────────────────────────
+                 ENTRY 2 — RIGHT
+            ───────────────────────────────── -->
+            <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32">
 
-                <!-- Empty left -->
-                <div class="w-1/2 pr-8 sm:pr-14 spacer"></div>
-
-                <!-- Center dot -->
+                <div class="w-1/2 pr-8 sm:pr-14 side-spacer"></div>
                 <div class="tl-dot"></div>
 
-                <!-- Card side -->
                 <div class="w-1/2 flex justify-start pl-8 sm:pl-14 card-side from-right">
-                    <div class="exp-card neo-border shadow-xl">
+                    <div>
+                        <p class="tap-hint">
+                            <i class="fa-solid fa-hand-pointer"></i>&nbsp; Tap card to reveal
+                        </p>
+                        <div class="exp-card neo-border shadow-xl">
 
-                        <div class="exp-card-placeholder">
-                            <i class="fa-solid fa-briefcase text-5xl text-theme-accent opacity-30"></i>
-                        </div>
-                        <!-- ↑ Replace with: <img src="/assets/icon/exp2.png" alt="Company 2" class="exp-card-img"> -->
-
-                        <div class="exp-card-front-info">
-                            <p class="text-white font-black text-sm sm:text-base leading-snug">Organization Name</p>
-                            <p class="text-neoGreen font-mono text-[10px] uppercase tracking-widest mt-0.5">City, Country</p>
-                        </div>
-
-                        <div class="exp-card-back">
-                            <p class="text-theme-accent font-mono text-[9px] uppercase tracking-[0.25em] mb-2">02 // Role</p>
-                            <h3 class="text-theme-main font-black text-base leading-tight mb-1">Your Job Title</h3>
-                            <p class="text-theme-accent text-xs font-bold mb-2">Organization Name</p>
-                            <div class="flex items-center gap-1.5 text-theme-muted text-[11px] mb-3">
-                                <i class="fa-regular fa-calendar text-theme-accent"></i>
-                                Month Year – Month Year
+                            <div class="exp-card-front">
+                                <img src="/assets/icon/UM.png" alt="Company 1" class="exp-card-img">
                             </div>
-                            <ul class="space-y-1.5 text-theme-muted text-[11px] mb-3">
-                                <li class="skill-item">Key responsibility or achievement</li>
-                                <li class="skill-item">Key responsibility or achievement</li>
-                                <li class="skill-item">Key responsibility or achievement</li>
-                            </ul>
-                            <a href="#" target="_blank" class="offer-btn">
-                                <i class="fa-solid fa-file-contract text-[11px]"></i>
-                                Offer Letter
-                            </a>
+                            <div class="exp-card-scrim"></div>
+                            <div class="exp-card-label">
+                                <p class="exp-card-org">Organization Name</p>
+                                <p class="exp-card-city">
+                                    <i class="fa-solid fa-location-dot" style="font-size:8px;margin-right:3px;"></i>
+                                    City, Country
+                                </p>
+                            </div>
+
+                            <div class="exp-card-back">
+                                <p class="back-eyebrow">02 // Role</p>
+                                <h3 class="back-role">Your Job Title</h3>
+                                <p class="back-org">Organization Name</p>
+                                <div class="back-period">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    Month Year – Month Year
+                                </div>
+                                <div class="back-rule"></div>
+                                <ul class="back-bullets">
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                </ul>
+                                <a href="#" target="_blank" class="offer-btn">
+                                    <i class="fa-solid fa-file-contract" style="font-size:9px;"></i>
+                                    Offer Letter
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ─────────────────────────────────────────
-                 ENTRY 3 — LEFT SIDE
-            ───────────────────────────────────────── -->
-            <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32 mobile-card-col">
+            <!-- ─────────────────────────────
+                 ENTRY 3 — LEFT
+            ───────────────────────────────── -->
+            <div class="tl-entry flex items-center justify-center relative mb-24 sm:mb-32">
 
                 <div class="w-1/2 flex justify-end pr-8 sm:pr-14 card-side from-left">
-                    <div class="exp-card neo-border shadow-xl">
+                    <div>
+                        <p class="tap-hint">
+                            <i class="fa-solid fa-hand-pointer"></i>&nbsp; Tap card to reveal
+                        </p>
+                        <div class="exp-card neo-border shadow-xl">
 
-                        <div class="exp-card-placeholder">
-                            <i class="fa-solid fa-chart-line text-5xl text-theme-accent opacity-30"></i>
-                        </div>
-                        <!-- ↑ Replace with: <img src="/assets/icon/exp3.png" alt="Company 3" class="exp-card-img"> -->
-
-                        <div class="exp-card-front-info">
-                            <p class="text-white font-black text-sm sm:text-base leading-snug">Organization Name</p>
-                            <p class="text-neoGreen font-mono text-[10px] uppercase tracking-widest mt-0.5">City, Country</p>
-                        </div>
-
-                        <div class="exp-card-back">
-                            <p class="text-theme-accent font-mono text-[9px] uppercase tracking-[0.25em] mb-2">03 // Role</p>
-                            <h3 class="text-theme-main font-black text-base leading-tight mb-1">Your Job Title</h3>
-                            <p class="text-theme-accent text-xs font-bold mb-2">Organization Name</p>
-                            <div class="flex items-center gap-1.5 text-theme-muted text-[11px] mb-3">
-                                <i class="fa-regular fa-calendar text-theme-accent"></i>
-                                Month Year – Month Year
+                            <div class="exp-card-front">
+                                <img src="/assets/icon/PURV.png" alt="Company 1" class="exp-card-img">
                             </div>
-                            <ul class="space-y-1.5 text-theme-muted text-[11px] mb-3">
-                                <li class="skill-item">Key responsibility or achievement</li>
-                                <li class="skill-item">Key responsibility or achievement</li>
-                                <li class="skill-item">Key responsibility or achievement</li>
-                            </ul>
-                            <a href="#" target="_blank" class="offer-btn">
-                                <i class="fa-solid fa-file-contract text-[11px]"></i>
-                                Offer Letter
-                            </a>
+                            <div class="exp-card-scrim"></div>
+                            <div class="exp-card-label">
+                                <p class="exp-card-org">Organization Name</p>
+                                <p class="exp-card-city">
+                                    <i class="fa-solid fa-location-dot" style="font-size:8px;margin-right:3px;"></i>
+                                    City, Country
+                                </p>
+                            </div>
+
+                            <div class="exp-card-back">
+                                <p class="back-eyebrow">03 // Role</p>
+                                <h3 class="back-role">Your Job Title</h3>
+                                <p class="back-org">Organization Name</p>
+                                <div class="back-period">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    Month Year – Present
+                                </div>
+                                <div class="back-rule"></div>
+                                <ul class="back-bullets">
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                    <li>Key responsibility or achievement</li>
+                                </ul>
+                                <a href="#" target="_blank" class="offer-btn">
+                                    <i class="fa-solid fa-file-contract" style="font-size:9px;"></i>
+                                    Offer Letter
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="tl-dot"></div>
-                <div class="w-1/2 pl-8 sm:pl-14 spacer"></div>
+                <div class="w-1/2 pl-8 sm:pl-14 side-spacer"></div>
             </div>
 
-            <!-- ─────────────────────────────────────────
-                 ADD MORE ENTRIES BELOW FOLLOWING THE
-                 SAME LEFT / RIGHT / LEFT / RIGHT PATTERN
-            ───────────────────────────────────────── -->
+            <!--
+                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                ADD MORE ENTRIES BELOW — alternate LEFT / RIGHT / LEFT …
+                Copy an entry block, switch:
+                  • from-left  ↔  from-right
+                  • justify-end pr-*  ↔  justify-start pl-*
+                  • move the .tl-dot and .side-spacer accordingly
+                  • update back-eyebrow number & content
+                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            -->
 
-            <!-- ═══════════ END DOT + HUSTLE TEXT ═══════════ -->
-            <div id="hustle-wrap" class="flex flex-col items-center pt-4 pb-12">
-                <!-- terminal end dot -->
+            <!-- ══════════ TERMINAL END DOT — line stops HERE ══════════ -->
+            <!-- This dot is the last point on the timeline line.
+                 The hustle text lives BELOW, outside #tl-wrapper,
+                 so the green progress line never reaches it. -->
+            <div class="flex justify-center pb-10 pt-2">
                 <div class="tl-dot" id="end-dot" style="width:20px;height:20px;"></div>
-
-                <!-- hustle text -->
-                <div class="mt-10 text-center opacity-0" id="hustle-block">
-                    <p class="text-theme-accent font-mono text-[10px] uppercase tracking-[0.35em] mb-3">— And Still Going —</p>
-                    <h2 id="hustle-text"
-                        class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black italic text-theme-accent">
-                        Still Learning &amp; Hustling<span class="text-theme-main cursor-blink">_</span>
-                    </h2>
-                </div>
             </div>
 
-        </div><!-- /tl-wrapper -->
+        </div><!-- /tl-wrapper — line ends here -->
     </section>
 
-    <!-- ═══════════ FOOTER ═══════════ -->
-    <footer class="py-10 sm:py-14 border-t border-theme-border bg-theme-main transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+    <!-- ══════════ HUSTLE TEXT — outside timeline, no line ══════════ -->
+    <div id="hustle-below" class="py-10 sm:py-14 px-4 text-center">
+        <p class="hustle-eyebrow">— And Still Going —</p>
+        <h2 id="hustle-text"
+            class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+                   font-black italic text-theme-accent leading-tight">
+            <!-- JS splits this into .tw-char spans for typewriter -->
+            Still Learning &amp; Hustling<span class="text-theme-main cursor-blink">_</span>
+        </h2>
+    </div>
 
-            <div class="flex justify-center flex-wrap gap-3 sm:gap-4 mb-8">
-                <a href="https://www.linkedin.com/in/techwithabhi/" target="_blank"
-                   class="social-icon group relative w-10 h-10 sm:w-12 sm:h-12 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent transition-all duration-300 transform hover:-translate-y-1">
-                    <i class="fa-brands fa-linkedin-in text-theme-accent group-hover:text-black text-lg sm:text-xl"></i>
-                </a>
-                <a href="https://github.com/Techwithabhi" target="_blank"
-                   class="social-icon group relative w-10 h-10 sm:w-12 sm:h-12 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent transition-all duration-300 transform hover:-translate-y-1">
-                    <i class="fa-brands fa-github text-theme-accent group-hover:text-black text-lg sm:text-xl"></i>
-                </a>
-                <a href="https://www.instagram.com/i_am_abhi_sarkar/" target="_blank"
-                   class="social-icon group relative w-10 h-10 sm:w-12 sm:h-12 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent transition-all duration-300 transform hover:-translate-y-1">
-                    <i class="fa-brands fa-instagram text-theme-accent group-hover:text-black text-lg sm:text-xl"></i>
-                </a>
-                <a href="https://www.facebook.com/abhi.sarkar.50364592/" target="_blank"
-                   class="social-icon group relative w-10 h-10 sm:w-12 sm:h-12 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent transition-all duration-300 transform hover:-translate-y-1">
-                    <i class="fa-brands fa-facebook-f text-theme-accent group-hover:text-black text-lg sm:text-xl"></i>
-                </a>
-                <a href="https://www.youtube.com/@techwithabhi-d8y" target="_blank"
-                   class="social-icon group relative w-10 h-10 sm:w-12 sm:h-12 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent transition-all duration-300 transform hover:-translate-y-1">
-                    <i class="fa-brands fa-youtube text-theme-accent group-hover:text-black text-lg sm:text-xl"></i>
-                </a>
-            </div>
+    <!-- ══════════════ FOOTER ══════════════ -->
+    <footer class="py-12 text-center border-t border-theme-border bg-theme-main transition-colors duration-300">
+    
+        <div class="flex justify-center items-center gap-6 mb-8">
+            <a href="https://www.linkedin.com/in/techwithabhi/" target="_blank" data-tooltip="LinkedIn"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-linkedin-in text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+            
+            <a href="https://github.com/Techwithabhi" target="_blank" data-tooltip="GitHub"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-github text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
 
-            <p class="text-theme-muted text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] sm:tracking-[0.3em] px-4">
-                &copy; 2026 Abhi Sarkar || Data &amp; Design || Optimized for Impact
-            </p>
+            <a href="https://www.instagram.com/i_am_abhi_sarkar/" target="_blank" data-tooltip="Instagram"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-instagram text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.facebook.com/abhi.sarkar.50364592/" target="_blank" data-tooltip="Facebook"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-facebook-f text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@techwithabhi-d8y" target="_blank" data-tooltip="YouTube"
+            class="social-icon group relative w-10 h-10 bg-theme-accent/10 rounded-full flex items-center justify-center border border-theme-border hover:bg-theme-accent hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                <i class="fa-brands fa-youtube text-lg text-theme-accent group-hover:text-white"></i>
+            </a>
         </div>
+
+        <p class="text-theme-muted text-[10px] font-mono uppercase tracking-[0.3em] px-4">
+            &copy; 2026 Abhi Sarkar || Data & Design || Optimized for Impact
+        </p>
     </footer>
 
-    <!-- Main site script handles theme toggle -->
+    <!-- Main site script handles theme toggle — must come before GSAP block -->
     <script src="/assets/js_file/script.js"></script>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        /* ── 1. Animated growing timeline line ── */
-        const wrapper  = document.getElementById('tl-wrapper');
-        const progress = document.getElementById('tl-progress');
-
+        /* ── 1. Growing timeline progress line
+               Ends exactly at the bottom of #tl-wrapper (the last dot),
+               NOT at the hustle text which lives outside the wrapper. ── */
         ScrollTrigger.create({
-            trigger: wrapper,
+            trigger: '#tl-wrapper',
             start: 'top center',
             end:   'bottom center',
             scrub: 0.6,
-            onUpdate: (self) => {
-                progress.style.height = (self.progress * 100) + '%';
+            onUpdate(self){
+                document.getElementById('tl-progress').style.height =
+                    (self.progress * 100) + '%';
             }
         });
 
-        /* ── 2. Dot lights up when reached ── */
+        /* ── 2. Dot lights up when scrolled to ── */
         document.querySelectorAll('.tl-dot').forEach(dot => {
             ScrollTrigger.create({
                 trigger: dot,
-                start: 'top 52%',
-                onEnter:    () => dot.classList.add('lit'),
-                onLeaveBack:() => dot.classList.remove('lit'),
+                start: 'top 53%',
+                onEnter:     () => dot.classList.add('lit'),
+                onLeaveBack: () => dot.classList.remove('lit'),
             });
         });
 
         /* ── 3. Cards slide in from left ── */
         document.querySelectorAll('.from-left').forEach(el => {
             gsap.to(el, {
-                opacity: 1,
-                x: 0,
-                duration: 0.9,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 82%',
-                }
+                opacity: 1, x: 0,
+                duration: 0.9, ease: 'power3.out',
+                scrollTrigger: { trigger: el, start: 'top 82%' }
             });
         });
 
         /* ── 4. Cards slide in from right ── */
         document.querySelectorAll('.from-right').forEach(el => {
             gsap.to(el, {
-                opacity: 1,
-                x: 0,
-                duration: 0.9,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 82%',
-                }
+                opacity: 1, x: 0,
+                duration: 0.9, ease: 'power3.out',
+                scrollTrigger: { trigger: el, start: 'top 82%' }
             });
         });
 
-        /* ── 5. Hustle text fades + rises in ── */
-        ScrollTrigger.create({
-            trigger: '#hustle-wrap',
-            start: 'top 85%',
-            onEnter: () => {
-                gsap.to('#hustle-block', {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.1,
-                    ease: 'power3.out',
+        /* ── 5. Typewriter reveal for hustle text ── */
+        (function(){
+            const h2 = document.getElementById('hustle-text');
+            if (!h2) return;
+
+            // Grab the text node only (not the cursor span)
+            const cursor   = h2.querySelector('.cursor-blink');
+            const rawText  = h2.childNodes[0].textContent; // "Still Learning & Hustling"
+            h2.childNodes[0].textContent = '';             // clear it
+
+            // Wrap every character in a span
+            const frag = document.createDocumentFragment();
+            [...rawText].forEach(ch => {
+                const s = document.createElement('span');
+                s.className = 'tw-char';
+                s.textContent = ch === ' ' ? '\u00A0' : ch; // preserve spaces
+                frag.appendChild(s);
+            });
+            h2.insertBefore(frag, cursor);
+
+            // Eyebrow line starts hidden
+            const eyebrow = document.querySelector('#hustle-below .hustle-eyebrow');
+            gsap.set(eyebrow, { opacity: 0, y: 10 });
+
+            ScrollTrigger.create({
+                trigger: '#hustle-below',
+                start: 'top 88%',
+                once: true,
+                onEnter(){
+                    // 1. End dot pulses lit
+                    document.getElementById('end-dot').classList.add('lit');
+
+                    // 2. Eyebrow fades in
+                    gsap.to(eyebrow, {
+                        opacity: .7, y: 0,
+                        duration: .7, ease: 'power2.out'
+                    });
+
+                    // 3. Characters stagger up + fade in — typewriter feel
+                    const chars = h2.querySelectorAll('.tw-char');
+                    gsap.to(chars, {
+                        opacity: 1,
+                        y: 0,
+                        duration: .04,          // each char snaps in fast
+                        ease: 'none',
+                        stagger: {
+                            each: 0.055,        // 55 ms between chars — readable pace
+                            from: 'start',
+                        },
+                        delay: .35,
+                    });
+                }
+            });
+        })();
+
+        /* ── 6. Mobile: tap-to-reveal back panel ── */
+        const isMobile = () => window.innerWidth < 768;
+
+        document.querySelectorAll('.exp-card').forEach(card => {
+            card.addEventListener('click', function(e){
+                if (!isMobile()) return;
+
+                // if tapping the offer-letter link, let it through
+                if (e.target.closest('.offer-btn')) return;
+
+                // close any other open card first
+                document.querySelectorAll('.exp-card.tapped').forEach(c => {
+                    if (c !== card) c.classList.remove('tapped');
                 });
-                document.getElementById('end-dot').classList.add('lit');
-            }
+                card.classList.toggle('tapped');
+            });
         });
 
-        // small initial offset so it can rise up
-        gsap.set('#hustle-block', { y: 30 });
+        // Tap outside → close all
+        document.addEventListener('click', function(e){
+            if (!isMobile()) return;
+            if (!e.target.closest('.exp-card')){
+                document.querySelectorAll('.exp-card.tapped')
+                    .forEach(c => c.classList.remove('tapped'));
+            }
+        });
     </script>
 
 </body>
