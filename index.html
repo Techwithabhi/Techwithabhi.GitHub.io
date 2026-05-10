@@ -20,6 +20,71 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css_file/style.css">
 
+    <!-- Experience Section Styles -->
+    <style>
+        /* ── Experience Button ── */
+        .exp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 2rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-accent, #00ff88);
+            border: 2px solid var(--color-accent, #00ff88);
+            border-radius: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.35s ease, box-shadow 0.35s ease;
+            background: transparent;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .exp-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-accent, #00ff88);
+            transform: translateX(-101%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+        .exp-btn:hover::before { transform: translateX(0); }
+        .exp-btn:hover {
+            color: #000;
+            box-shadow: 0 0 24px var(--color-accent, #00ff88);
+        }
+        .exp-btn > * { position: relative; z-index: 1; }
+        .exp-btn-icon {
+            transition: transform 0.35s ease;
+        }
+        .exp-btn:hover .exp-btn-icon {
+            transform: rotate(-12deg) scale(1.15);
+        }
+
+        /* ── Experience Card left accent bar ── */
+        .exp-card-bar {
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--color-accent, #00ff88);
+            border-radius: 8px 0 0 8px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .exp-card:hover .exp-card-bar { opacity: 1; }
+        .exp-card {
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .exp-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        }
+    </style>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -288,7 +353,7 @@
         <section id="skills" class="py-16 sm:py-24 md:py-32 px-4 sm:px-6">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-12 sm:mb-16 md:mb-20">
-                    <h2 class="text-3xl sm:text-4xl font-black mb-4 text-theme-main">CORE <span class="text-theme-accent">CAPABILITIES</span></h2>
+                    <h2 class="text-3xl sm:text-4xl font-black mb-4 text-theme-main">SKILL'S & <span class="text-theme-accent">EXPERIENCE</span></h2>
                     <div class="w-20 h-1 bg-theme-accent mx-auto"></div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
@@ -333,11 +398,19 @@
                         </ul>
                     </div>
                 </div>
+                <div class="mt-10 sm:mt-14 text-center reveal">
+                    <a href="#" class="cert-btn">
+                        <i class="fa-solid fa-briefcase exp-btn-icon"></i>
+                        <span>View Full Experience</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </section>
-
+        
+                
         <section id="projects" class="py-16 sm:py-24 md:py-32 px-4 sm:px-6 gradient-theme">
-            <div class="max-w-7xl mx-auto">
+            <div class="max-w-7xl mx-auto"> 
                 <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 sm:mb-16 gap-6 text-center md:text-left">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-black italic text-theme-main">FEATURED <br><span class="text-theme-accent">EXPERIMENTS</span></h2>
                     <p class="text-theme-muted max-w-sm text-xs sm:text-sm">"Data is more than numbers on a screen—it’s hidden patterns, untold stories, and decisions waiting to happen."</p>
@@ -542,7 +615,8 @@
                         
                         <span class="hidden sm:block text-gray-400 dark:text-theme-muted opacity-50">&bull;</span> 
                         
-                        <a href="https://nutration-tracker-pc.vercel.app?_vercel_share=xx38i7sQR2NL4eXrtdN1dJEeeBupP5SO" class="group flex items-center gap-1.5 cursor-pointer transition-all duration-300 transform">
+                        <a href="https://nutration-tracker-pc.vercel.app?_vercel_share=xx38i7sQR2NL4eXrtdN1dJEeeBupP5SO"
+                        target="_blank" class="group flex items-center gap-1.5 cursor-pointer transition-all duration-300 transform">
                             <span class="nav-link">
                                 Nutrition Tracker
                             </span>
