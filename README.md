@@ -11,7 +11,7 @@
     <a href="https://techwithabhi.github.io/">
       <img src="https://img.shields.io/badge/View_Portfolio-000000?style=for-the-badge&logo=Google-Chrome&logoColor=white" alt="Website" />
     </a>
-    <a href="https://drive.google.com/file/d/1Ku83n3RqIoNzMlI_0hrAMVpPtHnlUN3Z/view?usp=sharing">
+    <a href="https://drive.google.com/file/d/1WoSfhwtIy9KsjwAuRmsrmW6WmqqCXz4m/view?usp=sharing">
      <img src="https://img.shields.io/badge/Download_Resume-FF5722?style=for-the-badge&logo=adobeacrobat&logoColor=white" alt="Resume" />
     </a>
   </p>
@@ -81,6 +81,7 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+<img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
 
 ### **AI & Automation**
 <img src="https://img.shields.io/badge/ChatGPT-74AA9C?style=for-the-badge&logo=openai&logoColor=white" />
@@ -96,8 +97,8 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 
 | Project | Description | Tech Stack |
 | :--- | :--- | :--- |
-| **Sales Performance Analysis** | In-depth market trend analysis using SQL and Power BI to identify high-growth revenue streams. | `SQL` `Power BI` `Python` |
-| **Financial Forecasting** | Applying Python-based predictive modeling to forecast quarterly budget allocations with high accuracy. | `Python` `Pandas` `NumPy` |
+| **Churn Prediction & Analysis** | Decoding customer behavior to predict churn and drive smarter retention strategies. | `Python` `SQL` `Plotly` |
+| **Exploratory Data Analysis (EDA)** | End-to-end logistics data analysis with interactive Streamlit dashboard (Internship Project). | `Python` `Jupyter` `Pandas` |
 | **Advanced Excel Dashboard** | Automated operational reporting system using Pivot Tables, Power Query, and VBA for efficiency. | `Excel` `VBA` `Power Query` |
 | **React Timer & Stopwatch** | A fully responsive, interactive web application engineered with React for precise time tracking and lap management. | `React` `JavaScript` `CSS` |
 
@@ -109,7 +110,7 @@ This portfolio is meticulously crafted to provide a seamless user experience, bl
 📦 techwithabhi.github.io
  ┣ 📂 assets
  ┃ ┣ 📂 icon
- ┃ ┃ ┗ 🖼️ dp2icon.png             # Profile imagery and favicons
+ ┃ ┃ ┗ 🖼️ dpicon.png              # Profile imagery and favicons
  ┃ ┗ 📂 projects_data             # Detailed pages for case studies
  ┃   ┣ 📂 1st_pj_data
  ┃   ┃ ┣ 📄 1st_project.html
@@ -214,7 +215,10 @@ open index.html
 [![Email](https://img.shields.io/badge/📧_Email-Drop_a_Line-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:abhisarkar6038@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Let's_Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/techwithabhi/)
 [![Twitter](https://img.shields.io/badge/🐦_Twitter-Follow_Me-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/AbhiSarkar2025)
-[![Resume](https://img.shields.io/badge/📄_Resume-Download_Now-FF5722?style=for-the-badge&logo=adobeacrobat&logoColor=white)](https://drive.google.com/file/d/1Ku83n3RqIoNzMlI_0hrAMVpPtHnlUN3Z/view?usp=sharing)
+[![Instagram](https://img.shields.io/badge/📸_Instagram-Follow_Me-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/i_am_abhi_sarkar/)
+[![Facebook](https://img.shields.io/badge/👍_Facebook-Connect-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/abhi.sarkar.50364592/)
+[![YouTube](https://img.shields.io/badge/▶_YouTube-Subscribe-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@techwithabhi-d8y)
+[![Resume](https://img.shields.io/badge/📄_Resume-Download_Now-FF5722?style=for-the-badge&logo=adobeacrobat&logoColor=white)](https://drive.google.com/file/d/1WoSfhwtIy9KsjwAuRmsrmW6WmqqCXz4m/view?usp=sharing)
 
 
 <br />
